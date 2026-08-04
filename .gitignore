@@ -1,0 +1,11 @@
+# 环境变量：里面是 API key、Cookie 这类凭证，绝对不能提交
+.env
+.env.*
+!.env.example
+
+# Python 运行时产物
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
