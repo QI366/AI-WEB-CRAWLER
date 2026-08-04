@@ -27,7 +27,7 @@
     练习里给的 data-hook 是老版页面的（review-title / review-body），
     现在的详情页换成了 reviewTitle / reviewText，两套都写上了，哪套在就用哪套。
 
-运行方式（建议在项目根目录执行，这样相对路径 DATA_PATH 才是对的）：
+运行方式：
     python exercises/04_amazon_reviews.py
 """
 
@@ -46,7 +46,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # 要抓的商品，用 ASIN（Amazon 给每个商品的唯一编号）标识。
-# 练习里给的链接是 .../customer-reviews/B096VP4L1W/...，其中 B096VP4L1W 就是 ASIN。
 ASIN = "B096VP4L1W"
 
 DETAIL_URL = f"https://www.amazon.com/dp/{ASIN}"
