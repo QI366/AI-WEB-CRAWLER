@@ -1,0 +1,10 @@
+61|abcd1234|< 1 Second|24106|
+62|131313|< 1 Second|23461|
+63|789456|< 1 Second|22779|
+64|luzit2000|17 Minutes|22671|
+65|aaaaaa|< 1 Second|22524|
+66|zxcvbnm|< 1 Second|22425|
+67|asdfghjkl|< 1 Second|22278|
+68|1234qwer|< 1 Second|21817|
+69|88888888|< 1 Second|21169|
+70|dragon|< 1 Second|20774|

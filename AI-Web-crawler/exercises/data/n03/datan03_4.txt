@@ -1,0 +1,10 @@
+31|159753|< 1 Second|40141|
+32|1q2w3e4r|< 1 Second|40056|
+33|54321|< 1 Second|39264|
+34|pass@123|2 Seconds|39046|
+35|222222|< 1 Second|36029|
+36|qwertyuiop|< 1 Second|35099|
+37|qwerty123|< 1 Second|34530|
+38|qazwsx|< 1 Second|33510|
+39|vip|< 1 Second|33442|
+40|asdasd|< 1 Second|33177|

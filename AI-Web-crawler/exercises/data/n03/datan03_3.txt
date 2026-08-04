@@ -1,0 +1,10 @@
+21|D1lakiss|3 Hours|50181|
+22|777777|< 1 Second|48903|
+23|110110jp|3 Seconds|48265|
+24|1111|< 1 Second|47935|
+25|987654321|< 1 Second|46891|
+26|121212|< 1 Second|46298|
+27|Gizli|10 Seconds|44874|
+28|abc123|< 1 Second|44587|
+29|112233|< 1 Second|43615|
+30|azerty|< 1 Second|43101|

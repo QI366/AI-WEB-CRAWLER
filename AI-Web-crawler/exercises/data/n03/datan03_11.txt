@@ -1,0 +1,10 @@
+101|12341234|< 1 Second|15271|
+102|147258|< 1 Second|15259|
+103|shadow|< 1 Second|15214|
+104|123456a|< 1 Second|15159|
+105|87654321|< 1 Second|15068|
+106|10203|< 1 Second|14802|
+107|pokemon|< 1 Second|14576|
+108|princess|< 1 Second|14510|
+109|azertyuiop|1 Minute|14509|
+110|thomas|8 Seconds|14432|

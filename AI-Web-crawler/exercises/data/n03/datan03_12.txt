@@ -1,0 +1,10 @@
+111|baseball|< 1 Second|14303|
+112|monkey|< 1 Second|14252|
+113|jordan|< 1 Second|14235|
+114|michael|8 Seconds|14162|
+115|love|< 1 Second|14026|
+116|1111111111|< 1 Second|13967|
+117|11223344|< 1 Second|13957|
+118|123456789|< 1 Second|13944|
+119|asdf1234|< 1 Second|13908|
+120|147852|< 1 Second|13833|
