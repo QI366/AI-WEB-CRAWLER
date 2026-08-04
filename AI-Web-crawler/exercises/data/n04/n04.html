@@ -1,0 +1,583 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Spiderbuf" />
+    <meta name="copyright" content="Spiderbuf" />
+    
+    <link rel="canonical" href="https://spiderbuf.cn/challenge/css-pseudo-elements">
+    
+    <meta name="description" content="SpiderBuf 是专注于 Python 爬虫学习和练习的平台，提供丰富的教程、实战案例、练习题目和在线爬虫工具，助你轻松掌握爬虫开发技能。">
+    <meta name="keywords" content="Python爬虫,爬虫练习,爬虫教程,爬虫实战,JS逆向,SpiderBuf,网络爬虫,数据采集,爬虫工具,数据抓取,API接口,视频下载,图片下载,电商数据,金融数据,数据安全,IP隐藏,web scraping,web scraper,web crawler, data scraping,scraping tool,scraper tool,web extractor,email extractor,data extraction">
+    <link rel="stylesheet" href="https://spiderbuf.cn/static/css/style.v1.min.css">
+    
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4169504979687359" crossorigin="anonymous"></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7B42BKG1QE"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-7B42BKG1QE');
+    </script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Python爬虫在线练习与项目实战","item":"https://spiderbuf.cn"},{"@type":"ListItem","position":2,"name":"爬虫挑战","item":"https://spiderbuf.cn/challenges"},{"@type":"ListItem","position":3,"name":"CSS伪元素反爬","item":"https://spiderbuf.cn/challenge/css-pseudo-elements"}]}</script>
+    <script src="https://spiderbuf.cn/static/js/site.v3.min.js"></script>
+    <title>CSS伪元素反爬 | SpiderBuf</title>
+</head>
+
+<body class="flex flex-col justify-between">
+    <header class="border-b border-slate-200 bg-white/80 backdrop-blur-md sticky top-0 z-50">
+        <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="flex h-16 items-center justify-between">
+                <div class="flex items-center gap-2 shrink-0">
+                    <a href="/" aria-label="logo">
+                        <span class="text-xl font-bold tracking-tight text-indigo-600">SpiderBuf<span class="text-slate-600">.cn</span></span>
+                    </a>
+                </div>
+                <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600" aria-label="网站导航">
+                    <a class="hover:text-indigo-600 transition" href="/challenges">靶场列表</a>
+                    <a class="hover:text-indigo-600 transition" href="/articles">技术文章</a>
+                    <a class="hover:text-indigo-600 transition" href="/python-exercise">Python习题</a>
+                    <a class="hover:text-indigo-600 transition" href="/tools" title="在线工具">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z"/></svg>
+                    </a>
+                    <a class="hover:text-indigo-600 transition" href="/sponsor" title="赞助支持">
+                        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M2 21h18v-2H2M20 8h-2V5h2m0-2H4v10a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4v-3h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Z"></path></svg>
+                    </a>
+                    <a class="hover:text-indigo-600 transition" href="https://github.com/hhuayuan/spiderbuf" target="_blank" title="GitHub">
+                        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12c0 5.303 3.438 9.8 8.205 11.385c.6.113.82-.258.82-.577c0-.285-.01-1.04-.015-2.04c-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729c1.205.084 1.838 1.236 1.838 1.236c1.07 1.835 2.809 1.305 3.495.998c.108-.776.417-1.305.76-1.605c-2.665-.3-5.466-1.332-5.466-5.93c0-1.31.465-2.38 1.235-3.22c-.135-.303-.54-1.523.105-3.176c0 0 1.005-.322 3.3 1.23c.96-.267 1.98-.399 3-.405c1.02.006 2.04.138 3 .405c2.28-1.552 3.285-1.23 3.285-1.23c.645 1.653.24 2.873.12 3.176c.765.84 1.23 1.91 1.23 3.22c0 4.61-2.805 5.625-5.475 5.92c.42.36.81 1.096.81 2.22c0 1.606-.015 2.896-.015 3.286c0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
+                    </a>
+                    <a class="hover:text-indigo-600 transition" href="/rss" title="RSS订阅" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+                    </a>
+                </nav>
+
+                <div class="flex md:hidden">
+                    <button id="mobile-menu-button" type="button" class="inline-flex items-center justify-center rounded-md p-2 text-slate-600 hover:bg-slate-100 outline-none">
+                        <svg id="icon-open" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                        <svg id="icon-close" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white shadow-lg transition-all duration-300">
+            <div class="space-y-1 px-4 pb-6 pt-2">
+                <a href="/challenges" class="block rounded-md px-3 py-3 text-base font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-600">靶场列表</a>
+                <a href="/articles" class="block rounded-md px-3 py-3 text-base font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-600">技术文章</a>
+                <a href="/python-exercise" class="block rounded-md px-3 py-3 text-base font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-600">Python习题</a>
+
+                <div class="my-2 border-t border-slate-100"></div>
+
+                <div class="grid grid-cols-4 gap-4 px-3 py-2">
+                    <a href="/tools" class="flex flex-col items-center gap-1.5 text-slate-500">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z"/></svg>
+                        <span class="text-xs">工具</span>
+                    </a>
+                    <a href="/sponsor" class="flex flex-col items-center gap-1.5 text-slate-500">
+                        <svg width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M2 21h18v-2H2M20 8h-2V5h2m0-2H4v10a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4v-3h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Z"></path></svg>
+                        <span class="text-xs">赞助</span>
+                    </a>
+                    <a href="https://github.com/hhuayuan/spiderbuf" class="flex flex-col items-center gap-1.5 text-slate-500">
+                        <svg width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12c0 5.303 3.438 9.8 8.205 11.385c.6.113.82-.258.82-.577c0-.285-.01-1.04-.015-2.04c-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729c1.205.084 1.838 1.236 1.838 1.236c1.07 1.835 2.809 1.305 3.495.998c.108-.776.417-1.305.76-1.605c-2.665-.3-5.466-1.332-5.466-5.93c0-1.31.465-2.38 1.235-3.22c-.135-.303-.54-1.523.105-3.176c0 0 1.005-.322 3.3 1.23c.96-.267 1.98-.399 3-.405c1.02.006 2.04.138 3 .405c2.28-1.552 3.285-1.23 3.285-1.23c.645 1.653.24 2.873.12 3.176c.765.84 1.23 1.91 1.23 3.22c0 4.61-2.805 5.625-5.475 5.92c.42.36.81 1.096.81 2.22c0 1.606-.015 2.896-.015 3.286c0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
+                        <span class="text-xs">代码</span>
+                    </a>
+                    <a href="/rss" class="flex flex-col items-center gap-1.5 text-slate-500">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+                        <span class="text-xs">订阅</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuBtn = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const iconOpen = document.getElementById('icon-open');
+            const iconClose = document.getElementById('icon-close');
+
+            menuBtn.addEventListener('click', () => {
+                
+                const isHidden = mobileMenu.classList.contains('hidden');
+
+                if (isHidden) {
+                    mobileMenu.classList.remove('hidden');
+                    iconOpen.classList.add('hidden');
+                    iconClose.classList.remove('hidden');
+                } else {
+                    mobileMenu.classList.add('hidden');
+                    iconOpen.classList.remove('hidden');
+                    iconClose.classList.add('hidden');
+                }
+            });
+
+            
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 768) { 
+                    mobileMenu.classList.add('hidden');
+                    iconOpen.classList.remove('hidden');
+                    iconClose.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+    <div class="flex-1">
+        <div class="flex gap-4">
+            
+            <aside class="hidden xl:block ml-4 shrink-0 xl:w-80 mt-8">
+                <div class="sticky top-24 border border-dashed border-slate-300 rounded-2xl text-center text-slate-400 text-sm overflow-hidden">
+                    <p class="text-[10px] text-slate-300 mb-2">AD</p>
+                    <div class="min-h-155 bg-slate-50 flex items-center justify-center w-full">
+                       
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4169504979687359"
+     data-ad-slot="9021161584"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+
+                    </div>
+                </div>
+            </aside>
+            
+            <div class="flex-1 max-w-7xl mx-auto flex flex-col gap-4">
+
+<header class="w-full max-w-4xl mx-auto my-8 font-sans border border-slate-200 rounded-2xl overflow-hidden">
+    <div class="bg-white px-6 py-4 flex items-center justify-between gap-6 shadow-sm border-b border-slate-200">
+        <div class="flex items-center gap-4 min-w-0 flex-1">
+            <span class="shrink-0 bg-indigo-500 text-white font-mono font-bold px-2 py-1 rounded-xl text-lg shadow-sm uppercase">
+                n04
+            </span>
+
+            <h1 class="text-xl font-bold text-slate-700 tracking-wide truncate flex-1"
+                title="CSS伪元素反爬">
+                CSS伪元素反爬
+            </h1>
+        </div>
+
+        <div class="flex items-center gap-4 text-slate-400 shrink-0">
+            <div class="flex items-center gap-1.5" title="累计访问量">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                <span class="text-xs font-medium">9.7k</span>
+            </div>
+            <div class="flex items-center gap-1.5" title="发布日期">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                <span class="text-xs font-medium">2024-01-11</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white p-6 space-y-6">
+        
+
+        <div class="flex flex-wrap gap-2">
+            
+                
+                    
+                    <span class="text-xs font-medium px-2 py-0.5 bg-gray-100 text-gray-600 rounded">入门</span>
+                    
+                
+                    
+                    <span class="text-xs font-medium px-2 py-0.5 bg-gray-100 text-gray-600 rounded">CSS</span>
+                    
+                
+                    
+                    <span class="text-xs font-medium px-2 py-0.5 bg-gray-100 text-gray-600 rounded">pseudo-element</span>
+                    
+                
+                    
+                    <span class="text-xs font-medium px-2 py-0.5 bg-gray-100 text-gray-600 rounded">xpath</span>
+                    
+                
+                    
+                    <span class="text-xs font-medium px-2 py-0.5 bg-gray-100 text-gray-600 rounded">电影海报</span>
+                    
+                
+            
+        </div>
+    </div>
+
+    <div class="flex flex-wrap bg-slate-50 overflow-hidden divide-x divide-slate-200 border-t border-slate-200">
+        
+        <a href="/tutorial/css-pseudo-elements" class="flex-1 flex flex-col items-center justify-center p-4 hover:bg-white transition-colors group" target="_blank">
+            <svg class="w-5 h-5 text-slate-400 group-hover:text-blue-500 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+            <span class="text-sm font-semibold text-slate-700">阅读教程</span>
+        </a>
+        
+        
+        <a href="/code/css-pseudo-elements" class="flex-1 flex flex-col items-center justify-center p-4 hover:bg-white transition-colors group" target="_blank">
+            <svg class="w-5 h-5 text-slate-400 group-hover:text-purple-500 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+            <span class="text-sm font-semibold text-slate-700">参考代码</span>
+        </a>
+        
+        
+        
+    </div>
+</header>
+
+<h1 class="text-2xl text-center my-8">值得一看的高分电影</h1>
+<div class="flex flex-col gap-8">
+    <div class="row" style="margin-top: 10px;">
+        <div class="grid grid-cols-[1fr_3fr] gap-4">
+            <h2 class="text-xl font-semibold col-start-1">肖申克的救赎 The Shawshank Redemption</h2></br>
+            <div class="col-start-1">
+                <img src="/static/images/douban_movie/posters/tt0111161.jpg" alt="肖申克的救赎 The Shawshank Redemption"
+                    class="w-[270px] h-auto">
+            </div>
+            <div class="col-start-2">
+                <span>豆瓣电影评分:</span><span class="mnopqr pkenmc">.</span><span class="rbmsak">9.3</span><br />
+                <span><span>导演</span>: <span>弗兰克·德拉邦特</span></span><br />
+                <span><span>编剧</span>: <span>弗兰克·德拉邦特 </span></span>/弗兰克·德拉邦特 / 斯蒂芬·金<br />
+                <span><span>主演</span>: <span>蒂姆·罗宾斯 </span></span>/蒂姆·罗宾斯 / 摩根·弗里曼 / 鲍勃·冈顿 / 威廉姆·赛德勒 / 克兰西·布朗 /
+                吉尔·贝罗斯 / 马克·罗斯顿 / 詹姆斯·惠特摩 / 杰弗里·德曼 / 拉里·布兰登伯格 / 尼尔·吉恩托利 / 布赖恩·利比 / 大卫·普罗瓦尔 / 约瑟夫·劳格诺 / 祖德·塞克利拉 /
+                保罗·麦克兰尼 / 芮妮·布莱恩 / 阿方索·弗里曼 / V·J·福斯特 / 弗兰克·梅德拉诺 / 马克·迈尔斯 / 尼尔·萨默斯 / 耐德·巴拉米 / 布赖恩·戴拉特 /
+                唐·麦克马纳斯<br />
+                <span><span>类型:</span><span> 剧情 </span></span>/剧情 / 犯罪<br />
+                <span><span>制片国家/地区:</span><span> 美国</span></span><br />
+                <span><span>语言:</span><span> 英语</span></span><br />
+                <span><span>上映日期:</span><span> 1994-09-10(多伦多电影节) </span></span>/1994-09-10(多伦多电影节) /
+                1994-10-14(美国)<br />
+                <span><span>片长:</span><span> 142分钟</span></span><br />
+                <span><span>又名:</span><span> 月黑高飞(港) </span></span>/月黑高飞(港) / 刺激1995(台) / 地狱诺言 / 铁窗岁月 /
+                消香克的救赎<br />
+                <span>IMDb:</span> tt0111161<br />
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="grid grid-cols-[1fr_3fr] gap-4">
+            <h2 class="text-xl font-semibold col-start-1">阿甘正传 Forrest Gump</h2></br>
+            <div class="col-start-1">
+                <img src="/static/images/douban_movie/posters/tt0109830.jpg" alt="阿甘正传 Forrest Gump"
+                    class="w-[270px] h-auto">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span>豆瓣电影评分:</span><span class="mnopqr mkrtyu">.</span><span class="rbmsak">9.1</span><br />
+                <span><span>导演</span>: <span>罗伯特·泽米吉斯</span></span><br />
+                <span><span>编剧</span>: <span>埃里克·罗思 </span></span>/埃里克·罗思 / 温斯顿·格鲁姆<br />
+                <span><span>主演</span>: <span>汤姆·汉克斯 </span></span>/汤姆·汉克斯 / 罗宾·怀特 / 加里·西尼斯 / 麦凯尔泰·威廉逊 / 莎莉·菲尔德 /
+                海利·乔·奥斯蒙 / 迈克尔·康纳·亨弗里斯 / 哈罗德·G·赫瑟姆 / 山姆·安德森 / 伊俄涅·M·特雷奇 / 彼得·道博森 / 希芳·法隆 / 伊丽莎白·汉克斯 / 汉娜·豪尔 /
+                克里斯托弗·琼斯 / 罗布·兰德里 / 杰森·麦克奎尔 / 桑尼·施罗耶 / 艾德·戴维斯 / 丹尼尔C.斯瑞派克 / 大卫·布里斯宾 / 德博拉·麦克蒂尔 / 艾尔·哈林顿 /
+                阿非莫·奥米拉 /
+                约翰·沃德斯塔德 / 迈克尔·伯吉斯 / 埃里克·安德伍德 / 拜伦·明斯 / 斯蒂芬·布吉格沃特 / 约翰·威廉·高尔特 / 希拉里·沙普兰 / 伊莎贝尔·罗斯 / 理查德·达历山德罗 /
+                迪克·史迪威 / 迈克尔-杰斯 / 杰弗里·布莱克 / 瓦妮莎·罗斯 / 迪克·卡维特 / 马拉·苏查雷特扎 / 乔·阿拉斯奇 / W·本森·泰瑞<br />
+                <span><span>类型:</span><span> 剧情 </span></span>/剧情 / 爱情<br />
+                <span><span>制片国家/地区:</span><span> 美国</span></span><br />
+                <span><span>语言:</span><span> 英语</span></span><br />
+                <span><span>上映日期:</span><span> 1994-06-23(洛杉矶首映) </span></span>/1994-06-23(洛杉矶首映) /
+                1994-07-06(美国)<br />
+                <span><span>片长:</span><span> 142分钟</span></span><br />
+                <span><span>又名:</span><span> 福雷斯特·冈普</span></span><br />
+                <span>IMDb:</span> tt0109830<br />
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div>简介：</br>阿甘（汤姆·汉克斯
+            饰）于二战结束后不久出生在美国南方阿拉巴马州一个闭塞的小镇，他先天弱智，智商只有75，然而他的妈妈是一个性格坚强的女性，她常常鼓励阿甘“傻人有傻福”，要他自强不息。</div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="grid grid-cols-[1fr_3fr] gap-4">
+            <h2 class="text-xl font-semibold col-start-1">触不可及 Intouchables</h2></br>
+            <div class="col-start-1">
+                <img src="/static/images/douban_movie/posters/tt1675434.jpg" alt="触不可及 Intouchables"
+                    class="w-[270px] h-auto">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span>豆瓣电影评分:</span><span class="mnopqr uvwxab">.</span><span class="rbmsak">8.6</span><br />
+                <span><span>导演</span>: <span>奥利维埃·纳卡什 </span></span>/奥利维埃·纳卡什 / 埃里克·托莱达诺<br />
+                <span><span>编剧</span>: <span>奥利维埃·纳卡什 </span></span>/奥利维埃·纳卡什 / 埃里克·托莱达诺<br />
+                <span><span>主演</span>: <span>弗朗索瓦·克鲁塞 </span></span>/弗朗索瓦·克鲁塞 / 奥玛·希 / 安娜·勒尼 / 奥德雷·弗勒罗 /
+                约瑟芬娜·德·摩 /
+                克洛蒂尔德·莫莱特 / 阿尔芭·贝露琪 / Cyril Mendy / 萨丽马特·卡马特 / Absa Diatou Toure / Grégoire Oestermann /
+                Dominique
+                Daguier / François Caron / Christian Ameri / 托马·索利韦尔<br />
+                <span><span>类型:</span><span> 剧情 </span></span>/剧情 / 喜剧<br />
+                <span><span>制片国家/地区:</span><span> 法国</span></span><br />
+                <span><span>语言:</span><span> 法语</span></span><br />
+                <span><span>上映日期:</span><span> 2011-11-02(法国)</span></span><br />
+                <span><span>片长:</span><span> 112分钟</span></span><br />
+                <span><span>又名:</span><span> 闪亮人生(港) </span></span>/闪亮人生(港) / 逆转人生(台) / 无法触碰 / 最佳拍档 / 不可触碰 /
+                不可触摸 /
+                Untouchable / The Intouchables<br />
+                <span>IMDb:</span> tt1675434<br />
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div>简介：</br>因为一次跳伞事故，白人富翁菲利普Philippe（弗朗索瓦·克鲁塞 François Cluzet
+            饰）瘫痪在床，欲招聘一名全职陪护。由于薪酬高，应聘者云集，个个舌灿莲花，却无法打动他的心。直到黑人德希斯Driss（奥玛·赛 Omar Sy
+            饰）的出现才让他作出决定。德希斯刚从监狱出来，背负家庭重担，一心只想寻张辞退信以申领救济金，而且他明显对女助理的兴趣要远大于这份工作。但是菲利普还是一眼相中了这个小伙子。于是，德希斯开始了一个月的试用期。虽然舒适的豪宅环境让他倍感虚荣，但是他仍面临很多挑战：不仅要为菲利普作身体复健，还得给他洗浴、灌肠、拆信、穿丝袜等。起初，两人的思维方式与价值观大相径庭，但是，随着了解的不断深入，他们成为了朋友……
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="grid grid-cols-[1fr_3fr] gap-4">
+            <h2 class="text-xl font-semibold col-start-1">狮子王 The Lion King</h2></br>
+            <div class="col-start-1">
+                <img src="/static/images/douban_movie/posters/tt0110357.jpg" alt="狮子王 The Lion King"
+                    class="w-[270px] h-auto">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span>豆瓣电影评分:</span><span class="mnopqr pqrmno">.</span><span class="rbmsak">9.7</span><br />
+                <span><span>导演</span>: <span>罗杰·阿勒斯 </span></span>/罗杰·阿勒斯 / 罗伯·明可夫<br />
+                <span><span>编剧</span>: <span>艾琳·梅琪 </span></span>/艾琳·梅琪 / 乔纳森·罗伯特 / 琳达·伍尔芙顿<br />
+                <span><span>主演</span>: <span>乔纳森·泰勒·托马斯 </span></span>/乔纳森·泰勒·托马斯 / 马修·布罗德里克 / 杰瑞米·艾恩斯 /
+                詹姆斯·厄尔·琼斯 /
+                莫伊拉·凯利 / 内森·连恩 / 尼基塔·卡兰姆 / 埃林·萨贝拉 / 乌比·戈德堡 / 罗温·艾金森<br />
+                <span><span>类型:</span><span> 动画 </span></span>/动画 / 歌舞 / 冒险<br />
+                <span><span>制片国家/地区:</span><span> 美国</span></span><br />
+                <span><span>语言:</span><span> 英语 </span></span>/英语 / 斯瓦希里语 / 科萨语 / 祖鲁语<br />
+                <span><span>上映日期:</span><span> 1995-07-15(中国大陆) </span></span>/1995-07-15(中国大陆) / 1994-06-15(美国)
+                /
+                2011-09-16(美国)<br />
+                <span><span>片长:</span><span> 89 分钟</span></span><br />
+                <span><span>又名:</span><span> 狮子王3D</span></span><br />
+                <span>IMDb:</span> tt0110357<br />
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div>简介：</br>辛巴是狮子王国的小王子，他的父亲穆法沙是一个威严的国王。然而叔叔刀疤却对穆法沙的王位觊觎已久。</div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="grid grid-cols-[1fr_3fr] gap-4">
+            <h2 class="text-xl font-semibold col-start-1">西西里的美丽传说 Malèna</h2></br>
+            <div class="col-start-1">
+                <img src="/static/images/douban_movie/posters/tt0213847.jpg" alt="西西里的美丽传说 Malèna"
+                    class="w-[270px] h-auto">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span>豆瓣电影评分:</span><span class="ghijkl tcwdsk">.</span><span class="rbmsak">8.3</span><br />
+                <span><span>导演</span>: <span>朱塞佩·托纳多雷</span></span><br />
+                <span><span>编剧</span>: <span>朱塞佩·托纳多雷 </span></span>/朱塞佩·托纳多雷 / 卢恰诺·温琴佐尼<br />
+                <span><span>主演</span>: <span>莫妮卡·贝鲁奇 </span></span>/莫妮卡·贝鲁奇 / 朱塞佩·苏尔法罗 / Luciano Federico /
+                玛蒂尔德·皮亚纳
+                / Pietro Notarianni / Gaetano Aronica / Gilberto Idonea / Angelo Pellegrino / Gabriella Di Luzio
+                /
+                Pippo Provvidenti / 埃丽萨·莫鲁奇 / 奥罗拉·夸特罗基 / 露琪亚·萨多 / 瓦尼·布拉马蒂 / Salvatore Martino / 安东内洛·普利西 /
+                诺姆·莫根施特恩<br />
+                <span><span>类型:</span><span> 剧情 </span></span>/剧情 / 情色 / 战争<br />
+                <span><span>制片国家/地区:</span><span> 意大利 </span></span>/意大利 / 美国<br />
+                <span><span>语言:</span><span> 意大利语 </span></span>/意大利语 / 英语 / 拉丁语 / 古希腊语<br />
+                <span><span>上映日期:</span><span> 2000-10-27(意大利)</span></span><br />
+                <span><span>片长:</span><span> 109 分钟</span></span>/109 分钟/ USA: 92 分钟(heavily cut) / Turkey: 84
+                分钟(TV
+                version)<br />
+                <span><span>又名:</span><span> 真爱伴我行(台) </span></span>/真爱伴我行(台) / 玛莲娜 / 玛琳娜<br />
+                <span>IMDb:</span> tt0213847<br />
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div>简介：</br>当我还只是十三岁时，1941年春末的那一天，我初次见到了她那一天，墨索里尼向英法宣战，而我，得到了生命里的第一辆脚踏车。
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="grid grid-cols-[1fr_3fr] gap-4">
+            <h2 class="text-xl font-semibold col-start-1">剪刀手爱德华 Edward Scissorhands</h2></br>
+            <div class="col-start-1">
+                <img src="/static/images/douban_movie/posters/tt0099487.jpg" alt="剪刀手爱德华 Edward Scissorhands"
+                    class="w-[270px] h-auto">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span>豆瓣电影评分:</span><span class="ghijkl pkenmc">.</span><span class="rbmsak">9.9</span><br />
+                <span><span>导演</span>: <span>蒂姆·波顿</span></span><br />
+                <span><span>编剧</span>: <span>蒂姆·波顿 </span></span>/蒂姆·波顿 / 卡罗琳·汤普森<br />
+                <span><span>主演</span>: <span>约翰尼·德普 </span></span>/约翰尼·德普 / 薇诺娜·瑞德 / 黛安·韦斯特 / 安东尼·迈克尔·豪尔 / 凯西·贝克
+                /
+                罗伯特·奥利维里 / 康查塔·费雷尔 / 卡罗琳·阿隆 / 迪克·安东尼·威廉姆斯 / 澳澜·琼斯 / 文森特·普莱斯 / 艾伦·阿金 / 苏珊·布洛马特 / 约翰·戴维森 / 布莱恩·拉肯
+                /
+                Victoria Price / Stuart Lancaster / Gina Gallagher / 阿隆·鲁斯汀 / 阿兰·弗吉 / 史蒂文·布里尔 / Peter Palmer /
+                马克·麦考利 / 唐娜·派洛尼 / Ken DeVaul / Kathy Dombo / Tabetha Thomas / 尼克·卡特<br />
+                <span><span>类型:</span><span> 剧情 </span></span>/剧情 / 爱情 / 奇幻<br />
+                <span><span>制片国家/地区:</span><span> 美国</span></span><br />
+                <span><span>语言:</span><span> 英语</span></span><br />
+                <span><span>上映日期:</span><span> 1990-12-06(美国)</span></span><br />
+                <span><span>片长:</span><span> 105分钟</span></span><br />
+                <span><span>又名:</span><span> 幻海奇缘(港)</span></span><br />
+                <span>IMDb:</span> tt0099487<br />
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div>简介：</br>爱德华（约翰尼•戴普
+            饰）是一个机器人，他拥有人的心智，却有一双剪刀手，孤独地生活在古堡里，闯入古堡的化妆品推销员佩格把他带回家，让他走进了人类的世界。单纯的爱德华爱上了佩格的女儿金（薇诺娜•瑞德
+            饰），金也慢慢的被爱德华的善良所吸引。</div>
+    </div>
+</div>
+<style>
+    .abcdef::before {
+        content: "7";
+    }
+
+    .abcdef::after {
+        content: "5";
+    }
+
+    .ghijkl::before {
+        content: "8";
+    }
+
+    .ghijkl::after {
+        content: "9";
+    }
+
+    .mnopqr::before {
+        content: "9";
+    }
+
+    .mnopqr::after {
+        content: "1";
+    }
+
+    .uvwxyz::before {
+        content: "1";
+    }
+
+    .uvwxyz::after {
+        content: "4";
+    }
+
+    .yzabcd::before {
+        content: "2";
+    }
+
+    .yzabcd::after {
+        content: "6";
+    }
+
+    .efghij::before {
+        content: "3";
+    }
+
+    .efghij::after {
+        content: "2";
+    }
+
+    .klmnop::before {
+        content: "5";
+    }
+
+    .klmnop::after {
+        content: "7";
+    }
+
+    .qrstuv::before {
+        content: "4";
+    }
+
+    .qrstuv::after {
+        content: "3";
+    }
+
+    .wxyzab::before {
+        content: "6";
+    }
+
+    .wxyzab::after {
+        content: "0";
+    }
+
+    .cdefgh::before {
+        content: "0";
+    }
+
+    .cdefgh::after {
+        content: "8";
+    }
+
+    .hijklm::after {
+        content: "6";
+    }
+
+    .opqrst::after {
+        content: "0";
+    }
+
+    .uvwxab::after {
+        content: "3";
+    }
+
+    .cdijkl::after {
+        content: "8";
+    }
+
+    .pqrmno::after {
+        content: "1";
+    }
+
+    .stuvwx::after {
+        content: "4";
+    }
+
+    .pkenmc::after {
+        content: "7";
+    }
+
+    .tcwdsk::after {
+        content: "9";
+    }
+
+    .mkrtyu::after {
+        content: "5";
+    }
+
+    .umdrtk::after {
+        content: "2";
+    }
+
+    .rbmsak {
+        color: #f8fafc;
+    }
+</style>
+</div>
+            
+            <aside class="hidden xl:block mr-4 shrink-0 xl:w-80 mt-8">
+                <div class="sticky top-24 border border-dashed border-slate-300 rounded-2xl text-center text-slate-400 text-sm overflow-hidden">
+                    <p class="text-[10px] text-slate-300 mb-2">AD</p>
+                    <div class="min-h-155 bg-slate-50 flex items-center justify-center w-full">
+                        
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4169504979687359"
+     data-ad-slot="9021161584"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+
+                    </div>
+                </div>
+            </aside>
+            
+        </div>
+        
+            <div class="mx-auto max-w-full md:max-w-7xl my-6 w-full h-full min-h-80 rounded-2xl border border-dashed border-slate-300 overflow-hidden">
+                <p class="text-[10px] text-slate-300 px-1">AD</p>
+                
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4169504979687359"
+     data-ad-slot="6722548729"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+
+            </div>
+        
+    </div>
+    <footer class="flex justify-center items-center gap-6 text-sm text-gray-600 p-4 border-t border-gray-200">
+        <a href="/about" title="关于Spiderbuf" aria-label="关于Spiderbuf">关于我们</a>
+        <a href="/privacy" title="Spiderbuf网站隐私政策" aria-label="Spiderbuf 网站隐私政策">隐私政策</a>
+        <a href="/" title="Spiderbuf" aria-label="All rights reserved">All rights reserved.</a>
+        友情链接：<a href="https://gethtmx.com" target="_blank" title="HTMX中文网" aria-label="HTMX 中文网">HTMX中文网</a>
+    </footer>
+</body>
+</html>
+
+
