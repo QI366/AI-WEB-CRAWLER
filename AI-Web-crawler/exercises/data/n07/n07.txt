@@ -1,0 +1,1012 @@
+0.&nbsp位运算符，按位异或运算的符号是
+运算符
+1.&nbsp在Python语言中，能够处理图像的第三方库是
+生态
+2.&nbsp以下不是函数作用的选项是
+函数
+3.&nbspf=open()可以打开一个文件，关于的的描述错误的是
+文件操作
+4.&nbsp以下代码的输出结果是
+d={}
+for i in range(26):
+	d[chr(i+ord('a'))] = chr((i+13)%26 + ord('a'))
+for c in 'Python’：
+	rint(d.get(c,c)，end='')
+字典
+5.&nbsp当用户输入5时，下面代码的输出结果是
+try：
+	n=input('请输入一个整数：')
+	def pow2(n):
+		return n**2
+	pow2(n)
+except:
+	print('程序执行错误')
+异常处理
+6.&nbsp以下程序的输出结果是
+ls=['aa',[2,3,3.0]]
+print(ls.index(2))
+列表
+7.&nbsp生成一个[1,99]之间随机整数的函数是
+数学模块
+8.&nbsp整数除法（向下取整）的运算符是
+运算符
+9.&nbsp以下不是Python语言所使用特殊含义符号的是
+运算符
+10.&nbsprandom库采用更多随机数生成算法是
+生态
+11.&nbsp元组可以嵌套吗
+元组
+12.&nbsp在Python语言中，属于网络爬虫领域的第三方库是
+生态
+13.&nbsp安装一个第三方库的命名格式是
+入门基础
+14.&nbsp以下关于组合类型的描述，正确的是
+元组
+15.&nbsp以下关于Python分支的描述中，错误的是
+条件语句
+16.&nbsp元组的长度如何获取
+元组
+17.&nbsp在Python语言中，用来安装第三方库的工具是
+生态
+18.&nbsp以下的函数定义中，错误的是
+函数
+19.&nbspPython中，下列哪个选项是正确的字典操作？
+字典
+20.&nbsp下列哪个选项是Python中正确的列表推导式，用于生成一个包含0到9的列表？
+列表
+21.&nbsp元组支持哪些操作
+元组
+22.&nbsp以下代码绘制的图形是
+import turtle as t
+for i in range(1,5):
+	t.fd(50)
+	t.left(90)
+内置函数
+23.&nbsp以下程序被调用后，运行错误的是
+def f(x,y=1,z=2)：
+	pass
+函数
+24.&nbspPython 是一个
+入门基础
+25.&nbsp键盘输入数字5，以下代码的输出结果是
+try：
+n=input("请输入一个整数：")
+	def pow2(n):
+		return ntn
+except：
+	print("程序执行错误")
+异常处理
+26.&nbsp以下不属于人工智能领域的Python第三方库是
+生态
+27.&nbsps='1234567890'，以下表示1234的选项是
+字符串
+28.&nbsp生成一个k比特长度随机整数的函数是
+数学模块
+29.&nbsp在Python语言中，可以作为源文件后缀名的是
+入门基础
+30.&nbsp位运算符，按位与运算的符号是
+运算符
+31.&nbsp以下符合Python语言变量命名规则的是
+基础语法
+32.&nbsp以下不是Python语言保留字的是
+基础语法
+33.&nbsp为以下程序填空，使得输出结果是{40:'yuwen', 20：'yingw', 30：'shuxue'}的选项是
+tb = {'fyingyui'：20，'shuxue'：30, 'yuwen'：40}
+stb={}
+for it in tb.items():
+	print(it)
+print(stb)
+字典
+34.&nbsp以下不属于Python语言保留字的是
+入门基础
+35.&nbsp以下关于Python全局变量和局部变量的描述中，错误的是
+变量类型
+36.&nbspPython中，如何将一个字符串转换为整数？
+字符串
+37.&nbsp以下关于字符串类型的操作的描述，正确的是
+字符串
+38.&nbsp以下程序的输出结果是
+def hub(ss, x=2.0,y=4.0):
+	ss += x*y
+ss=10
+print(ss, hub(es,3))
+函数
+39.&nbspPython中，如何将一个二进制数转换为十进制数
+数字
+40.&nbsp以下代码的输出结果是
+1s=['2020', '20.20', 'Python']
+ls,append(2020)
+1s.append([2020，'2020'])
+print(ls)
+列表
+41.&nbsp以下关于数据维度的描述，错误的是
+列表
+42.&nbspPython中，以下哪个函数可以返回一个随机整数
+数字
+43.&nbsp以下关于Python程序语法元素的描述，正确的选项是
+基础语法
+44.&nbsp以下哪一项在 Python 中被视为注释?
+入门基础
+45.&nbsp以下不属于Python数据分析领域第三方库的是
+生态
+46.&nbsp以下程序被调用后，能够正确执行的是
+def f(x,y=1,z=2)：
+	pass
+函数
+47.&nbspPython为源文件指定的默认字符编码是
+入门基础
+48.&nbsp元组的元素可以修改吗
+元组
+49.&nbsp以下关于Python语言中try语句的描述中，错误是
+异常处理
+50.&nbsp以下程序的输出结果是
+ls1=[1.2.3.4.5]
+ls2=ls1
+ls2.reverse()
+print(lsl)
+列表
+51.&nbsp以下用于计算机视觉领域的Python第三方库是
+生态
+52.&nbsp如何获取指定日期是星期几？
+日期和时间
+53.&nbsp关于函数定义，以下形式错误的是
+函数
+54.&nbsp用pyinstaller工具打包Python源文件时-F参数的含义是
+生态
+55.&nbsp下列关于Python面向对象编程的说法，正确的是？
+面向对象
+56.&nbsp元组和列表的主要区别是什么
+元组
+57.&nbsp以下属于Python机器学习领域第三方库的是
+生态
+58.&nbsp在Python中，以下哪个运算符用于位与运算
+数字
+59.&nbsp设str1='python'，语句print(strl.center(10,*))的执行结果是
+字符串
+60.&nbsp在Python语言中，读入CSV文件保存的二维数据，按特定分隔符抽取信息，最可能用到的函数是
+文件操作
+61.&nbsp在Python语言中，IPO模式不包括
+入门基础
+62.&nbsp下载但不安装一个第三方库的命名格式是
+入门基础
+63.&nbspPython中，下列哪个选项是正确的函数定义方式？
+函数
+64.&nbsp以下关于turtle库的描述，错误的是
+生态
+65.&nbspPython中定义函数的关键字是
+函数
+66.&nbspPython语言中用来表示代码块所属关系的语法是
+基础语法
+67.&nbsp以下程序的输出结果是
+for c in 'Python NCRE'：
+	if c=='N：
+		break
+		print (c)
+循环语句
+68.&nbsp以下不是Python组合数据类型的是
+变量类型
+69.&nbsp以下不是Python文件操作方法的是
+文件操作
+70.&nbspPython中，下列哪种数据类型是不可变的？
+变量类型
+71.&nbsp右移运算符是
+运算符
+72.&nbsp以下程序的输出结果是
+ls=[1,2,3]
+lt=[4,5，6]
+print(ls+lt)
+列表
+73.&nbsp以下代码执行后，book.txt文件的内容是
+fo= open('book.txt','w')
+ls=['book','23','201009','20']
+fo.wite(str(1s))
+fo.close()
+文件操作
+74.&nbsp以下不是Python组合数据类型的是
+变量类型
+75.&nbspPython语言提供三种基本的数字类型，它们是
+变量类型
+76.&nbsp对于序列s，能够返回序列s中第i到第i以1为步长的子序列的表达是
+列表
+77.&nbsp以下不属于Python的pip工具命令的选项是
+生态
+78.&nbspPython中，如何将一个十进制数转换为二进制数
+数字
+79.&nbsp以下不是Pythan语言所使用特殊含义符号的是
+运算符
+80.&nbspPython 受哪些语言启发
+入门基础
+81.&nbsp什么时候应该使用元组而不是列表
+元组
+82.&nbsp以下关于文件的描述中，错误的是
+文件操作
+83.&nbsp下列关于Python中的垃圾回收机制的说法，正确的是？
+基础语法
+84.&nbspPython中的复数用什么表示
+数字
+85.&nbsp表达键值对的字典类型最可能属于的数据组织维度是
+字典
+86.&nbsp以下程序的输出结果是
+a=[3,2,1]
+for i in a[::-1]:
+	print (i,end='')
+列表
+87.&nbsp以下哪个函数可以将一个数四舍五入为整数
+数字
+88.&nbsp元组生成式和列表生成式有什么区别
+元组
+89.&nbsp在Python语言中，不属于组合数据类型的是
+变量类型
+90.&nbspPython中，with语句主要用于什么场景？
+基础语法
+91.&nbsp下列哪个选项表示2023年11月11日？
+日期和时间
+92.&nbsp复合赋值运算符，同时进行运算和赋值，例如+=，是
+运算符
+93.&nbsp以下关于Python二维数据的描述中，错误的是
+元组
+94.&nbsp下列哪种方式可以实现Python中的多线程？
+模块
+95.&nbsp以下关于程序设计语言的描述，错误的选项是
+入门基础
+96.&nbsp以下对Python文件处理的描述中，错误的是
+文件操作
+97.&nbspPython中，如何获取当前时间的毫秒级精度？
+日期和时间
+98.&nbsp以下程序的输出结果是
+x=10
+y=0
+if (x>5) or (x/y>5)：
+	print('Right')
+e1se:
+	print('Wrong')
+条件语句
+99.&nbsp关于以下代码的描述中，错误的是
+def fact(n):
+	s=1
+	for i in range(1,n+1):
+		s *=i
+	return s
+函数
+100.&nbsp假设city.csv文件内容如下
+巴哈马,巴林,孟加拉国,巴巴多斯
+白俄罗斯,比利时,伯利兹
+以下代码的输出结果是：
+f= open('city.csv','r')
+ls=f.read().split(',')
+f.close()
+print(ls)
+文件操作
+101.&nbsptime库的time.time()函数作用是
+内置函数
+102.&nbsp以下选项，不是Python保留字的选项是
+基础语法
+103.&nbsp将字符串"2023-11-11 12:34:56"转换为datetime对象，可以使用：
+日期和时间
+104.&nbsp如何将一个datetime对象转换为timestamp？
+日期和时间
+105.&nbsp逻辑“或”运算的运算符是
+运算符
+106.&nbsp不属于Python文件读操作的是
+文件操作
+107.&nbsp以下选项，错误的是
+基础语法
+108.&nbsp运算符的优先级，从高到低依次是
+运算符
+109.&nbsp以下哪个是Python中的无穷大表示
+数字
+110.&nbsp将本地时间转换为UTC时间，可以使用：
+日期和时间
+111.&nbsp以下程序的输出结果是
+s=10
+def run(n)：
+	global s
+	for i in range(n)：
+		s+=i
+	return s
+print(s, run(5))
+循环语句
+112.&nbsp在Python中，表示时区的类是：
+日期和时间
+113.&nbspPython中，面向对象编程的三大特性是？
+面向对象
+114.&nbsp成员运算符，用于判断一个元素是否在序列中，是
+运算符
+115.&nbsp如何计算两个datetime对象之间的时间差？
+日期和时间
+116.&nbsp以下关于Python字典的描述中，错误的是
+字典
+117.&nbsp以下不是Python文件读写方法的是
+文件操作
+118.&nbsp位运算符，按位或运算的符号是
+运算符
+119.&nbsp以下代码的输出结果是
+def young(age):
+	if 12 <= age<=17:
+		print(“作为一个大学生，你很年轻”)
+	elif age <12:
+		print(“作为一个大学生，你太年轻了”)
+	elif age <=28:
+		print(“作为一个大学生，你要努力学习”)
+	e1se:
+		print(“作为一个大学生，你很有毅力”)
+young(18)
+条件语句
+120.&nbsp不属于Python开发用户界面第三方库的是
+生态
+121.&nbsp以下保留字不属于分支或循环逻辑的是
+基础语法
+122.&nbsp表达式divmod(40,3)的结果是
+内置函数
+123.&nbsp下面的d是一个字典变量，能够输出数字5的语句是
+d={'food':{'cake':1,'egg':5},'cake':2,'egg':3}
+字典
+124.&nbsp以下代码的输出结果是
+s=[4,2,9,1]
+s.insert(2,3)
+print(s)
+列表
+125.&nbsp以下关于文件的描述，错误的是
+文件操作
+126.&nbsp元组可以作为集合的元素吗
+元组
+127.&nbsp以下代码的输出结果是
+fo = open('book,txt','w')
+ls=['book','23','201009','20']
+fo.writelines(ls)
+fo.close()
+文件操作
+128.&nbsp以下代码的输出结果是
+while True:
+	guess = eval(input())
+	if guess == 0x452//2:
+		break
+print (guess)
+数学模块
+129.&nbsp列表1istV=1ist(range(10))，以下能够输出列表1istV中最大元素的是
+列表
+130.&nbsp在Python中，使用%Y表示日期格式中的：
+日期和时间
+131.&nbsp以下程序的输出结果是
+for i in 'Nation':
+	for k in range(2):
+		if i=='n':
+			break
+		print(i，end='')
+字符串
+132.&nbsp下列关于Python模块的说法，正确的是？
+模块
+133.&nbsp以下哪个函数可以将字符串转换为浮点数
+数字
+134.&nbsp以下代码的输出结果是
+x='A\0B\0C'
+print(len(x))
+入门基础
+135.&nbsp不属于Python数据分析及可视化处理第三方库的是
+生态
+136.&nbsp以下不属于Python语言保留字的是
+入门基础
+137.&nbsp以下保留字不用于循环逻辑的是
+循环语句
+138.&nbsp以下程序的输出结果是
+ls= [10]
+def run(n):
+	ls.append(n)
+run(5)
+print(ls)
+列表
+139.&nbsp在进行csv文件读写时，最不可能使用的字符串处理方法是
+文件操作
+140.&nbsp以下对CSV格式描述正确的是
+文件操作
+141.&nbsp以下不属于Python文件操作方法的是
+文件操作
+142.&nbsp下列函数中，不是Python内置函数的是
+内置函数
+143.&nbsp文件book.txt在当前代码所在目录内，其内容是一段文本：book，以下代码的输出结果是
+txt= open('book.txt，'r')
+print(txt)
+txt.close()
+文件操作
+144.&nbsp以下属于turtle库颜色控制函数的是
+模块
+145.&nbsp以下代码的输出结果是
+def func(a，b):
+	a *= b
+	return a
+s = func(5,2)
+print(s)
+函数
+146.&nbsp取模运算（求余）的运算符是
+运算符
+147.&nbsp在读写文件之前，需要打开文件使用的函数是
+文件操作
+148.&nbsp以下代码的输出结果是
+for s in “testatest":
+	if s=="a" or s=="e":
+		continue
+	print(s, end='')
+循环语句
+149.&nbsp变量tstr='kip520'，表达式eval(tstr[3:-1])的结果是
+内置函数
+150.&nbsp元组在Python中的常见应用场景有哪些
+元组
+151.&nbsp关于表达式id('45')的结果的描述，错误的是
+内置函数
+152.&nbsp拟在屏幕上打印输出Hel1oWorld，使用的Python语句是
+入门基础
+153.&nbsp以下关于分支结构的描述中，错误的是
+条件语句
+154.&nbsp以下描述中，错误的是
+列表
+155.&nbspPython中，下列哪个选项可以创建一个生成器？
+基础语法
+156.&nbsp用Pyinstaller工具把Python源文件打包成一个独立的可执行文件，使用的参数是
+生态
+157.&nbspPython 文件扩展名是
+入门基础
+158.&nbsp以下关于语言类型的描述中，错误的是
+入门基础
+159.&nbsp以下代码的输出结果是
+fori in range(1,6):
+	if i%4==0:
+		break
+	e1se:
+		print(i,end = ",")
+循环语句
+160.&nbsp执行以下程序，导致输出"输入有误"的输入选项是
+try：
+	ls= eval(input())*2
+	print(ls)
+except:
+	print('输入有误')
+内置函数
+161.&nbsp元组的常用方法有哪些
+元组
+162.&nbspPython中，元组用什么符号表示
+元组
+163.&nbspPython中，字典的键可以是？
+字典
+164.&nbsp以下哪个函数可以计算一个数的绝对值
+数字
+165.&nbsp以下代码的输出结果是
+def Hello(famlyName，age)：
+	if age > 50:
+		print('您好！'+famlyName+'大爷')
+	elif age > 40：
+		print('您好！'+famlyName+'叔叔')
+	elif age > 30:
+		print('您好！'+famlyNane+'大哥')
+	e1se:
+		print('您好！'+'小'+famlyNane)
+Hello(age=60，famlyName='王')
+条件语句
+166.&nbsp对于字典d，以下选项对d.values()的描述正确的是
+字典
+167.&nbsp以下程序的输出结果是
+x=dict()
+type(x)
+字典
+168.&nbsp以下代码的输出结果是
+ls=[]
+for m in 'AB':
+	for n in 'CD':
+		ls.append(mtn)
+print (ls)
+列表
+169.&nbsp以下程序的输出结果是
+ls=[12,44,23,46]
+for i in ls:
+	if i=='44':
+		print('found it! i=', i)
+		break
+	else:
+		print('not found it ...')
+条件语句
+170.&nbsp逻辑“与”运算的运算符是
+运算符
+171.&nbspls=['1','2','3']，以下关于循环结构的描述，错误的是
+循环语句
+172.&nbsp以下代码的输出结果是
+a=10.99
+print (complex(a))
+内置函数
+173.&nbspPython中，下列哪个选项是正确的类定义方式？
+面向对象
+174.&nbspPython中，int类型属于以下哪种数据类型
+数字
+175.&nbsp以下不属于数据分析领域的Python第三方库是
+生态
+176.&nbsp以下哪个是Python中的浮点数表示
+数字
+177.&nbspturtle画图结束后，让画面停顿，不立即关掉窗口的方法是
+生态
+178.&nbsp以下程序的输出结果是
+lt=['绿茶','乌龙茶','红茶','白茶','黑茶']
+ls=lt
+ls.clear()
+print(it)
+列表
+179.&nbsp以下关于CSV文件的描述中，错误的是
+文件操作
+180.&nbsp表达式3*4**2//8%7的计算结果是
+数学模块
+181.&nbsp以下代码的输出结果是
+for s in 'PythonNCRE：'
+	if s=='N':
+		continue
+	print(e, end='')
+循环语句
+182.&nbsp下列哪个选项可以正确地从一个列表中删除重复元素？
+列表
+183.&nbsp以下关于列表变量ls操作的描述中，错误的是
+列表
+184.&nbsp在Python语言中，用于数据分析的第三方库是
+生态
+185.&nbsp以下关于Pythan字典变量的定义中，错误的是
+字典
+186.&nbsp以下代码的输出结果是
+t=10.5
+def above_zero(t):
+	return t>0
+函数
+187.&nbsp关于Python全局变量和局部变量，以下选项描述错误的是
+变量类型
+188.&nbsp以下代码的输出结果是
+x=2 + 9 * ((3*12) -8) // 10 
+print(x)
+数学模块
+189.&nbsp表达式eval('500//10')的结果是
+内置函数
+190.&nbsp在多线程环境下，如何保证时间操作的准确性？
+日期和时间
+191.&nbsp列表变量1s共包含10个元素，1s索引的取值范围是
+列表
+192.&nbsp第三方库Beautifulsoup4的功能是
+生态
+193.&nbsp元组可以作为字典的键吗
+元组
+194.&nbsp以下哪个是正确的元组定义方式
+元组
+195.&nbsp在Python中，以下哪种方法可以判断一个数是否为偶数
+数字
+196.&nbsp要将datetime对象转换为可读的字符串格式，可以使用：
+日期和时间
+197.&nbsp下列关于Python闭包的说法，正确的是？
+基础语法
+198.&nbsp以下代码的输出结果是
+vlist = list(range(5))
+print(vlist)
+列表
+199.&nbsp如何将一个字符串表示的时间转换为datetime对象，同时指定格式？
+日期和时间
+200.&nbspPython中的数学库是什么
+数字
+201.&nbsp对于序列s，以下选项对min(s)描述正确的是
+列表
+202.&nbsp执行以下程序，输出结果是
+y=[' ','']
+print(all(y),any(y))
+内置函数
+203.&nbspPython中，如何处理夏令时？
+日期和时间
+204.&nbsptime.sleep(2)的作用是：
+日期和时间
+205.&nbsp以下关于Python函数的描述中，正确的是
+内置函数
+206.&nbsp元组的打包和解包是什么
+元组
+207.&nbsp判断两个datetime对象是否相等，可以直接使用：
+日期和时间
+208.&nbsp以下关于文件的描述中，错误的是
+文件操作
+209.&nbsp以下关于Python二维数组的描述中，错误的是
+文件操作
+210.&nbsp二维列表ls=[[9,8],[7,6],[5,4],[3,2],[1,0]]，能够获得数字4的选项是
+列表
+211.&nbsp以下代码的输出结果是
+S= 'Pame'
+for i in range(len(S))
+	print(S[-il，end='')
+列表
+212.&nbsp以下用来处理Python列表的方法中，错误的是
+列表
+213.&nbsp以下关于函数优点的描述中，错误的是
+函数
+214.&nbspPython中，if语句的关键字是？
+条件语句
+215.&nbsp关于Python无限循环，以下选项描述错误的是
+循环语句
+216.&nbsp如何将一个datetime对象转换为ISO 8601格式的字符串？
+日期和时间
+217.&nbsp下列关于Python异常处理的说法，错误的是？
+异常处理
+218.&nbsp以下程序的输出结果是
+x=4
+ca='123456'
+if str(x) in ca:
+	print(ca.replace(ca[x]，str(x-2)))
+字符串
+219.&nbsp在Python语言中，包含矩阵运算的第三方库是
+生态
+220.&nbsp元组的切片操作和列表的切片操作有什么区别
+元组
+221.&nbsp文件的追加写入模式是
+文件操作
+222.&nbspPython中，下列哪个选项是正确的异常处理语句？
+异常处理
+223.&nbsp在Python中，以下哪种运算会将结果转换为浮点数
+数字
+224.&nbsp以下程序的输出结果是
+s = 0
+def fun(s，n)：
+	for i in range(n):
+		s+i
+print(fun(s,5))
+函数
+225.&nbsp以下不是Python语言保留字的是
+基础语法
+226.&nbsp表格类型数据的组织维度最可能是
+元组
+227.&nbsp以下关于二进制整数的定义，正确的是
+基础语法
+228.&nbsp以下代码的输出结果是
+1s = ['car','truck2']
+def funC(A)：
+	ls.append(A)
+	return
+func('bus')
+print(ls)
+列表
+229.&nbsp比较两个变量是否相等的运算符是
+运算符
+230.&nbsp以下关于函数返回值的描述中，正确的是
+函数
+231.&nbsp以下程序的输出结果是
+ss = set('htslbht)
+sorted(ss)
+for i in ss:
+	print(i, end='')
+内置函数
+232.&nbsp以下关于Python的函数的描述，正确的是
+函数
+233.&nbsp赋值运算符，将一个值赋给一个变量，是
+运算符
+234.&nbsp以下关于Python语言技术特点的描述中，错误的是
+入门基础
+235.&nbsp文件exam.txt与以下代码在同一目录下，其内容是一段文本：bigBen，以下代码的输出结果是
+f=open('exam.txt')
+print(f)
+f.close()
+文件操作
+236.&nbsp执行以下程序，输出结果是
+y='中文'
+x='中文字'
+print(x>y)
+基础语法
+237.&nbsp以下代码的输出结果是
+print(0.1+0.2==0.3)
+入门基础
+238.&nbsp以下不属于网络爬虫领域的Python第三方库是
+生态
+239.&nbsp以下关于Python语言的描述中，错误的是
+函数
+240.&nbsp以下程序的输出结果是
+L1=[1,2,3,4]
+L2=Ll.copy()
+L2.reverse()
+print(L1)
+列表
+241.&nbsp设str1='*@pythan@*’，语句print(str1[2:].stip('@'))的执行结果是
+字符串
+242.&nbsp以下关于Python循环结构的描述中，错误的是
+循环语句
+243.&nbsp在Python语言中，不属于Web开发框架第三方库的是
+生态
+244.&nbsp以下关于数据组织的描述中，错误的是
+元组
+245.&nbsp以下代码的输出结果是
+a=[[1,2,3],[4,5,6],[7,8,9]]
+s=0
+for c in a:
+	for j in range(3):
+		s += c[j]
+print(s)
+循环语句
+246.&nbspPython中，函数的参数传递方式有哪些？
+函数
+247.&nbspPython中，列表的索引从哪个位置开始？
+列表
+248.&nbsp以下不能用于生成空字典的选项是
+字典
+249.&nbspcalendar模块的主要功能是：
+日期和时间
+250.&nbsp比较两个变量是否不相等的运算符是
+运算符
+251.&nbsp在Python中，以下哪个运算符用于求余
+数字
+252.&nbsp以下保留字不用于异常处理逻辑的是
+异常处理
+253.&nbspPython中，下列哪个选项可以导入一个名为mymodule的模块？
+模块
+254.&nbsp给定列表1s=[1，2，3，'1'，'2','3']，其元素包含2种数据类型，列表1s的数据组织维度是
+列表
+255.&nbsp以下代码的输出结果是
+a={'大海':'蓝色','天空':'灰色','大地':'黑色'}
+print(d['大地']，d.get('大地','黄色'))
+字典
+256.&nbspPython中，下列哪个运算符用于比较两个值是否相等？
+基础语法
+257.&nbsp以下代码的输出结果是
+ls=[[1,2,3],[[4,5],6],[7,8]]
+print(len(ls))
+列表
+258.&nbsp以下关于Python字符编码的描述中，错误的是
+入门基础
+259.&nbsp以下变量名中，不符合Python语言变量命名规则的是
+基础语法
+260.&nbsp以下关于Python语言return语句的描述中，正确的是
+函数
+261.&nbspx=2.6，表达式raund(x)的结果是
+内置函数
+262.&nbspPython中，下列哪个选项不是合法的变量名？
+基础语法
+263.&nbsp以下关于Python循环结构的描述中，错误的是
+循环语句
+264.&nbsp位运算符，按位取反运算的符号是
+运算符
+265.&nbspPython中，以下哪种数据类型不支持比较运算
+数字
+266.&nbsp以下代码的输出结果是
+def fibRate(n):
+	if n<=0:
+		return -1
+	elif n==1:
+		return -l
+	elif n==2:
+		return 1
+	e1se:
+		L= [1,1]
+		for i in range(2,n)：
+			L.append(L[-1]+L[-2])
+		return L[-2]/L[-1]
+print(fibRate(5))
+条件语句
+267.&nbsp下列关于Python中的装饰器语法，正确的是？
+基础语法
+268.&nbsp以下不是Python语言特点的是
+入门基础
+269.&nbsp以下关于函数的描述，正确的是
+函数
+270.&nbspPython中，下列哪个选项可以创建一个线程？
+基础语法
+271.&nbsp左移运算符是
+运算符
+272.&nbsp下列关于Python生成器的说法，正确的是？
+基础语法
+273.&nbsp以下关于"for<循环变量>in<循环结构>"的描述，错误的是
+循环语句
+274.&nbsp元组和列表在性能上有何差异
+元组
+275.&nbsp以下程序的输出结果是
+def loc_glo(b=2，a=4):
+	global z
+	z+=3*a+5*b
+	return z
+z=10
+print(z，loc_glo(4,2))
+函数
+276.&nbsp以下描述中，错误的是
+列表
+277.&nbspPython中，下列哪个选项可以正确打开一个文件并以追加模式写入？
+文件操作
+278.&nbsp计算当前时间3天后的日期，可以使用：
+日期和时间
+279.&nbsp元组可以作为函数的返回值吗
+元组
+280.&nbsp关于Python文件打开模式，表示错误的是
+文件操作
+281.&nbsp以下关于Python字符串的描述中，错误的是
+字符串
+282.&nbspPython中，表示日期和时间的标准库是：
+日期和时间
+283.&nbsp以下关于Python全局变量和局部变量的描述中，错误的是
+变量类型
+284.&nbsp表达式type(type('45'))的结果是
+内置函数
+285.&nbsp以下选项，不是Python保留字的选项是
+基础语法
+286.&nbsp以下关于随机运算函数库的描述，错误的是
+内置函数
+287.&nbsp以下不属于Python的pip工具命令的选项是
+模块
+288.&nbsp在Python中，获取当前时间的Unix时间戳（从1970年1月1日0时0分0秒开始的秒数）的方法是：
+日期和时间
+289.&nbsp如何访问元组中的元素
+元组
+290.&nbsp以下哪个语句用于连接两个字符串？
+入门基础
+291.&nbsp执行以下程序，输入fish520，输出结果是
+W= input()
+for x in w:
+	if'0'<=x<=
+	 continue
+	e1se:
+		w.replace(x,'')
+print(w)
+循环语句
+292.&nbspPython中，如何生成一个指定范围内的随机数
+数字
+293.&nbspPython中，如何定义一个类的构造函数？
+面向对象
+294.&nbsp在Python语言中，使用for..in.方式形成的循环不能遍历的类型是
+循环语句
+295.&nbsp在Pythan语言中，使用open()打开一个Windows操作系统D盘下文件，路径名错误的是
+文件操作
+296.&nbsp以下不属于Web开发框架的Python第三方库是
+生态
+297.&nbspPython中的幂运算用什么符号表示
+数字
+298.&nbsp字符串tstr='television'，显示结果为vi的选项是
+字符串
+299.&nbsp表达式3+5%6*2//8的值是
+数学模块
+300.&nbsp幂运算的运算符是
+运算符
+301.&nbsp以下程序的输出结果是
+ls=['绿茶','乌龙茶','红茶','白茶','黑茶']
+x='乌龙茶'
+print(ls.index(x,0))
+列表
+302.&nbsp逻辑“非”运算的运算符是
+运算符
+303.&nbsp关于字典的描述，错误的是
+字典
+304.&nbsp键盘输入数字5，以下代码的输出结果是
+n=eval(input("请输入一个整数："))
+s = 0
+if n>=5:
+	n -= 1
+	s = 4
+if n<5:
+	n-=1
+	s=3
+print(s)
+条件语句
+305.&nbsp以下关于Python语言的描述中，正确的是
+条件语句
+306.&nbsp以下描述错误的是
+基础语法
+307.&nbsp函数chr(x)的作用是
+内置函数
+308.&nbsp以下关于Python函数的描述中，错误的是
+基础语法
+309.&nbsp以下哪个运算符用于字符串的连接
+运算符
+310.&nbsp函数中定义了2个参数，并且两个参数都指定了默认值，调用函数时参数个数最少是
+函数
+311.&nbsp以下程序的输出结果是
+x=3.1415926
+print(round(x,2),round(x))
+内置函数
+312.&nbsp在Python语言中，不属于机器学习领域第三方库的是
+生态
+313.&nbspPython中，如何判断一个字符串是否包含某个子串？
+字符串
+314.&nbsp下列关于Python装饰器的说法，正确的是？
+基础语法
+315.&nbsp字典d={'Python':123,'C':123,'C++':123},1en(d)的结果是
+字典
+316.&nbsp以下关于分支和循环结构的描述中，错误的是
+循环语句
+317.&nbsp元组和字符串有什么相似之处
+元组
+318.&nbsp在Python语言中，不能作为变量名的是
+入门基础
+319.&nbsp以下方法能返回列表数据类型的选项是
+内置函数
+320.&nbsp以下代码的输出结果是
+CList = list(range(5))
+print(2 in CList)
+列表
+321.&nbsp以下关于Python列表的描述中，错误的是
+列表
+322.&nbsp在Python语言中，写文件的操作是
+文件操作
+323.&nbsp以下关于Python语言浮点数类型的描述中，错误的是
+基础语法
+324.&nbsp以下代码的输出结果是
+d= {'food':{'cake':1,'egg':5}}
+print(d.get('cake','no this food'))
+字典
+325.&nbsp以下关于Python函数的描述中，错误的是
+函数
+326.&nbsp不属于Python用于Web开发第三方库的是
+生态
+327.&nbspPython中，下列哪个选项可以正确创建一个包含元素1、2、3的列表？
+列表
+328.&nbsp以下代码的输出结果是
+print('{:@>10.6}'.format('Fog'))
+字符串
+329.&nbsp以下程序的输出结果是
+s=2
+for i in range(1,10):
+	s+=i
+print(s)
+循环语句
+330.&nbsp关于以下代码的描述中，错误的是
+def func(a,b):
+	c=a**2+b
+	b=a
+	return c
+a=10
+b=100
+c=func(a,b)+a
+函数
+331.&nbsp以下用于数据存储领域的Python第三方库是
+生态
+332.&nbsp以下代码的输出结果是
+for s in 'HelloWorld':
+	if s=='W':
+		continue
+	print (s, end='')
+字符串
+333.&nbsp下列函数中，不是Python内置函数的是
+内置函数
+334.&nbsp以下关于Python缩进的描述中，错误的是
+入门基础
+335.&nbsp以下关于数据维度的描述，正确的是
+元组
+336.&nbsp元组可以作为函数的参数吗
+元组
+337.&nbsp以下关于Python函数的描述中，错误的是
+函数
+338.&nbsp执行以下程序，输ab，然后回车，结果是
+k=10
+while True:
+	s=input('请输入q退出：')
+	if s=='a':
+		K+=1
+		continue
+	else:
+		k+=2
+		break
+print(k)
+循环语句
+339.&nbsp以下程序的输出结果是
+a=[3,2,1]
+b=a[:]
+print(b)
+列表
+340.&nbspPython中，用于表示字符串的数据类型是？
+变量类型
+341.&nbsp如果Python程序执行时产生了“TypeErrar的错误，其原因是
+变量类型
+342.&nbsp在Python语言中，将二维数据写入CSV文件，最可能使用的函数是
+文件操作
+343.&nbsp以下关于Python文件打开模式的描述中，错误的是
+文件操作
+344.&nbsp身份运算符，用于判断两个变量是否引用同一个对象，是
+运算符
+345.&nbspPython中，如何导入一个模块？
+基础语法
+346.&nbsp以下选项不属于Python语言特点的是
+入门基础
+347.&nbsp以下的描述中，不属于Python语言控制结构的是
+基础语法
+348.&nbsp以下程序的输出结果不可能的选项是
+import random
+1s=[2,3,4,6]
+s=10
+k=random.randint(0,2)
+s+=ls[k]
+print(s)
+数学模块
+349.&nbsp以下构成Python循环结构的方法中，正确的是
+循环语句
+350.&nbsp以下代码的输出结果是
+ls=['book',23,[2010,'stud1'],20]
+print(ls[2][1][-1])
+列表
+351.&nbsp以下关于文件的描述，错误的是
+文件操作

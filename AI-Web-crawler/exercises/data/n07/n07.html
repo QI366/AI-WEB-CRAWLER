@@ -1,0 +1,1655 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Spiderbuf" />
+    <meta name="copyright" content="Spiderbuf" />
+    
+    <link rel="canonical" href="https://spiderbuf.cn/challenge/random-css-classname">
+    
+    <meta name="description" content="SpiderBuf 是专注于 Python 爬虫学习和练习的平台，提供丰富的教程、实战案例、练习题目和在线爬虫工具，助你轻松掌握爬虫开发技能。">
+    <meta name="keywords" content="Python爬虫,爬虫练习,爬虫教程,爬虫实战,JS逆向,SpiderBuf,网络爬虫,数据采集,爬虫工具,数据抓取,API接口,视频下载,图片下载,电商数据,金融数据,数据安全,IP隐藏,web scraping,web scraper,web crawler, data scraping,scraping tool,scraper tool,web extractor,email extractor,data extraction">
+    <link rel="stylesheet" href="https://spiderbuf.cn/static/css/style.v1.min.css">
+    
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4169504979687359" crossorigin="anonymous"></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7B42BKG1QE"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-7B42BKG1QE');
+    </script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Python爬虫在线练习与项目实战","item":"https://spiderbuf.cn"},{"@type":"ListItem","position":2,"name":"爬虫挑战","item":"https://spiderbuf.cn/challenges"},{"@type":"ListItem","position":3,"name":"随机CSS样式类名，无Element ID","item":"https://spiderbuf.cn/challenge/random-css-classname"}]}</script>
+    <script src="https://spiderbuf.cn/static/js/site.v3.min.js"></script>
+    <title>随机CSS样式类名，无Element ID | SpiderBuf</title>
+</head>
+
+<body class="flex flex-col justify-between">
+    <header class="border-b border-slate-200 bg-white/80 backdrop-blur-md sticky top-0 z-50">
+        <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="flex h-16 items-center justify-between">
+                <div class="flex items-center gap-2 shrink-0">
+                    <a href="/" aria-label="logo">
+                        <span class="text-xl font-bold tracking-tight text-indigo-600">SpiderBuf<span class="text-slate-600">.cn</span></span>
+                    </a>
+                </div>
+                <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600" aria-label="网站导航">
+                    <a class="hover:text-indigo-600 transition" href="/challenges">靶场列表</a>
+                    <a class="hover:text-indigo-600 transition" href="/articles">技术文章</a>
+                    <a class="hover:text-indigo-600 transition" href="/python-exercise">Python习题</a>
+                    <a class="hover:text-indigo-600 transition" href="/tools" title="在线工具">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z"/></svg>
+                    </a>
+                    <a class="hover:text-indigo-600 transition" href="/sponsor" title="赞助支持">
+                        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M2 21h18v-2H2M20 8h-2V5h2m0-2H4v10a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4v-3h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Z"></path></svg>
+                    </a>
+                    <a class="hover:text-indigo-600 transition" href="https://github.com/hhuayuan/spiderbuf" target="_blank" title="GitHub">
+                        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12c0 5.303 3.438 9.8 8.205 11.385c.6.113.82-.258.82-.577c0-.285-.01-1.04-.015-2.04c-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729c1.205.084 1.838 1.236 1.838 1.236c1.07 1.835 2.809 1.305 3.495.998c.108-.776.417-1.305.76-1.605c-2.665-.3-5.466-1.332-5.466-5.93c0-1.31.465-2.38 1.235-3.22c-.135-.303-.54-1.523.105-3.176c0 0 1.005-.322 3.3 1.23c.96-.267 1.98-.399 3-.405c1.02.006 2.04.138 3 .405c2.28-1.552 3.285-1.23 3.285-1.23c.645 1.653.24 2.873.12 3.176c.765.84 1.23 1.91 1.23 3.22c0 4.61-2.805 5.625-5.475 5.92c.42.36.81 1.096.81 2.22c0 1.606-.015 2.896-.015 3.286c0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
+                    </a>
+                    <a class="hover:text-indigo-600 transition" href="/rss" title="RSS订阅" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+                    </a>
+                </nav>
+
+                <div class="flex md:hidden">
+                    <button id="mobile-menu-button" type="button" class="inline-flex items-center justify-center rounded-md p-2 text-slate-600 hover:bg-slate-100 outline-none">
+                        <svg id="icon-open" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                        <svg id="icon-close" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white shadow-lg transition-all duration-300">
+            <div class="space-y-1 px-4 pb-6 pt-2">
+                <a href="/challenges" class="block rounded-md px-3 py-3 text-base font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-600">靶场列表</a>
+                <a href="/articles" class="block rounded-md px-3 py-3 text-base font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-600">技术文章</a>
+                <a href="/python-exercise" class="block rounded-md px-3 py-3 text-base font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-600">Python习题</a>
+
+                <div class="my-2 border-t border-slate-100"></div>
+
+                <div class="grid grid-cols-4 gap-4 px-3 py-2">
+                    <a href="/tools" class="flex flex-col items-center gap-1.5 text-slate-500">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z"/></svg>
+                        <span class="text-xs">工具</span>
+                    </a>
+                    <a href="/sponsor" class="flex flex-col items-center gap-1.5 text-slate-500">
+                        <svg width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M2 21h18v-2H2M20 8h-2V5h2m0-2H4v10a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4v-3h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Z"></path></svg>
+                        <span class="text-xs">赞助</span>
+                    </a>
+                    <a href="https://github.com/hhuayuan/spiderbuf" class="flex flex-col items-center gap-1.5 text-slate-500">
+                        <svg width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12c0 5.303 3.438 9.8 8.205 11.385c.6.113.82-.258.82-.577c0-.285-.01-1.04-.015-2.04c-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729c1.205.084 1.838 1.236 1.838 1.236c1.07 1.835 2.809 1.305 3.495.998c.108-.776.417-1.305.76-1.605c-2.665-.3-5.466-1.332-5.466-5.93c0-1.31.465-2.38 1.235-3.22c-.135-.303-.54-1.523.105-3.176c0 0 1.005-.322 3.3 1.23c.96-.267 1.98-.399 3-.405c1.02.006 2.04.138 3 .405c2.28-1.552 3.285-1.23 3.285-1.23c.645 1.653.24 2.873.12 3.176c.765.84 1.23 1.91 1.23 3.22c0 4.61-2.805 5.625-5.475 5.92c.42.36.81 1.096.81 2.22c0 1.606-.015 2.896-.015 3.286c0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
+                        <span class="text-xs">代码</span>
+                    </a>
+                    <a href="/rss" class="flex flex-col items-center gap-1.5 text-slate-500">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+                        <span class="text-xs">订阅</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuBtn = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const iconOpen = document.getElementById('icon-open');
+            const iconClose = document.getElementById('icon-close');
+
+            menuBtn.addEventListener('click', () => {
+                
+                const isHidden = mobileMenu.classList.contains('hidden');
+
+                if (isHidden) {
+                    mobileMenu.classList.remove('hidden');
+                    iconOpen.classList.add('hidden');
+                    iconClose.classList.remove('hidden');
+                } else {
+                    mobileMenu.classList.add('hidden');
+                    iconOpen.classList.remove('hidden');
+                    iconClose.classList.add('hidden');
+                }
+            });
+
+            
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 768) { 
+                    mobileMenu.classList.add('hidden');
+                    iconOpen.classList.remove('hidden');
+                    iconClose.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+    <div class="flex-1">
+        <div class="flex gap-4">
+            
+            <aside class="hidden xl:block ml-4 shrink-0 xl:w-80 mt-8">
+                <div class="sticky top-24 border border-dashed border-slate-300 rounded-2xl text-center text-slate-400 text-sm overflow-hidden">
+                    <p class="text-[10px] text-slate-300 mb-2">AD</p>
+                    <div class="min-h-155 bg-slate-50 flex items-center justify-center w-full">
+                       
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4169504979687359"
+     data-ad-slot="9021161584"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+
+                    </div>
+                </div>
+            </aside>
+            
+            <div class="flex-1 max-w-7xl mx-auto flex flex-col gap-4">
+<style>
+  h1{
+    font-size: 1.2em;
+    line-height: 1.8em;
+  }
+  .xyRgcH{
+    font-size: 1.2em;
+    margin: 20px 0px 10px 0px;
+  }
+  .syABtJ{
+    font-size: 1em;
+
+  }
+</style>
+
+<header class="w-full max-w-4xl mx-auto my-8 font-sans border border-slate-200 rounded-2xl overflow-hidden">
+    <div class="bg-white px-6 py-4 flex items-center justify-between gap-6 shadow-sm border-b border-slate-200">
+        <div class="flex items-center gap-4 min-w-0 flex-1">
+            <span class="shrink-0 bg-indigo-500 text-white font-mono font-bold px-2 py-1 rounded-xl text-lg shadow-sm uppercase">
+                n07
+            </span>
+
+            <h1 class="text-xl font-bold text-slate-700 tracking-wide truncate flex-1"
+                title="随机CSS样式类名，无Element ID">
+                随机CSS样式类名，无Element ID
+            </h1>
+        </div>
+
+        <div class="flex items-center gap-4 text-slate-400 shrink-0">
+            <div class="flex items-center gap-1.5" title="累计访问量">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                <span class="text-xs font-medium">5.8k</span>
+            </div>
+            <div class="flex items-center gap-1.5" title="发布日期">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                <span class="text-xs font-medium">2024-09-08</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white p-6 space-y-6">
+        
+
+        <div class="flex flex-wrap gap-2">
+            
+                
+                    
+                    <span class="text-xs font-medium px-2 py-0.5 bg-gray-100 text-gray-600 rounded">入门</span>
+                    
+                
+                    
+                    <span class="text-xs font-medium px-2 py-0.5 bg-gray-100 text-gray-600 rounded">CSS</span>
+                    
+                
+                    
+                    <span class="text-xs font-medium px-2 py-0.5 bg-gray-100 text-gray-600 rounded">random</span>
+                    
+                
+                    
+                    <span class="text-xs font-medium px-2 py-0.5 bg-gray-100 text-gray-600 rounded">classname</span>
+                    
+                
+            
+        </div>
+    </div>
+
+    <div class="flex flex-wrap bg-slate-50 overflow-hidden divide-x divide-slate-200 border-t border-slate-200">
+        
+        <a href="/tutorial/random-css-classname" class="flex-1 flex flex-col items-center justify-center p-4 hover:bg-white transition-colors group" target="_blank">
+            <svg class="w-5 h-5 text-slate-400 group-hover:text-blue-500 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+            <span class="text-sm font-semibold text-slate-700">阅读教程</span>
+        </a>
+        
+        
+        <a href="/code/random-css-classname" class="flex-1 flex flex-col items-center justify-center p-4 hover:bg-white transition-colors group" target="_blank">
+            <svg class="w-5 h-5 text-slate-400 group-hover:text-purple-500 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+            <span class="text-sm font-semibold text-slate-700">参考代码</span>
+        </a>
+        
+        
+        
+    </div>
+</header>
+
+<main class="mt-6 overflow-hidden">
+  <div>
+    <div style="overflow-wrap: break-word;">
+      <h1>
+        这是一个Spiderbuf网络爬虫练习网页，请尝试分析本页面并编写爬虫代码爬取及解析本页面内容。如果你在开发爬虫的过程中遇到问题，可以查看对应的爬虫教学视频及示例代码。调试爬虫的过程中请注意代码的严谨性，请勿对本网站造成过于大量的访问流量。
+      </h1>
+    </div>
+    <div style="margin-top: 30px;"><h2>Python在线习题题目</h2></div>
+    
+    
+    
+      <div class="xyRgcH">0.&nbsp位运算符，按位异或运算的符号是</div>
+      <div class="syABtJ">运算符</div>
+    
+      <div class="xyRgcH">1.&nbsp在Python语言中，能够处理图像的第三方库是</div>
+      <div class="syABtJ">生态</div>
+    
+      <div class="xyRgcH">2.&nbsp以下不是函数作用的选项是</div>
+      <div class="syABtJ">函数</div>
+    
+      <div class="xyRgcH">3.&nbspf=open()可以打开一个文件，关于的的描述错误的是</div>
+      <div class="syABtJ">文件操作</div>
+    
+      <div class="xyRgcH">4.&nbsp以下代码的输出结果是
+d={}
+for i in range(26):
+	d[chr(i&#43;ord(&#39;a&#39;))] = chr((i&#43;13)%26 &#43; ord(&#39;a&#39;))
+for c in &#39;Python’：
+	rint(d.get(c,c)，end=&#39;&#39;)</div>
+      <div class="syABtJ">字典</div>
+    
+      <div class="xyRgcH">5.&nbsp当用户输入5时，下面代码的输出结果是
+try：
+	n=input(&#39;请输入一个整数：&#39;)
+	def pow2(n):
+		return n**2
+	pow2(n)
+except:
+	print(&#39;程序执行错误&#39;)</div>
+      <div class="syABtJ">异常处理</div>
+    
+      <div class="xyRgcH">6.&nbsp以下程序的输出结果是
+ls=[&#39;aa&#39;,[2,3,3.0]]
+print(ls.index(2))</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">7.&nbsp生成一个[1,99]之间随机整数的函数是</div>
+      <div class="syABtJ">数学模块</div>
+    
+      <div class="xyRgcH">8.&nbsp整数除法（向下取整）的运算符是</div>
+      <div class="syABtJ">运算符</div>
+    
+      <div class="xyRgcH">9.&nbsp以下不是Python语言所使用特殊含义符号的是</div>
+      <div class="syABtJ">运算符</div>
+    
+      <div class="xyRgcH">10.&nbsprandom库采用更多随机数生成算法是</div>
+      <div class="syABtJ">生态</div>
+    
+      <div class="xyRgcH">11.&nbsp元组可以嵌套吗</div>
+      <div class="syABtJ">元组</div>
+    
+      <div class="xyRgcH">12.&nbsp在Python语言中，属于网络爬虫领域的第三方库是</div>
+      <div class="syABtJ">生态</div>
+    
+      <div class="xyRgcH">13.&nbsp安装一个第三方库的命名格式是</div>
+      <div class="syABtJ">入门基础</div>
+    
+      <div class="xyRgcH">14.&nbsp以下关于组合类型的描述，正确的是</div>
+      <div class="syABtJ">元组</div>
+    
+      <div class="xyRgcH">15.&nbsp以下关于Python分支的描述中，错误的是</div>
+      <div class="syABtJ">条件语句</div>
+    
+      <div class="xyRgcH">16.&nbsp元组的长度如何获取</div>
+      <div class="syABtJ">元组</div>
+    
+      <div class="xyRgcH">17.&nbsp在Python语言中，用来安装第三方库的工具是</div>
+      <div class="syABtJ">生态</div>
+    
+      <div class="xyRgcH">18.&nbsp以下的函数定义中，错误的是</div>
+      <div class="syABtJ">函数</div>
+    
+      <div class="xyRgcH">19.&nbspPython中，下列哪个选项是正确的字典操作？</div>
+      <div class="syABtJ">字典</div>
+    
+      <div class="xyRgcH">20.&nbsp下列哪个选项是Python中正确的列表推导式，用于生成一个包含0到9的列表？</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">21.&nbsp元组支持哪些操作</div>
+      <div class="syABtJ">元组</div>
+    
+      <div class="xyRgcH">22.&nbsp以下代码绘制的图形是
+import turtle as t
+for i in range(1,5):
+	t.fd(50)
+	t.left(90)</div>
+      <div class="syABtJ">内置函数</div>
+    
+      <div class="xyRgcH">23.&nbsp以下程序被调用后，运行错误的是
+def f(x,y=1,z=2)：
+	pass</div>
+      <div class="syABtJ">函数</div>
+    
+      <div class="xyRgcH">24.&nbspPython 是一个</div>
+      <div class="syABtJ">入门基础</div>
+    
+      <div class="xyRgcH">25.&nbsp键盘输入数字5，以下代码的输出结果是
+try：
+n=input(&#34;请输入一个整数：&#34;)
+	def pow2(n):
+		return ntn
+except：
+	print(&#34;程序执行错误&#34;)</div>
+      <div class="syABtJ">异常处理</div>
+    
+      <div class="xyRgcH">26.&nbsp以下不属于人工智能领域的Python第三方库是</div>
+      <div class="syABtJ">生态</div>
+    
+      <div class="xyRgcH">27.&nbsps=&#39;1234567890&#39;，以下表示1234的选项是</div>
+      <div class="syABtJ">字符串</div>
+    
+      <div class="xyRgcH">28.&nbsp生成一个k比特长度随机整数的函数是</div>
+      <div class="syABtJ">数学模块</div>
+    
+      <div class="xyRgcH">29.&nbsp在Python语言中，可以作为源文件后缀名的是</div>
+      <div class="syABtJ">入门基础</div>
+    
+      <div class="xyRgcH">30.&nbsp位运算符，按位与运算的符号是</div>
+      <div class="syABtJ">运算符</div>
+    
+      <div class="xyRgcH">31.&nbsp以下符合Python语言变量命名规则的是</div>
+      <div class="syABtJ">基础语法</div>
+    
+      <div class="xyRgcH">32.&nbsp以下不是Python语言保留字的是</div>
+      <div class="syABtJ">基础语法</div>
+    
+      <div class="xyRgcH">33.&nbsp为以下程序填空，使得输出结果是{40:&#39;yuwen&#39;, 20：&#39;yingw&#39;, 30：&#39;shuxue&#39;}的选项是
+tb = {&#39;fyingyui&#39;：20，&#39;shuxue&#39;：30, &#39;yuwen&#39;：40}
+stb={}
+for it in tb.items():
+	print(it)
+print(stb)</div>
+      <div class="syABtJ">字典</div>
+    
+      <div class="xyRgcH">34.&nbsp以下不属于Python语言保留字的是</div>
+      <div class="syABtJ">入门基础</div>
+    
+      <div class="xyRgcH">35.&nbsp以下关于Python全局变量和局部变量的描述中，错误的是</div>
+      <div class="syABtJ">变量类型</div>
+    
+      <div class="xyRgcH">36.&nbspPython中，如何将一个字符串转换为整数？</div>
+      <div class="syABtJ">字符串</div>
+    
+      <div class="xyRgcH">37.&nbsp以下关于字符串类型的操作的描述，正确的是</div>
+      <div class="syABtJ">字符串</div>
+    
+      <div class="xyRgcH">38.&nbsp以下程序的输出结果是
+def hub(ss, x=2.0,y=4.0):
+	ss &#43;= x*y
+ss=10
+print(ss, hub(es,3))</div>
+      <div class="syABtJ">函数</div>
+    
+      <div class="xyRgcH">39.&nbspPython中，如何将一个二进制数转换为十进制数</div>
+      <div class="syABtJ">数字</div>
+    
+      <div class="xyRgcH">40.&nbsp以下代码的输出结果是
+1s=[&#39;2020&#39;, &#39;20.20&#39;, &#39;Python&#39;]
+ls,append(2020)
+1s.append([2020，&#39;2020&#39;])
+print(ls)</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">41.&nbsp以下关于数据维度的描述，错误的是</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">42.&nbspPython中，以下哪个函数可以返回一个随机整数</div>
+      <div class="syABtJ">数字</div>
+    
+      <div class="xyRgcH">43.&nbsp以下关于Python程序语法元素的描述，正确的选项是</div>
+      <div class="syABtJ">基础语法</div>
+    
+      <div class="xyRgcH">44.&nbsp以下哪一项在 Python 中被视为注释?</div>
+      <div class="syABtJ">入门基础</div>
+    
+      <div class="xyRgcH">45.&nbsp以下不属于Python数据分析领域第三方库的是</div>
+      <div class="syABtJ">生态</div>
+    
+      <div class="xyRgcH">46.&nbsp以下程序被调用后，能够正确执行的是
+def f(x,y=1,z=2)：
+	pass</div>
+      <div class="syABtJ">函数</div>
+    
+      <div class="xyRgcH">47.&nbspPython为源文件指定的默认字符编码是</div>
+      <div class="syABtJ">入门基础</div>
+    
+      <div class="xyRgcH">48.&nbsp元组的元素可以修改吗</div>
+      <div class="syABtJ">元组</div>
+    
+      <div class="xyRgcH">49.&nbsp以下关于Python语言中try语句的描述中，错误是</div>
+      <div class="syABtJ">异常处理</div>
+    
+      <div class="xyRgcH">50.&nbsp以下程序的输出结果是
+ls1=[1.2.3.4.5]
+ls2=ls1
+ls2.reverse()
+print(lsl)</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">51.&nbsp以下用于计算机视觉领域的Python第三方库是</div>
+      <div class="syABtJ">生态</div>
+    
+      <div class="xyRgcH">52.&nbsp如何获取指定日期是星期几？</div>
+      <div class="syABtJ">日期和时间</div>
+    
+      <div class="xyRgcH">53.&nbsp关于函数定义，以下形式错误的是</div>
+      <div class="syABtJ">函数</div>
+    
+      <div class="xyRgcH">54.&nbsp用pyinstaller工具打包Python源文件时-F参数的含义是</div>
+      <div class="syABtJ">生态</div>
+    
+      <div class="xyRgcH">55.&nbsp下列关于Python面向对象编程的说法，正确的是？</div>
+      <div class="syABtJ">面向对象</div>
+    
+      <div class="xyRgcH">56.&nbsp元组和列表的主要区别是什么</div>
+      <div class="syABtJ">元组</div>
+    
+      <div class="xyRgcH">57.&nbsp以下属于Python机器学习领域第三方库的是</div>
+      <div class="syABtJ">生态</div>
+    
+      <div class="xyRgcH">58.&nbsp在Python中，以下哪个运算符用于位与运算</div>
+      <div class="syABtJ">数字</div>
+    
+      <div class="xyRgcH">59.&nbsp设str1=&#39;python&#39;，语句print(strl.center(10,*))的执行结果是</div>
+      <div class="syABtJ">字符串</div>
+    
+      <div class="xyRgcH">60.&nbsp在Python语言中，读入CSV文件保存的二维数据，按特定分隔符抽取信息，最可能用到的函数是</div>
+      <div class="syABtJ">文件操作</div>
+    
+      <div class="xyRgcH">61.&nbsp在Python语言中，IPO模式不包括</div>
+      <div class="syABtJ">入门基础</div>
+    
+      <div class="xyRgcH">62.&nbsp下载但不安装一个第三方库的命名格式是</div>
+      <div class="syABtJ">入门基础</div>
+    
+      <div class="xyRgcH">63.&nbspPython中，下列哪个选项是正确的函数定义方式？</div>
+      <div class="syABtJ">函数</div>
+    
+      <div class="xyRgcH">64.&nbsp以下关于turtle库的描述，错误的是</div>
+      <div class="syABtJ">生态</div>
+    
+      <div class="xyRgcH">65.&nbspPython中定义函数的关键字是</div>
+      <div class="syABtJ">函数</div>
+    
+      <div class="xyRgcH">66.&nbspPython语言中用来表示代码块所属关系的语法是</div>
+      <div class="syABtJ">基础语法</div>
+    
+      <div class="xyRgcH">67.&nbsp以下程序的输出结果是
+for c in &#39;Python NCRE&#39;：
+	if c==&#39;N：
+		break
+		print (c)</div>
+      <div class="syABtJ">循环语句</div>
+    
+      <div class="xyRgcH">68.&nbsp以下不是Python组合数据类型的是</div>
+      <div class="syABtJ">变量类型</div>
+    
+      <div class="xyRgcH">69.&nbsp以下不是Python文件操作方法的是</div>
+      <div class="syABtJ">文件操作</div>
+    
+      <div class="xyRgcH">70.&nbspPython中，下列哪种数据类型是不可变的？</div>
+      <div class="syABtJ">变量类型</div>
+    
+      <div class="xyRgcH">71.&nbsp右移运算符是</div>
+      <div class="syABtJ">运算符</div>
+    
+      <div class="xyRgcH">72.&nbsp以下程序的输出结果是
+ls=[1,2,3]
+lt=[4,5，6]
+print(ls&#43;lt)</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">73.&nbsp以下代码执行后，book.txt文件的内容是
+fo= open(&#39;book.txt&#39;,&#39;w&#39;)
+ls=[&#39;book&#39;,&#39;23&#39;,&#39;201009&#39;,&#39;20&#39;]
+fo.wite(str(1s))
+fo.close()</div>
+      <div class="syABtJ">文件操作</div>
+    
+      <div class="xyRgcH">74.&nbsp以下不是Python组合数据类型的是</div>
+      <div class="syABtJ">变量类型</div>
+    
+      <div class="xyRgcH">75.&nbspPython语言提供三种基本的数字类型，它们是</div>
+      <div class="syABtJ">变量类型</div>
+    
+      <div class="xyRgcH">76.&nbsp对于序列s，能够返回序列s中第i到第i以1为步长的子序列的表达是</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">77.&nbsp以下不属于Python的pip工具命令的选项是</div>
+      <div class="syABtJ">生态</div>
+    
+      <div class="xyRgcH">78.&nbspPython中，如何将一个十进制数转换为二进制数</div>
+      <div class="syABtJ">数字</div>
+    
+      <div class="xyRgcH">79.&nbsp以下不是Pythan语言所使用特殊含义符号的是</div>
+      <div class="syABtJ">运算符</div>
+    
+      <div class="xyRgcH">80.&nbspPython 受哪些语言启发</div>
+      <div class="syABtJ">入门基础</div>
+    
+      <div class="xyRgcH">81.&nbsp什么时候应该使用元组而不是列表</div>
+      <div class="syABtJ">元组</div>
+    
+      <div class="xyRgcH">82.&nbsp以下关于文件的描述中，错误的是</div>
+      <div class="syABtJ">文件操作</div>
+    
+      <div class="xyRgcH">83.&nbsp下列关于Python中的垃圾回收机制的说法，正确的是？</div>
+      <div class="syABtJ">基础语法</div>
+    
+      <div class="xyRgcH">84.&nbspPython中的复数用什么表示</div>
+      <div class="syABtJ">数字</div>
+    
+      <div class="xyRgcH">85.&nbsp表达键值对的字典类型最可能属于的数据组织维度是</div>
+      <div class="syABtJ">字典</div>
+    
+      <div class="xyRgcH">86.&nbsp以下程序的输出结果是
+a=[3,2,1]
+for i in a[::-1]:
+	print (i,end=&#39;&#39;)</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">87.&nbsp以下哪个函数可以将一个数四舍五入为整数</div>
+      <div class="syABtJ">数字</div>
+    
+      <div class="xyRgcH">88.&nbsp元组生成式和列表生成式有什么区别</div>
+      <div class="syABtJ">元组</div>
+    
+      <div class="xyRgcH">89.&nbsp在Python语言中，不属于组合数据类型的是</div>
+      <div class="syABtJ">变量类型</div>
+    
+      <div class="xyRgcH">90.&nbspPython中，with语句主要用于什么场景？</div>
+      <div class="syABtJ">基础语法</div>
+    
+      <div class="xyRgcH">91.&nbsp下列哪个选项表示2023年11月11日？</div>
+      <div class="syABtJ">日期和时间</div>
+    
+      <div class="xyRgcH">92.&nbsp复合赋值运算符，同时进行运算和赋值，例如&#43;=，是</div>
+      <div class="syABtJ">运算符</div>
+    
+      <div class="xyRgcH">93.&nbsp以下关于Python二维数据的描述中，错误的是</div>
+      <div class="syABtJ">元组</div>
+    
+      <div class="xyRgcH">94.&nbsp下列哪种方式可以实现Python中的多线程？</div>
+      <div class="syABtJ">模块</div>
+    
+      <div class="xyRgcH">95.&nbsp以下关于程序设计语言的描述，错误的选项是</div>
+      <div class="syABtJ">入门基础</div>
+    
+      <div class="xyRgcH">96.&nbsp以下对Python文件处理的描述中，错误的是</div>
+      <div class="syABtJ">文件操作</div>
+    
+      <div class="xyRgcH">97.&nbspPython中，如何获取当前时间的毫秒级精度？</div>
+      <div class="syABtJ">日期和时间</div>
+    
+      <div class="xyRgcH">98.&nbsp以下程序的输出结果是
+x=10
+y=0
+if (x&gt;5) or (x/y&gt;5)：
+	print(&#39;Right&#39;)
+e1se:
+	print(&#39;Wrong&#39;)</div>
+      <div class="syABtJ">条件语句</div>
+    
+      <div class="xyRgcH">99.&nbsp关于以下代码的描述中，错误的是
+def fact(n):
+	s=1
+	for i in range(1,n&#43;1):
+		s *=i
+	return s</div>
+      <div class="syABtJ">函数</div>
+    
+      <div class="xyRgcH">100.&nbsp假设city.csv文件内容如下
+巴哈马,巴林,孟加拉国,巴巴多斯
+白俄罗斯,比利时,伯利兹
+以下代码的输出结果是：
+f= open(&#39;city.csv&#39;,&#39;r&#39;)
+ls=f.read().split(&#39;,&#39;)
+f.close()
+print(ls)</div>
+      <div class="syABtJ">文件操作</div>
+    
+      <div class="xyRgcH">101.&nbsptime库的time.time()函数作用是</div>
+      <div class="syABtJ">内置函数</div>
+    
+      <div class="xyRgcH">102.&nbsp以下选项，不是Python保留字的选项是</div>
+      <div class="syABtJ">基础语法</div>
+    
+      <div class="xyRgcH">103.&nbsp将字符串&#34;2023-11-11 12:34:56&#34;转换为datetime对象，可以使用：</div>
+      <div class="syABtJ">日期和时间</div>
+    
+      <div class="xyRgcH">104.&nbsp如何将一个datetime对象转换为timestamp？</div>
+      <div class="syABtJ">日期和时间</div>
+    
+      <div class="xyRgcH">105.&nbsp逻辑“或”运算的运算符是</div>
+      <div class="syABtJ">运算符</div>
+    
+      <div class="xyRgcH">106.&nbsp不属于Python文件读操作的是</div>
+      <div class="syABtJ">文件操作</div>
+    
+      <div class="xyRgcH">107.&nbsp以下选项，错误的是</div>
+      <div class="syABtJ">基础语法</div>
+    
+      <div class="xyRgcH">108.&nbsp运算符的优先级，从高到低依次是</div>
+      <div class="syABtJ">运算符</div>
+    
+      <div class="xyRgcH">109.&nbsp以下哪个是Python中的无穷大表示</div>
+      <div class="syABtJ">数字</div>
+    
+      <div class="xyRgcH">110.&nbsp将本地时间转换为UTC时间，可以使用：</div>
+      <div class="syABtJ">日期和时间</div>
+    
+      <div class="xyRgcH">111.&nbsp以下程序的输出结果是
+s=10
+def run(n)：
+	global s
+	for i in range(n)：
+		s&#43;=i
+	return s
+print(s, run(5))</div>
+      <div class="syABtJ">循环语句</div>
+    
+      <div class="xyRgcH">112.&nbsp在Python中，表示时区的类是：</div>
+      <div class="syABtJ">日期和时间</div>
+    
+      <div class="xyRgcH">113.&nbspPython中，面向对象编程的三大特性是？</div>
+      <div class="syABtJ">面向对象</div>
+    
+      <div class="xyRgcH">114.&nbsp成员运算符，用于判断一个元素是否在序列中，是</div>
+      <div class="syABtJ">运算符</div>
+    
+      <div class="xyRgcH">115.&nbsp如何计算两个datetime对象之间的时间差？</div>
+      <div class="syABtJ">日期和时间</div>
+    
+      <div class="xyRgcH">116.&nbsp以下关于Python字典的描述中，错误的是</div>
+      <div class="syABtJ">字典</div>
+    
+      <div class="xyRgcH">117.&nbsp以下不是Python文件读写方法的是</div>
+      <div class="syABtJ">文件操作</div>
+    
+      <div class="xyRgcH">118.&nbsp位运算符，按位或运算的符号是</div>
+      <div class="syABtJ">运算符</div>
+    
+      <div class="xyRgcH">119.&nbsp以下代码的输出结果是
+def young(age):
+	if 12 &lt;= age&lt;=17:
+		print(“作为一个大学生，你很年轻”)
+	elif age &lt;12:
+		print(“作为一个大学生，你太年轻了”)
+	elif age &lt;=28:
+		print(“作为一个大学生，你要努力学习”)
+	e1se:
+		print(“作为一个大学生，你很有毅力”)
+young(18)</div>
+      <div class="syABtJ">条件语句</div>
+    
+      <div class="xyRgcH">120.&nbsp不属于Python开发用户界面第三方库的是</div>
+      <div class="syABtJ">生态</div>
+    
+      <div class="xyRgcH">121.&nbsp以下保留字不属于分支或循环逻辑的是</div>
+      <div class="syABtJ">基础语法</div>
+    
+      <div class="xyRgcH">122.&nbsp表达式divmod(40,3)的结果是</div>
+      <div class="syABtJ">内置函数</div>
+    
+      <div class="xyRgcH">123.&nbsp下面的d是一个字典变量，能够输出数字5的语句是
+d={&#39;food&#39;:{&#39;cake&#39;:1,&#39;egg&#39;:5},&#39;cake&#39;:2,&#39;egg&#39;:3}</div>
+      <div class="syABtJ">字典</div>
+    
+      <div class="xyRgcH">124.&nbsp以下代码的输出结果是
+s=[4,2,9,1]
+s.insert(2,3)
+print(s)</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">125.&nbsp以下关于文件的描述，错误的是</div>
+      <div class="syABtJ">文件操作</div>
+    
+      <div class="xyRgcH">126.&nbsp元组可以作为集合的元素吗</div>
+      <div class="syABtJ">元组</div>
+    
+      <div class="xyRgcH">127.&nbsp以下代码的输出结果是
+fo = open(&#39;book,txt&#39;,&#39;w&#39;)
+ls=[&#39;book&#39;,&#39;23&#39;,&#39;201009&#39;,&#39;20&#39;]
+fo.writelines(ls)
+fo.close()</div>
+      <div class="syABtJ">文件操作</div>
+    
+      <div class="xyRgcH">128.&nbsp以下代码的输出结果是
+while True:
+	guess = eval(input())
+	if guess == 0x452//2:
+		break
+print (guess)</div>
+      <div class="syABtJ">数学模块</div>
+    
+      <div class="xyRgcH">129.&nbsp列表1istV=1ist(range(10))，以下能够输出列表1istV中最大元素的是</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">130.&nbsp在Python中，使用%Y表示日期格式中的：</div>
+      <div class="syABtJ">日期和时间</div>
+    
+      <div class="xyRgcH">131.&nbsp以下程序的输出结果是
+for i in &#39;Nation&#39;:
+	for k in range(2):
+		if i==&#39;n&#39;:
+			break
+		print(i，end=&#39;&#39;)</div>
+      <div class="syABtJ">字符串</div>
+    
+      <div class="xyRgcH">132.&nbsp下列关于Python模块的说法，正确的是？</div>
+      <div class="syABtJ">模块</div>
+    
+      <div class="xyRgcH">133.&nbsp以下哪个函数可以将字符串转换为浮点数</div>
+      <div class="syABtJ">数字</div>
+    
+      <div class="xyRgcH">134.&nbsp以下代码的输出结果是
+x=&#39;A\0B\0C&#39;
+print(len(x))</div>
+      <div class="syABtJ">入门基础</div>
+    
+      <div class="xyRgcH">135.&nbsp不属于Python数据分析及可视化处理第三方库的是</div>
+      <div class="syABtJ">生态</div>
+    
+      <div class="xyRgcH">136.&nbsp以下不属于Python语言保留字的是</div>
+      <div class="syABtJ">入门基础</div>
+    
+      <div class="xyRgcH">137.&nbsp以下保留字不用于循环逻辑的是</div>
+      <div class="syABtJ">循环语句</div>
+    
+      <div class="xyRgcH">138.&nbsp以下程序的输出结果是
+ls= [10]
+def run(n):
+	ls.append(n)
+run(5)
+print(ls)</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">139.&nbsp在进行csv文件读写时，最不可能使用的字符串处理方法是</div>
+      <div class="syABtJ">文件操作</div>
+    
+      <div class="xyRgcH">140.&nbsp以下对CSV格式描述正确的是</div>
+      <div class="syABtJ">文件操作</div>
+    
+      <div class="xyRgcH">141.&nbsp以下不属于Python文件操作方法的是</div>
+      <div class="syABtJ">文件操作</div>
+    
+      <div class="xyRgcH">142.&nbsp下列函数中，不是Python内置函数的是</div>
+      <div class="syABtJ">内置函数</div>
+    
+      <div class="xyRgcH">143.&nbsp文件book.txt在当前代码所在目录内，其内容是一段文本：book，以下代码的输出结果是
+txt= open(&#39;book.txt，&#39;r&#39;)
+print(txt)
+txt.close()</div>
+      <div class="syABtJ">文件操作</div>
+    
+      <div class="xyRgcH">144.&nbsp以下属于turtle库颜色控制函数的是</div>
+      <div class="syABtJ">模块</div>
+    
+      <div class="xyRgcH">145.&nbsp以下代码的输出结果是
+def func(a，b):
+	a *= b
+	return a
+s = func(5,2)
+print(s)</div>
+      <div class="syABtJ">函数</div>
+    
+      <div class="xyRgcH">146.&nbsp取模运算（求余）的运算符是</div>
+      <div class="syABtJ">运算符</div>
+    
+      <div class="xyRgcH">147.&nbsp在读写文件之前，需要打开文件使用的函数是</div>
+      <div class="syABtJ">文件操作</div>
+    
+      <div class="xyRgcH">148.&nbsp以下代码的输出结果是
+for s in “testatest&#34;:
+	if s==&#34;a&#34; or s==&#34;e&#34;:
+		continue
+	print(s, end=&#39;&#39;)</div>
+      <div class="syABtJ">循环语句</div>
+    
+      <div class="xyRgcH">149.&nbsp变量tstr=&#39;kip520&#39;，表达式eval(tstr[3:-1])的结果是</div>
+      <div class="syABtJ">内置函数</div>
+    
+      <div class="xyRgcH">150.&nbsp元组在Python中的常见应用场景有哪些</div>
+      <div class="syABtJ">元组</div>
+    
+      <div class="xyRgcH">151.&nbsp关于表达式id(&#39;45&#39;)的结果的描述，错误的是</div>
+      <div class="syABtJ">内置函数</div>
+    
+      <div class="xyRgcH">152.&nbsp拟在屏幕上打印输出Hel1oWorld，使用的Python语句是</div>
+      <div class="syABtJ">入门基础</div>
+    
+      <div class="xyRgcH">153.&nbsp以下关于分支结构的描述中，错误的是</div>
+      <div class="syABtJ">条件语句</div>
+    
+      <div class="xyRgcH">154.&nbsp以下描述中，错误的是</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">155.&nbspPython中，下列哪个选项可以创建一个生成器？</div>
+      <div class="syABtJ">基础语法</div>
+    
+      <div class="xyRgcH">156.&nbsp用Pyinstaller工具把Python源文件打包成一个独立的可执行文件，使用的参数是</div>
+      <div class="syABtJ">生态</div>
+    
+      <div class="xyRgcH">157.&nbspPython 文件扩展名是</div>
+      <div class="syABtJ">入门基础</div>
+    
+      <div class="xyRgcH">158.&nbsp以下关于语言类型的描述中，错误的是</div>
+      <div class="syABtJ">入门基础</div>
+    
+      <div class="xyRgcH">159.&nbsp以下代码的输出结果是
+fori in range(1,6):
+	if i%4==0:
+		break
+	e1se:
+		print(i,end = &#34;,&#34;)</div>
+      <div class="syABtJ">循环语句</div>
+    
+      <div class="xyRgcH">160.&nbsp执行以下程序，导致输出&#34;输入有误&#34;的输入选项是
+try：
+	ls= eval(input())*2
+	print(ls)
+except:
+	print(&#39;输入有误&#39;)</div>
+      <div class="syABtJ">内置函数</div>
+    
+      <div class="xyRgcH">161.&nbsp元组的常用方法有哪些</div>
+      <div class="syABtJ">元组</div>
+    
+      <div class="xyRgcH">162.&nbspPython中，元组用什么符号表示</div>
+      <div class="syABtJ">元组</div>
+    
+      <div class="xyRgcH">163.&nbspPython中，字典的键可以是？</div>
+      <div class="syABtJ">字典</div>
+    
+      <div class="xyRgcH">164.&nbsp以下哪个函数可以计算一个数的绝对值</div>
+      <div class="syABtJ">数字</div>
+    
+      <div class="xyRgcH">165.&nbsp以下代码的输出结果是
+def Hello(famlyName，age)：
+	if age &gt; 50:
+		print(&#39;您好！&#39;&#43;famlyName&#43;&#39;大爷&#39;)
+	elif age &gt; 40：
+		print(&#39;您好！&#39;&#43;famlyName&#43;&#39;叔叔&#39;)
+	elif age &gt; 30:
+		print(&#39;您好！&#39;&#43;famlyNane&#43;&#39;大哥&#39;)
+	e1se:
+		print(&#39;您好！&#39;&#43;&#39;小&#39;&#43;famlyNane)
+Hello(age=60，famlyName=&#39;王&#39;)</div>
+      <div class="syABtJ">条件语句</div>
+    
+      <div class="xyRgcH">166.&nbsp对于字典d，以下选项对d.values()的描述正确的是</div>
+      <div class="syABtJ">字典</div>
+    
+      <div class="xyRgcH">167.&nbsp以下程序的输出结果是
+x=dict()
+type(x)</div>
+      <div class="syABtJ">字典</div>
+    
+      <div class="xyRgcH">168.&nbsp以下代码的输出结果是
+ls=[]
+for m in &#39;AB&#39;:
+	for n in &#39;CD&#39;:
+		ls.append(mtn)
+print (ls)</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">169.&nbsp以下程序的输出结果是
+ls=[12,44,23,46]
+for i in ls:
+	if i==&#39;44&#39;:
+		print(&#39;found it! i=&#39;, i)
+		break
+	else:
+		print(&#39;not found it ...&#39;)</div>
+      <div class="syABtJ">条件语句</div>
+    
+      <div class="xyRgcH">170.&nbsp逻辑“与”运算的运算符是</div>
+      <div class="syABtJ">运算符</div>
+    
+      <div class="xyRgcH">171.&nbspls=[&#39;1&#39;,&#39;2&#39;,&#39;3&#39;]，以下关于循环结构的描述，错误的是</div>
+      <div class="syABtJ">循环语句</div>
+    
+      <div class="xyRgcH">172.&nbsp以下代码的输出结果是
+a=10.99
+print (complex(a))</div>
+      <div class="syABtJ">内置函数</div>
+    
+      <div class="xyRgcH">173.&nbspPython中，下列哪个选项是正确的类定义方式？</div>
+      <div class="syABtJ">面向对象</div>
+    
+      <div class="xyRgcH">174.&nbspPython中，int类型属于以下哪种数据类型</div>
+      <div class="syABtJ">数字</div>
+    
+      <div class="xyRgcH">175.&nbsp以下不属于数据分析领域的Python第三方库是</div>
+      <div class="syABtJ">生态</div>
+    
+      <div class="xyRgcH">176.&nbsp以下哪个是Python中的浮点数表示</div>
+      <div class="syABtJ">数字</div>
+    
+      <div class="xyRgcH">177.&nbspturtle画图结束后，让画面停顿，不立即关掉窗口的方法是</div>
+      <div class="syABtJ">生态</div>
+    
+      <div class="xyRgcH">178.&nbsp以下程序的输出结果是
+lt=[&#39;绿茶&#39;,&#39;乌龙茶&#39;,&#39;红茶&#39;,&#39;白茶&#39;,&#39;黑茶&#39;]
+ls=lt
+ls.clear()
+print(it)</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">179.&nbsp以下关于CSV文件的描述中，错误的是</div>
+      <div class="syABtJ">文件操作</div>
+    
+      <div class="xyRgcH">180.&nbsp表达式3*4**2//8%7的计算结果是</div>
+      <div class="syABtJ">数学模块</div>
+    
+      <div class="xyRgcH">181.&nbsp以下代码的输出结果是
+for s in &#39;PythonNCRE：&#39;
+	if s==&#39;N&#39;:
+		continue
+	print(e, end=&#39;&#39;)</div>
+      <div class="syABtJ">循环语句</div>
+    
+      <div class="xyRgcH">182.&nbsp下列哪个选项可以正确地从一个列表中删除重复元素？</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">183.&nbsp以下关于列表变量ls操作的描述中，错误的是</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">184.&nbsp在Python语言中，用于数据分析的第三方库是</div>
+      <div class="syABtJ">生态</div>
+    
+      <div class="xyRgcH">185.&nbsp以下关于Pythan字典变量的定义中，错误的是</div>
+      <div class="syABtJ">字典</div>
+    
+      <div class="xyRgcH">186.&nbsp以下代码的输出结果是
+t=10.5
+def above_zero(t):
+	return t&gt;0</div>
+      <div class="syABtJ">函数</div>
+    
+      <div class="xyRgcH">187.&nbsp关于Python全局变量和局部变量，以下选项描述错误的是</div>
+      <div class="syABtJ">变量类型</div>
+    
+      <div class="xyRgcH">188.&nbsp以下代码的输出结果是
+x=2 &#43; 9 * ((3*12) -8) // 10 
+print(x)</div>
+      <div class="syABtJ">数学模块</div>
+    
+      <div class="xyRgcH">189.&nbsp表达式eval(&#39;500//10&#39;)的结果是</div>
+      <div class="syABtJ">内置函数</div>
+    
+      <div class="xyRgcH">190.&nbsp在多线程环境下，如何保证时间操作的准确性？</div>
+      <div class="syABtJ">日期和时间</div>
+    
+      <div class="xyRgcH">191.&nbsp列表变量1s共包含10个元素，1s索引的取值范围是</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">192.&nbsp第三方库Beautifulsoup4的功能是</div>
+      <div class="syABtJ">生态</div>
+    
+      <div class="xyRgcH">193.&nbsp元组可以作为字典的键吗</div>
+      <div class="syABtJ">元组</div>
+    
+      <div class="xyRgcH">194.&nbsp以下哪个是正确的元组定义方式</div>
+      <div class="syABtJ">元组</div>
+    
+      <div class="xyRgcH">195.&nbsp在Python中，以下哪种方法可以判断一个数是否为偶数</div>
+      <div class="syABtJ">数字</div>
+    
+      <div class="xyRgcH">196.&nbsp要将datetime对象转换为可读的字符串格式，可以使用：</div>
+      <div class="syABtJ">日期和时间</div>
+    
+      <div class="xyRgcH">197.&nbsp下列关于Python闭包的说法，正确的是？</div>
+      <div class="syABtJ">基础语法</div>
+    
+      <div class="xyRgcH">198.&nbsp以下代码的输出结果是
+vlist = list(range(5))
+print(vlist)</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">199.&nbsp如何将一个字符串表示的时间转换为datetime对象，同时指定格式？</div>
+      <div class="syABtJ">日期和时间</div>
+    
+      <div class="xyRgcH">200.&nbspPython中的数学库是什么</div>
+      <div class="syABtJ">数字</div>
+    
+      <div class="xyRgcH">201.&nbsp对于序列s，以下选项对min(s)描述正确的是</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">202.&nbsp执行以下程序，输出结果是
+y=[&#39; &#39;,&#39;&#39;]
+print(all(y),any(y))</div>
+      <div class="syABtJ">内置函数</div>
+    
+      <div class="xyRgcH">203.&nbspPython中，如何处理夏令时？</div>
+      <div class="syABtJ">日期和时间</div>
+    
+      <div class="xyRgcH">204.&nbsptime.sleep(2)的作用是：</div>
+      <div class="syABtJ">日期和时间</div>
+    
+      <div class="xyRgcH">205.&nbsp以下关于Python函数的描述中，正确的是</div>
+      <div class="syABtJ">内置函数</div>
+    
+      <div class="xyRgcH">206.&nbsp元组的打包和解包是什么</div>
+      <div class="syABtJ">元组</div>
+    
+      <div class="xyRgcH">207.&nbsp判断两个datetime对象是否相等，可以直接使用：</div>
+      <div class="syABtJ">日期和时间</div>
+    
+      <div class="xyRgcH">208.&nbsp以下关于文件的描述中，错误的是</div>
+      <div class="syABtJ">文件操作</div>
+    
+      <div class="xyRgcH">209.&nbsp以下关于Python二维数组的描述中，错误的是</div>
+      <div class="syABtJ">文件操作</div>
+    
+      <div class="xyRgcH">210.&nbsp二维列表ls=[[9,8],[7,6],[5,4],[3,2],[1,0]]，能够获得数字4的选项是</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">211.&nbsp以下代码的输出结果是
+S= &#39;Pame&#39;
+for i in range(len(S))
+	print(S[-il，end=&#39;&#39;)</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">212.&nbsp以下用来处理Python列表的方法中，错误的是</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">213.&nbsp以下关于函数优点的描述中，错误的是</div>
+      <div class="syABtJ">函数</div>
+    
+      <div class="xyRgcH">214.&nbspPython中，if语句的关键字是？</div>
+      <div class="syABtJ">条件语句</div>
+    
+      <div class="xyRgcH">215.&nbsp关于Python无限循环，以下选项描述错误的是</div>
+      <div class="syABtJ">循环语句</div>
+    
+      <div class="xyRgcH">216.&nbsp如何将一个datetime对象转换为ISO 8601格式的字符串？</div>
+      <div class="syABtJ">日期和时间</div>
+    
+      <div class="xyRgcH">217.&nbsp下列关于Python异常处理的说法，错误的是？</div>
+      <div class="syABtJ">异常处理</div>
+    
+      <div class="xyRgcH">218.&nbsp以下程序的输出结果是
+x=4
+ca=&#39;123456&#39;
+if str(x) in ca:
+	print(ca.replace(ca[x]，str(x-2)))</div>
+      <div class="syABtJ">字符串</div>
+    
+      <div class="xyRgcH">219.&nbsp在Python语言中，包含矩阵运算的第三方库是</div>
+      <div class="syABtJ">生态</div>
+    
+      <div class="xyRgcH">220.&nbsp元组的切片操作和列表的切片操作有什么区别</div>
+      <div class="syABtJ">元组</div>
+    
+      <div class="xyRgcH">221.&nbsp文件的追加写入模式是</div>
+      <div class="syABtJ">文件操作</div>
+    
+      <div class="xyRgcH">222.&nbspPython中，下列哪个选项是正确的异常处理语句？</div>
+      <div class="syABtJ">异常处理</div>
+    
+      <div class="xyRgcH">223.&nbsp在Python中，以下哪种运算会将结果转换为浮点数</div>
+      <div class="syABtJ">数字</div>
+    
+      <div class="xyRgcH">224.&nbsp以下程序的输出结果是
+s = 0
+def fun(s，n)：
+	for i in range(n):
+		s&#43;i
+print(fun(s,5))</div>
+      <div class="syABtJ">函数</div>
+    
+      <div class="xyRgcH">225.&nbsp以下不是Python语言保留字的是</div>
+      <div class="syABtJ">基础语法</div>
+    
+      <div class="xyRgcH">226.&nbsp表格类型数据的组织维度最可能是</div>
+      <div class="syABtJ">元组</div>
+    
+      <div class="xyRgcH">227.&nbsp以下关于二进制整数的定义，正确的是</div>
+      <div class="syABtJ">基础语法</div>
+    
+      <div class="xyRgcH">228.&nbsp以下代码的输出结果是
+1s = [&#39;car&#39;,&#39;truck2&#39;]
+def funC(A)：
+	ls.append(A)
+	return
+func(&#39;bus&#39;)
+print(ls)</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">229.&nbsp比较两个变量是否相等的运算符是</div>
+      <div class="syABtJ">运算符</div>
+    
+      <div class="xyRgcH">230.&nbsp以下关于函数返回值的描述中，正确的是</div>
+      <div class="syABtJ">函数</div>
+    
+      <div class="xyRgcH">231.&nbsp以下程序的输出结果是
+ss = set(&#39;htslbht)
+sorted(ss)
+for i in ss:
+	print(i, end=&#39;&#39;)</div>
+      <div class="syABtJ">内置函数</div>
+    
+      <div class="xyRgcH">232.&nbsp以下关于Python的函数的描述，正确的是</div>
+      <div class="syABtJ">函数</div>
+    
+      <div class="xyRgcH">233.&nbsp赋值运算符，将一个值赋给一个变量，是</div>
+      <div class="syABtJ">运算符</div>
+    
+      <div class="xyRgcH">234.&nbsp以下关于Python语言技术特点的描述中，错误的是</div>
+      <div class="syABtJ">入门基础</div>
+    
+      <div class="xyRgcH">235.&nbsp文件exam.txt与以下代码在同一目录下，其内容是一段文本：bigBen，以下代码的输出结果是
+f=open(&#39;exam.txt&#39;)
+print(f)
+f.close()</div>
+      <div class="syABtJ">文件操作</div>
+    
+      <div class="xyRgcH">236.&nbsp执行以下程序，输出结果是
+y=&#39;中文&#39;
+x=&#39;中文字&#39;
+print(x&gt;y)</div>
+      <div class="syABtJ">基础语法</div>
+    
+      <div class="xyRgcH">237.&nbsp以下代码的输出结果是
+print(0.1&#43;0.2==0.3)</div>
+      <div class="syABtJ">入门基础</div>
+    
+      <div class="xyRgcH">238.&nbsp以下不属于网络爬虫领域的Python第三方库是</div>
+      <div class="syABtJ">生态</div>
+    
+      <div class="xyRgcH">239.&nbsp以下关于Python语言的描述中，错误的是</div>
+      <div class="syABtJ">函数</div>
+    
+      <div class="xyRgcH">240.&nbsp以下程序的输出结果是
+L1=[1,2,3,4]
+L2=Ll.copy()
+L2.reverse()
+print(L1)</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">241.&nbsp设str1=&#39;*@pythan@*’，语句print(str1[2:].stip(&#39;@&#39;))的执行结果是</div>
+      <div class="syABtJ">字符串</div>
+    
+      <div class="xyRgcH">242.&nbsp以下关于Python循环结构的描述中，错误的是</div>
+      <div class="syABtJ">循环语句</div>
+    
+      <div class="xyRgcH">243.&nbsp在Python语言中，不属于Web开发框架第三方库的是</div>
+      <div class="syABtJ">生态</div>
+    
+      <div class="xyRgcH">244.&nbsp以下关于数据组织的描述中，错误的是</div>
+      <div class="syABtJ">元组</div>
+    
+      <div class="xyRgcH">245.&nbsp以下代码的输出结果是
+a=[[1,2,3],[4,5,6],[7,8,9]]
+s=0
+for c in a:
+	for j in range(3):
+		s &#43;= c[j]
+print(s)</div>
+      <div class="syABtJ">循环语句</div>
+    
+      <div class="xyRgcH">246.&nbspPython中，函数的参数传递方式有哪些？</div>
+      <div class="syABtJ">函数</div>
+    
+      <div class="xyRgcH">247.&nbspPython中，列表的索引从哪个位置开始？</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">248.&nbsp以下不能用于生成空字典的选项是</div>
+      <div class="syABtJ">字典</div>
+    
+      <div class="xyRgcH">249.&nbspcalendar模块的主要功能是：</div>
+      <div class="syABtJ">日期和时间</div>
+    
+      <div class="xyRgcH">250.&nbsp比较两个变量是否不相等的运算符是</div>
+      <div class="syABtJ">运算符</div>
+    
+      <div class="xyRgcH">251.&nbsp在Python中，以下哪个运算符用于求余</div>
+      <div class="syABtJ">数字</div>
+    
+      <div class="xyRgcH">252.&nbsp以下保留字不用于异常处理逻辑的是</div>
+      <div class="syABtJ">异常处理</div>
+    
+      <div class="xyRgcH">253.&nbspPython中，下列哪个选项可以导入一个名为mymodule的模块？</div>
+      <div class="syABtJ">模块</div>
+    
+      <div class="xyRgcH">254.&nbsp给定列表1s=[1，2，3，&#39;1&#39;，&#39;2&#39;,&#39;3&#39;]，其元素包含2种数据类型，列表1s的数据组织维度是</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">255.&nbsp以下代码的输出结果是
+a={&#39;大海&#39;:&#39;蓝色&#39;,&#39;天空&#39;:&#39;灰色&#39;,&#39;大地&#39;:&#39;黑色&#39;}
+print(d[&#39;大地&#39;]，d.get(&#39;大地&#39;,&#39;黄色&#39;))</div>
+      <div class="syABtJ">字典</div>
+    
+      <div class="xyRgcH">256.&nbspPython中，下列哪个运算符用于比较两个值是否相等？</div>
+      <div class="syABtJ">基础语法</div>
+    
+      <div class="xyRgcH">257.&nbsp以下代码的输出结果是
+ls=[[1,2,3],[[4,5],6],[7,8]]
+print(len(ls))</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">258.&nbsp以下关于Python字符编码的描述中，错误的是</div>
+      <div class="syABtJ">入门基础</div>
+    
+      <div class="xyRgcH">259.&nbsp以下变量名中，不符合Python语言变量命名规则的是</div>
+      <div class="syABtJ">基础语法</div>
+    
+      <div class="xyRgcH">260.&nbsp以下关于Python语言return语句的描述中，正确的是</div>
+      <div class="syABtJ">函数</div>
+    
+      <div class="xyRgcH">261.&nbspx=2.6，表达式raund(x)的结果是</div>
+      <div class="syABtJ">内置函数</div>
+    
+      <div class="xyRgcH">262.&nbspPython中，下列哪个选项不是合法的变量名？</div>
+      <div class="syABtJ">基础语法</div>
+    
+      <div class="xyRgcH">263.&nbsp以下关于Python循环结构的描述中，错误的是</div>
+      <div class="syABtJ">循环语句</div>
+    
+      <div class="xyRgcH">264.&nbsp位运算符，按位取反运算的符号是</div>
+      <div class="syABtJ">运算符</div>
+    
+      <div class="xyRgcH">265.&nbspPython中，以下哪种数据类型不支持比较运算</div>
+      <div class="syABtJ">数字</div>
+    
+      <div class="xyRgcH">266.&nbsp以下代码的输出结果是
+def fibRate(n):
+	if n&lt;=0:
+		return -1
+	elif n==1:
+		return -l
+	elif n==2:
+		return 1
+	e1se:
+		L= [1,1]
+		for i in range(2,n)：
+			L.append(L[-1]&#43;L[-2])
+		return L[-2]/L[-1]
+print(fibRate(5))</div>
+      <div class="syABtJ">条件语句</div>
+    
+      <div class="xyRgcH">267.&nbsp下列关于Python中的装饰器语法，正确的是？</div>
+      <div class="syABtJ">基础语法</div>
+    
+      <div class="xyRgcH">268.&nbsp以下不是Python语言特点的是</div>
+      <div class="syABtJ">入门基础</div>
+    
+      <div class="xyRgcH">269.&nbsp以下关于函数的描述，正确的是</div>
+      <div class="syABtJ">函数</div>
+    
+      <div class="xyRgcH">270.&nbspPython中，下列哪个选项可以创建一个线程？</div>
+      <div class="syABtJ">基础语法</div>
+    
+      <div class="xyRgcH">271.&nbsp左移运算符是</div>
+      <div class="syABtJ">运算符</div>
+    
+      <div class="xyRgcH">272.&nbsp下列关于Python生成器的说法，正确的是？</div>
+      <div class="syABtJ">基础语法</div>
+    
+      <div class="xyRgcH">273.&nbsp以下关于&#34;for&lt;循环变量&gt;in&lt;循环结构&gt;&#34;的描述，错误的是</div>
+      <div class="syABtJ">循环语句</div>
+    
+      <div class="xyRgcH">274.&nbsp元组和列表在性能上有何差异</div>
+      <div class="syABtJ">元组</div>
+    
+      <div class="xyRgcH">275.&nbsp以下程序的输出结果是
+def loc_glo(b=2，a=4):
+	global z
+	z&#43;=3*a&#43;5*b
+	return z
+z=10
+print(z，loc_glo(4,2))</div>
+      <div class="syABtJ">函数</div>
+    
+      <div class="xyRgcH">276.&nbsp以下描述中，错误的是</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">277.&nbspPython中，下列哪个选项可以正确打开一个文件并以追加模式写入？</div>
+      <div class="syABtJ">文件操作</div>
+    
+      <div class="xyRgcH">278.&nbsp计算当前时间3天后的日期，可以使用：</div>
+      <div class="syABtJ">日期和时间</div>
+    
+      <div class="xyRgcH">279.&nbsp元组可以作为函数的返回值吗</div>
+      <div class="syABtJ">元组</div>
+    
+      <div class="xyRgcH">280.&nbsp关于Python文件打开模式，表示错误的是</div>
+      <div class="syABtJ">文件操作</div>
+    
+      <div class="xyRgcH">281.&nbsp以下关于Python字符串的描述中，错误的是</div>
+      <div class="syABtJ">字符串</div>
+    
+      <div class="xyRgcH">282.&nbspPython中，表示日期和时间的标准库是：</div>
+      <div class="syABtJ">日期和时间</div>
+    
+      <div class="xyRgcH">283.&nbsp以下关于Python全局变量和局部变量的描述中，错误的是</div>
+      <div class="syABtJ">变量类型</div>
+    
+      <div class="xyRgcH">284.&nbsp表达式type(type(&#39;45&#39;))的结果是</div>
+      <div class="syABtJ">内置函数</div>
+    
+      <div class="xyRgcH">285.&nbsp以下选项，不是Python保留字的选项是</div>
+      <div class="syABtJ">基础语法</div>
+    
+      <div class="xyRgcH">286.&nbsp以下关于随机运算函数库的描述，错误的是</div>
+      <div class="syABtJ">内置函数</div>
+    
+      <div class="xyRgcH">287.&nbsp以下不属于Python的pip工具命令的选项是</div>
+      <div class="syABtJ">模块</div>
+    
+      <div class="xyRgcH">288.&nbsp在Python中，获取当前时间的Unix时间戳（从1970年1月1日0时0分0秒开始的秒数）的方法是：</div>
+      <div class="syABtJ">日期和时间</div>
+    
+      <div class="xyRgcH">289.&nbsp如何访问元组中的元素</div>
+      <div class="syABtJ">元组</div>
+    
+      <div class="xyRgcH">290.&nbsp以下哪个语句用于连接两个字符串？</div>
+      <div class="syABtJ">入门基础</div>
+    
+      <div class="xyRgcH">291.&nbsp执行以下程序，输入fish520，输出结果是
+W= input()
+for x in w:
+	if&#39;0&#39;&lt;=x&lt;=
+	 continue
+	e1se:
+		w.replace(x,&#39;&#39;)
+print(w)</div>
+      <div class="syABtJ">循环语句</div>
+    
+      <div class="xyRgcH">292.&nbspPython中，如何生成一个指定范围内的随机数</div>
+      <div class="syABtJ">数字</div>
+    
+      <div class="xyRgcH">293.&nbspPython中，如何定义一个类的构造函数？</div>
+      <div class="syABtJ">面向对象</div>
+    
+      <div class="xyRgcH">294.&nbsp在Python语言中，使用for..in.方式形成的循环不能遍历的类型是</div>
+      <div class="syABtJ">循环语句</div>
+    
+      <div class="xyRgcH">295.&nbsp在Pythan语言中，使用open()打开一个Windows操作系统D盘下文件，路径名错误的是</div>
+      <div class="syABtJ">文件操作</div>
+    
+      <div class="xyRgcH">296.&nbsp以下不属于Web开发框架的Python第三方库是</div>
+      <div class="syABtJ">生态</div>
+    
+      <div class="xyRgcH">297.&nbspPython中的幂运算用什么符号表示</div>
+      <div class="syABtJ">数字</div>
+    
+      <div class="xyRgcH">298.&nbsp字符串tstr=&#39;television&#39;，显示结果为vi的选项是</div>
+      <div class="syABtJ">字符串</div>
+    
+      <div class="xyRgcH">299.&nbsp表达式3&#43;5%6*2//8的值是</div>
+      <div class="syABtJ">数学模块</div>
+    
+      <div class="xyRgcH">300.&nbsp幂运算的运算符是</div>
+      <div class="syABtJ">运算符</div>
+    
+      <div class="xyRgcH">301.&nbsp以下程序的输出结果是
+ls=[&#39;绿茶&#39;,&#39;乌龙茶&#39;,&#39;红茶&#39;,&#39;白茶&#39;,&#39;黑茶&#39;]
+x=&#39;乌龙茶&#39;
+print(ls.index(x,0))</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">302.&nbsp逻辑“非”运算的运算符是</div>
+      <div class="syABtJ">运算符</div>
+    
+      <div class="xyRgcH">303.&nbsp关于字典的描述，错误的是</div>
+      <div class="syABtJ">字典</div>
+    
+      <div class="xyRgcH">304.&nbsp键盘输入数字5，以下代码的输出结果是
+n=eval(input(&#34;请输入一个整数：&#34;))
+s = 0
+if n&gt;=5:
+	n -= 1
+	s = 4
+if n&lt;5:
+	n-=1
+	s=3
+print(s)</div>
+      <div class="syABtJ">条件语句</div>
+    
+      <div class="xyRgcH">305.&nbsp以下关于Python语言的描述中，正确的是</div>
+      <div class="syABtJ">条件语句</div>
+    
+      <div class="xyRgcH">306.&nbsp以下描述错误的是</div>
+      <div class="syABtJ">基础语法</div>
+    
+      <div class="xyRgcH">307.&nbsp函数chr(x)的作用是</div>
+      <div class="syABtJ">内置函数</div>
+    
+      <div class="xyRgcH">308.&nbsp以下关于Python函数的描述中，错误的是</div>
+      <div class="syABtJ">基础语法</div>
+    
+      <div class="xyRgcH">309.&nbsp以下哪个运算符用于字符串的连接</div>
+      <div class="syABtJ">运算符</div>
+    
+      <div class="xyRgcH">310.&nbsp函数中定义了2个参数，并且两个参数都指定了默认值，调用函数时参数个数最少是</div>
+      <div class="syABtJ">函数</div>
+    
+      <div class="xyRgcH">311.&nbsp以下程序的输出结果是
+x=3.1415926
+print(round(x,2),round(x))</div>
+      <div class="syABtJ">内置函数</div>
+    
+      <div class="xyRgcH">312.&nbsp在Python语言中，不属于机器学习领域第三方库的是</div>
+      <div class="syABtJ">生态</div>
+    
+      <div class="xyRgcH">313.&nbspPython中，如何判断一个字符串是否包含某个子串？</div>
+      <div class="syABtJ">字符串</div>
+    
+      <div class="xyRgcH">314.&nbsp下列关于Python装饰器的说法，正确的是？</div>
+      <div class="syABtJ">基础语法</div>
+    
+      <div class="xyRgcH">315.&nbsp字典d={&#39;Python&#39;:123,&#39;C&#39;:123,&#39;C&#43;&#43;&#39;:123},1en(d)的结果是</div>
+      <div class="syABtJ">字典</div>
+    
+      <div class="xyRgcH">316.&nbsp以下关于分支和循环结构的描述中，错误的是</div>
+      <div class="syABtJ">循环语句</div>
+    
+      <div class="xyRgcH">317.&nbsp元组和字符串有什么相似之处</div>
+      <div class="syABtJ">元组</div>
+    
+      <div class="xyRgcH">318.&nbsp在Python语言中，不能作为变量名的是</div>
+      <div class="syABtJ">入门基础</div>
+    
+      <div class="xyRgcH">319.&nbsp以下方法能返回列表数据类型的选项是</div>
+      <div class="syABtJ">内置函数</div>
+    
+      <div class="xyRgcH">320.&nbsp以下代码的输出结果是
+CList = list(range(5))
+print(2 in CList)</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">321.&nbsp以下关于Python列表的描述中，错误的是</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">322.&nbsp在Python语言中，写文件的操作是</div>
+      <div class="syABtJ">文件操作</div>
+    
+      <div class="xyRgcH">323.&nbsp以下关于Python语言浮点数类型的描述中，错误的是</div>
+      <div class="syABtJ">基础语法</div>
+    
+      <div class="xyRgcH">324.&nbsp以下代码的输出结果是
+d= {&#39;food&#39;:{&#39;cake&#39;:1,&#39;egg&#39;:5}}
+print(d.get(&#39;cake&#39;,&#39;no this food&#39;))</div>
+      <div class="syABtJ">字典</div>
+    
+      <div class="xyRgcH">325.&nbsp以下关于Python函数的描述中，错误的是</div>
+      <div class="syABtJ">函数</div>
+    
+      <div class="xyRgcH">326.&nbsp不属于Python用于Web开发第三方库的是</div>
+      <div class="syABtJ">生态</div>
+    
+      <div class="xyRgcH">327.&nbspPython中，下列哪个选项可以正确创建一个包含元素1、2、3的列表？</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">328.&nbsp以下代码的输出结果是
+print(&#39;{:@&gt;10.6}&#39;.format(&#39;Fog&#39;))</div>
+      <div class="syABtJ">字符串</div>
+    
+      <div class="xyRgcH">329.&nbsp以下程序的输出结果是
+s=2
+for i in range(1,10):
+	s&#43;=i
+print(s)</div>
+      <div class="syABtJ">循环语句</div>
+    
+      <div class="xyRgcH">330.&nbsp关于以下代码的描述中，错误的是
+def func(a,b):
+	c=a**2&#43;b
+	b=a
+	return c
+a=10
+b=100
+c=func(a,b)&#43;a</div>
+      <div class="syABtJ">函数</div>
+    
+      <div class="xyRgcH">331.&nbsp以下用于数据存储领域的Python第三方库是</div>
+      <div class="syABtJ">生态</div>
+    
+      <div class="xyRgcH">332.&nbsp以下代码的输出结果是
+for s in &#39;HelloWorld&#39;:
+	if s==&#39;W&#39;:
+		continue
+	print (s, end=&#39;&#39;)</div>
+      <div class="syABtJ">字符串</div>
+    
+      <div class="xyRgcH">333.&nbsp下列函数中，不是Python内置函数的是</div>
+      <div class="syABtJ">内置函数</div>
+    
+      <div class="xyRgcH">334.&nbsp以下关于Python缩进的描述中，错误的是</div>
+      <div class="syABtJ">入门基础</div>
+    
+      <div class="xyRgcH">335.&nbsp以下关于数据维度的描述，正确的是</div>
+      <div class="syABtJ">元组</div>
+    
+      <div class="xyRgcH">336.&nbsp元组可以作为函数的参数吗</div>
+      <div class="syABtJ">元组</div>
+    
+      <div class="xyRgcH">337.&nbsp以下关于Python函数的描述中，错误的是</div>
+      <div class="syABtJ">函数</div>
+    
+      <div class="xyRgcH">338.&nbsp执行以下程序，输ab，然后回车，结果是
+k=10
+while True:
+	s=input(&#39;请输入q退出：&#39;)
+	if s==&#39;a&#39;:
+		K&#43;=1
+		continue
+	else:
+		k&#43;=2
+		break
+print(k)</div>
+      <div class="syABtJ">循环语句</div>
+    
+      <div class="xyRgcH">339.&nbsp以下程序的输出结果是
+a=[3,2,1]
+b=a[:]
+print(b)</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">340.&nbspPython中，用于表示字符串的数据类型是？</div>
+      <div class="syABtJ">变量类型</div>
+    
+      <div class="xyRgcH">341.&nbsp如果Python程序执行时产生了“TypeErrar的错误，其原因是</div>
+      <div class="syABtJ">变量类型</div>
+    
+      <div class="xyRgcH">342.&nbsp在Python语言中，将二维数据写入CSV文件，最可能使用的函数是</div>
+      <div class="syABtJ">文件操作</div>
+    
+      <div class="xyRgcH">343.&nbsp以下关于Python文件打开模式的描述中，错误的是</div>
+      <div class="syABtJ">文件操作</div>
+    
+      <div class="xyRgcH">344.&nbsp身份运算符，用于判断两个变量是否引用同一个对象，是</div>
+      <div class="syABtJ">运算符</div>
+    
+      <div class="xyRgcH">345.&nbspPython中，如何导入一个模块？</div>
+      <div class="syABtJ">基础语法</div>
+    
+      <div class="xyRgcH">346.&nbsp以下选项不属于Python语言特点的是</div>
+      <div class="syABtJ">入门基础</div>
+    
+      <div class="xyRgcH">347.&nbsp以下的描述中，不属于Python语言控制结构的是</div>
+      <div class="syABtJ">基础语法</div>
+    
+      <div class="xyRgcH">348.&nbsp以下程序的输出结果不可能的选项是
+import random
+1s=[2,3,4,6]
+s=10
+k=random.randint(0,2)
+s&#43;=ls[k]
+print(s)</div>
+      <div class="syABtJ">数学模块</div>
+    
+      <div class="xyRgcH">349.&nbsp以下构成Python循环结构的方法中，正确的是</div>
+      <div class="syABtJ">循环语句</div>
+    
+      <div class="xyRgcH">350.&nbsp以下代码的输出结果是
+ls=[&#39;book&#39;,23,[2010,&#39;stud1&#39;],20]
+print(ls[2][1][-1])</div>
+      <div class="syABtJ">列表</div>
+    
+      <div class="xyRgcH">351.&nbsp以下关于文件的描述，错误的是</div>
+      <div class="syABtJ">文件操作</div>
+    
+  </div>
+</main>
+</div>
+            
+            <aside class="hidden xl:block mr-4 shrink-0 xl:w-80 mt-8">
+                <div class="sticky top-24 border border-dashed border-slate-300 rounded-2xl text-center text-slate-400 text-sm overflow-hidden">
+                    <p class="text-[10px] text-slate-300 mb-2">AD</p>
+                    <div class="min-h-155 bg-slate-50 flex items-center justify-center w-full">
+                        
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4169504979687359"
+     data-ad-slot="9021161584"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+
+                    </div>
+                </div>
+            </aside>
+            
+        </div>
+        
+            <div class="mx-auto max-w-full md:max-w-7xl my-6 w-full h-full min-h-80 rounded-2xl border border-dashed border-slate-300 overflow-hidden">
+                <p class="text-[10px] text-slate-300 px-1">AD</p>
+                
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4169504979687359"
+     data-ad-slot="6722548729"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+
+            </div>
+        
+    </div>
+    <footer class="flex justify-center items-center gap-6 text-sm text-gray-600 p-4 border-t border-gray-200">
+        <a href="/about" title="关于Spiderbuf" aria-label="关于Spiderbuf">关于我们</a>
+        <a href="/privacy" title="Spiderbuf网站隐私政策" aria-label="Spiderbuf 网站隐私政策">隐私政策</a>
+        <a href="/" title="Spiderbuf" aria-label="All rights reserved">All rights reserved.</a>
+        友情链接：<a href="https://gethtmx.com" target="_blank" title="HTMX中文网" aria-label="HTMX 中文网">HTMX中文网</a>
+    </footer>
+</body>
+</html>
+
+
