@@ -1,0 +1,432 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Spiderbuf" />
+    <meta name="copyright" content="Spiderbuf" />
+    
+    <link rel="canonical" href="https://spiderbuf.cn/challenge/css-sprites">
+    
+    <meta name="description" content="SpiderBuf 是专注于 Python 爬虫学习和练习的平台，提供丰富的教程、实战案例、练习题目和在线爬虫工具，助你轻松掌握爬虫开发技能。">
+    <meta name="keywords" content="Python爬虫,爬虫练习,爬虫教程,爬虫实战,JS逆向,SpiderBuf,网络爬虫,数据采集,爬虫工具,数据抓取,API接口,视频下载,图片下载,电商数据,金融数据,数据安全,IP隐藏,web scraping,web scraper,web crawler, data scraping,scraping tool,scraper tool,web extractor,email extractor,data extraction">
+    <link rel="stylesheet" href="https://spiderbuf.cn/static/css/style.v1.min.css">
+    
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4169504979687359" crossorigin="anonymous"></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7B42BKG1QE"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-7B42BKG1QE');
+    </script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Python爬虫在线练习与项目实战","item":"https://spiderbuf.cn"},{"@type":"ListItem","position":2,"name":"爬虫挑战","item":"https://spiderbuf.cn/challenges"},{"@type":"ListItem","position":3,"name":"CSS Sprites （雪碧图）反爬","item":"https://spiderbuf.cn/challenge/css-sprites"}]}</script>
+    <script src="https://spiderbuf.cn/static/js/site.v3.min.js"></script>
+    <title>CSS Sprites （雪碧图）反爬 | SpiderBuf</title>
+</head>
+
+<body class="flex flex-col justify-between">
+    <header class="border-b border-slate-200 bg-white/80 backdrop-blur-md sticky top-0 z-50">
+        <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="flex h-16 items-center justify-between">
+                <div class="flex items-center gap-2 shrink-0">
+                    <a href="/" aria-label="logo">
+                        <span class="text-xl font-bold tracking-tight text-indigo-600">SpiderBuf<span class="text-slate-600">.cn</span></span>
+                    </a>
+                </div>
+                <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600" aria-label="网站导航">
+                    <a class="hover:text-indigo-600 transition" href="/challenges">靶场列表</a>
+                    <a class="hover:text-indigo-600 transition" href="/articles">技术文章</a>
+                    <a class="hover:text-indigo-600 transition" href="/python-exercise">Python习题</a>
+                    <a class="hover:text-indigo-600 transition" href="/tools" title="在线工具">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z"/></svg>
+                    </a>
+                    <a class="hover:text-indigo-600 transition" href="/sponsor" title="赞助支持">
+                        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M2 21h18v-2H2M20 8h-2V5h2m0-2H4v10a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4v-3h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Z"></path></svg>
+                    </a>
+                    <a class="hover:text-indigo-600 transition" href="https://github.com/hhuayuan/spiderbuf" target="_blank" title="GitHub">
+                        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12c0 5.303 3.438 9.8 8.205 11.385c.6.113.82-.258.82-.577c0-.285-.01-1.04-.015-2.04c-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729c1.205.084 1.838 1.236 1.838 1.236c1.07 1.835 2.809 1.305 3.495.998c.108-.776.417-1.305.76-1.605c-2.665-.3-5.466-1.332-5.466-5.93c0-1.31.465-2.38 1.235-3.22c-.135-.303-.54-1.523.105-3.176c0 0 1.005-.322 3.3 1.23c.96-.267 1.98-.399 3-.405c1.02.006 2.04.138 3 .405c2.28-1.552 3.285-1.23 3.285-1.23c.645 1.653.24 2.873.12 3.176c.765.84 1.23 1.91 1.23 3.22c0 4.61-2.805 5.625-5.475 5.92c.42.36.81 1.096.81 2.22c0 1.606-.015 2.896-.015 3.286c0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
+                    </a>
+                    <a class="hover:text-indigo-600 transition" href="/rss" title="RSS订阅" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+                    </a>
+                </nav>
+
+                <div class="flex md:hidden">
+                    <button id="mobile-menu-button" type="button" class="inline-flex items-center justify-center rounded-md p-2 text-slate-600 hover:bg-slate-100 outline-none">
+                        <svg id="icon-open" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                        <svg id="icon-close" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white shadow-lg transition-all duration-300">
+            <div class="space-y-1 px-4 pb-6 pt-2">
+                <a href="/challenges" class="block rounded-md px-3 py-3 text-base font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-600">靶场列表</a>
+                <a href="/articles" class="block rounded-md px-3 py-3 text-base font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-600">技术文章</a>
+                <a href="/python-exercise" class="block rounded-md px-3 py-3 text-base font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-600">Python习题</a>
+
+                <div class="my-2 border-t border-slate-100"></div>
+
+                <div class="grid grid-cols-4 gap-4 px-3 py-2">
+                    <a href="/tools" class="flex flex-col items-center gap-1.5 text-slate-500">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z"/></svg>
+                        <span class="text-xs">工具</span>
+                    </a>
+                    <a href="/sponsor" class="flex flex-col items-center gap-1.5 text-slate-500">
+                        <svg width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M2 21h18v-2H2M20 8h-2V5h2m0-2H4v10a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4v-3h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Z"></path></svg>
+                        <span class="text-xs">赞助</span>
+                    </a>
+                    <a href="https://github.com/hhuayuan/spiderbuf" class="flex flex-col items-center gap-1.5 text-slate-500">
+                        <svg width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12c0 5.303 3.438 9.8 8.205 11.385c.6.113.82-.258.82-.577c0-.285-.01-1.04-.015-2.04c-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729c1.205.084 1.838 1.236 1.838 1.236c1.07 1.835 2.809 1.305 3.495.998c.108-.776.417-1.305.76-1.605c-2.665-.3-5.466-1.332-5.466-5.93c0-1.31.465-2.38 1.235-3.22c-.135-.303-.54-1.523.105-3.176c0 0 1.005-.322 3.3 1.23c.96-.267 1.98-.399 3-.405c1.02.006 2.04.138 3 .405c2.28-1.552 3.285-1.23 3.285-1.23c.645 1.653.24 2.873.12 3.176c.765.84 1.23 1.91 1.23 3.22c0 4.61-2.805 5.625-5.475 5.92c.42.36.81 1.096.81 2.22c0 1.606-.015 2.896-.015 3.286c0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
+                        <span class="text-xs">代码</span>
+                    </a>
+                    <a href="/rss" class="flex flex-col items-center gap-1.5 text-slate-500">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+                        <span class="text-xs">订阅</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuBtn = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const iconOpen = document.getElementById('icon-open');
+            const iconClose = document.getElementById('icon-close');
+
+            menuBtn.addEventListener('click', () => {
+                
+                const isHidden = mobileMenu.classList.contains('hidden');
+
+                if (isHidden) {
+                    mobileMenu.classList.remove('hidden');
+                    iconOpen.classList.add('hidden');
+                    iconClose.classList.remove('hidden');
+                } else {
+                    mobileMenu.classList.add('hidden');
+                    iconOpen.classList.remove('hidden');
+                    iconClose.classList.add('hidden');
+                }
+            });
+
+            
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 768) { 
+                    mobileMenu.classList.add('hidden');
+                    iconOpen.classList.remove('hidden');
+                    iconClose.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+    <div class="flex-1">
+        <div class="flex gap-4">
+            
+            <aside class="hidden xl:block ml-4 shrink-0 xl:w-80 mt-8">
+                <div class="sticky top-24 border border-dashed border-slate-300 rounded-2xl text-center text-slate-400 text-sm overflow-hidden">
+                    <p class="text-[10px] text-slate-300 mb-2">AD</p>
+                    <div class="min-h-155 bg-slate-50 flex items-center justify-center w-full">
+                       
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4169504979687359"
+     data-ad-slot="9021161584"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+
+                    </div>
+                </div>
+            </aside>
+            
+            <div class="flex-1 max-w-7xl mx-auto flex flex-col gap-4">
+
+<header class="w-full max-w-4xl mx-auto my-8 font-sans border border-slate-200 rounded-2xl overflow-hidden">
+    <div class="bg-white px-6 py-4 flex items-center justify-between gap-6 shadow-sm border-b border-slate-200">
+        <div class="flex items-center gap-4 min-w-0 flex-1">
+            <span class="shrink-0 bg-indigo-500 text-white font-mono font-bold px-2 py-1 rounded-xl text-lg shadow-sm uppercase">
+                n05
+            </span>
+
+            <h1 class="text-xl font-bold text-slate-700 tracking-wide truncate flex-1"
+                title="CSS Sprites （雪碧图）反爬">
+                CSS Sprites （雪碧图）反爬
+            </h1>
+        </div>
+
+        <div class="flex items-center gap-4 text-slate-400 shrink-0">
+            <div class="flex items-center gap-1.5" title="累计访问量">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                <span class="text-xs font-medium">9.2k</span>
+            </div>
+            <div class="flex items-center gap-1.5" title="发布日期">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                <span class="text-xs font-medium">2024-02-18</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white p-6 space-y-6">
+        
+
+        <div class="flex flex-wrap gap-2">
+            
+                
+                    
+                    <span class="text-xs font-medium px-2 py-0.5 bg-gray-100 text-gray-600 rounded">入门</span>
+                    
+                
+                    
+                    <span class="text-xs font-medium px-2 py-0.5 bg-gray-100 text-gray-600 rounded">CSS</span>
+                    
+                
+                    
+                    <span class="text-xs font-medium px-2 py-0.5 bg-gray-100 text-gray-600 rounded">sprites</span>
+                    
+                
+                    
+                    <span class="text-xs font-medium px-2 py-0.5 bg-gray-100 text-gray-600 rounded">雪碧图</span>
+                    
+                
+                    
+                    <span class="text-xs font-medium px-2 py-0.5 bg-gray-100 text-gray-600 rounded">offfset</span>
+                    
+                
+                    
+                    <span class="text-xs font-medium px-2 py-0.5 bg-gray-100 text-gray-600 rounded">position</span>
+                    
+                
+                    
+                    <span class="text-xs font-medium px-2 py-0.5 bg-gray-100 text-gray-600 rounded">absolute</span>
+                    
+                
+                    
+                    <span class="text-xs font-medium px-2 py-0.5 bg-gray-100 text-gray-600 rounded">中国500强</span>
+                    
+                
+            
+        </div>
+    </div>
+
+    <div class="flex flex-wrap bg-slate-50 overflow-hidden divide-x divide-slate-200 border-t border-slate-200">
+        
+        <a href="/tutorial/css-sprites" class="flex-1 flex flex-col items-center justify-center p-4 hover:bg-white transition-colors group" target="_blank">
+            <svg class="w-5 h-5 text-slate-400 group-hover:text-blue-500 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+            <span class="text-sm font-semibold text-slate-700">阅读教程</span>
+        </a>
+        
+        
+        <a href="/code/css-sprites" class="flex-1 flex flex-col items-center justify-center p-4 hover:bg-white transition-colors group" target="_blank">
+            <svg class="w-5 h-5 text-slate-400 group-hover:text-purple-500 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+            <span class="text-sm font-semibold text-slate-700">参考代码</span>
+        </a>
+        
+        
+        
+    </div>
+</header>
+
+<main class="mt-6 overflow-hidden">
+    <div>
+        <div class="container">
+            <h1>2021胡润中国500强</h1>
+            <p>胡润研究院发布《2021胡润中国500强》，列出了中国500强非国有企业，按照企业市值或估值进行排名。据悉，本次中国500强上榜门槛提高90亿元（39%），达到320亿元，创历史新高。</p>
+        </div>
+        <div>
+            <div class="grid grid-cols-3 gap-8" style="margin-top: 30px">
+                <div class="col-xs-6 col-lg-4" style="margin-bottom: 30px;">
+                    <h2>腾讯控股</h2>
+                    <p>排名：1</p>
+                    <p>企业估值(亿元)：<span class="sprite uvwxyz"></span><span class="sprite cdefgh"></span><span
+                            class="sprite abcdef"></span><span class="sprite abcdef"></span><span
+                            class="sprite abcdef"></span></p>
+                    <p>CEO：马化腾</p>
+                    <p>行业：互联网服务</p>
+                </div>
+                <div class="col-xs-6 col-lg-4" style="margin-bottom: 30px;">
+                    <h2>台湾积体电路制造</h2>
+                    <p>排名：2</p>
+                    <p>企业估值(亿元)：<span class="sprite uvwxyz"></span><span class="sprite klmnop"></span><span
+                            class="sprite cdefgh"></span><span class="sprite abcdef"></span><span
+                            class="sprite abcdef"></span></p>
+                    <p>CEO：刘德音</p>
+                    <p>行业：半导体</p>
+                </div>
+                <div class="col-xs-6 col-lg-4" style="margin-bottom: 30px;">
+                    <h2>阿里巴巴</h2>
+                    <p>排名：3</p>
+                    <p>企业估值(亿元)：<span class="sprite mnopqr"></span><span class="sprite yzabcd"></span><span
+                            class="sprite wxyzab"></span><span class="sprite abcdef"></span><span
+                            class="sprite abcdef"></span></p>
+                    <p>CEO：张勇</p>
+                    <p>行业：电子商务</p>
+                </div>
+                <div class="col-xs-6 col-lg-4" style="margin-bottom: 30px;">
+                    <h2>字节跳动</h2>
+                    <p>排名：4</p>
+                    <p>企业估值(亿元)：<span class="sprite mnopqr"></span><span class="sprite mnopqr"></span><span
+                            class="sprite efghij"></span><span class="sprite abcdef"></span><span
+                            class="sprite abcdef"></span></p>
+                    <p>CEO：张利东</p>
+                    <p>行业：传媒和娱乐</p>
+                </div>
+                <div class="col-xs-6 col-lg-4" style="margin-bottom: 30px;">
+                    <h2>宁德时代</h2>
+                    <p>排名：5</p>
+                    <p>企业估值(亿元)：<span class="sprite ghijkl"></span><span class="sprite yzabcd"></span><span
+                            class="sprite cdefgh"></span><span class="sprite abcdef"></span><span
+                            class="sprite abcdef"></span></p>
+                    <p>CEO：曾毓群</p>
+                    <p>行业：锂电池</p>
+                </div>
+                <div class="col-xs-6 col-lg-4" style="margin-bottom: 30px;">
+                    <h2>美团</h2>
+                    <p>排名：6</p>
+                    <p>企业估值(亿元)：<span class="sprite ghijkl"></span><span class="sprite yzabcd"></span><span
+                            class="sprite ghijkl"></span><span class="sprite abcdef"></span><span
+                            class="sprite abcdef"></span></p>
+                    <p>CEO：王兴</p>
+                    <p>行业：生活服务</p>
+                </div>
+                <div class="col-xs-6 col-lg-4" style="margin-bottom: 30px;">
+                    <h2>华为</h2>
+                    <p>排名：7</p>
+                    <p>企业估值(亿元)：<span class="sprite ghijkl"></span><span class="sprite abcdef"></span><span
+                            class="sprite abcdef"></span><span class="sprite abcdef"></span><span
+                            class="sprite abcdef"></span></p>
+                    <p>CEO：梁华</p>
+                    <p>行业：智能手机、电信解决方案</p>
+                </div>
+                <div class="col-xs-6 col-lg-4" style="margin-bottom: 30px;">
+                    <h2>蚂蚁集团</h2>
+                    <p>排名：7</p>
+                    <p>企业估值(亿元)：<span class="sprite ghijkl"></span><span class="sprite abcdef"></span><span
+                            class="sprite abcdef"></span><span class="sprite abcdef"></span><span
+                            class="sprite abcdef"></span></p>
+                    <p>CEO：井贤栋</p>
+                    <p>行业：金融科技</p>
+                </div>
+                <div class="col-xs-6 col-lg-4" style="margin-bottom: 30px;">
+                    <h2>京东集团</h2>
+                    <p>排名：9</p>
+                    <p>企业估值(亿元)：<span class="sprite cdefgh"></span><span class="sprite abcdef"></span><span
+                            class="sprite ghijkl"></span><span class="sprite abcdef"></span></p>
+                    <p>CEO：刘强东</p>
+                    <p>行业：电子商务</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</main>
+<style>
+    .sprite {
+        background-image: url('data:image/png;base64,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');
+        background-repeat: no-repeat;
+        width: 10px;
+        height: 15px;
+        padding: 0px;
+    }
+
+    .abcdef {
+        background-position: -106px 0px;
+        display: inline-block;
+    }
+
+    .ghijkl {
+        background-position: -70px 0px;
+        display: inline-block;
+    }
+
+    .mnopqr {
+        background-position: -12px 0px;
+        display: inline-block;
+    }
+
+    .uvwxyz {
+        background-position: -94px 0px;
+        display: inline-block;
+    }
+
+    .yzabcd {
+        background-position: -48px 0px;
+        display: inline-block;
+    }
+
+    .efghij {
+        background-position: -82px 0px;
+        display: inline-block;
+    }
+
+    .klmnop {
+        background-position: -36px 0px;
+        display: inline-block;
+    }
+
+    .qrstuv {
+        background-position: 0px 0px;
+        display: inline-block;
+    }
+
+    .wxyzab {
+        background-position: -60px 0px;
+        display: inline-block;
+    }
+
+    .cdefgh {
+        background-position: -24px 0px;
+        display: inline-block;
+    }
+</style>
+</div>
+            
+            <aside class="hidden xl:block mr-4 shrink-0 xl:w-80 mt-8">
+                <div class="sticky top-24 border border-dashed border-slate-300 rounded-2xl text-center text-slate-400 text-sm overflow-hidden">
+                    <p class="text-[10px] text-slate-300 mb-2">AD</p>
+                    <div class="min-h-155 bg-slate-50 flex items-center justify-center w-full">
+                        
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4169504979687359"
+     data-ad-slot="9021161584"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+
+                    </div>
+                </div>
+            </aside>
+            
+        </div>
+        
+            <div class="mx-auto max-w-full md:max-w-7xl my-6 w-full h-full min-h-80 rounded-2xl border border-dashed border-slate-300 overflow-hidden">
+                <p class="text-[10px] text-slate-300 px-1">AD</p>
+                
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4169504979687359"
+     data-ad-slot="6722548729"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+
+            </div>
+        
+    </div>
+    <footer class="flex justify-center items-center gap-6 text-sm text-gray-600 p-4 border-t border-gray-200">
+        <a href="/about" title="关于Spiderbuf" aria-label="关于Spiderbuf">关于我们</a>
+        <a href="/privacy" title="Spiderbuf网站隐私政策" aria-label="Spiderbuf 网站隐私政策">隐私政策</a>
+        <a href="/" title="Spiderbuf" aria-label="All rights reserved">All rights reserved.</a>
+        友情链接：<a href="https://gethtmx.com" target="_blank" title="HTMX中文网" aria-label="HTMX 中文网">HTMX中文网</a>
+    </footer>
+</body>
+</html>
+
+
