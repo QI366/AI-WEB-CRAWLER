@@ -1,0 +1,2417 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Spiderbuf" />
+    <meta name="copyright" content="Spiderbuf" />
+    
+    <link rel="canonical" href="https://spiderbuf.cn/challenge/scraping-douban-movies-xpath-advanced">
+    
+    <meta name="description" content="SpiderBuf 是专注于 Python 爬虫学习和练习的平台，提供丰富的教程、实战案例、练习题目和在线爬虫工具，助你轻松掌握爬虫开发技能。">
+    <meta name="keywords" content="Python爬虫,爬虫练习,爬虫教程,爬虫实战,JS逆向,SpiderBuf,网络爬虫,数据采集,爬虫工具,数据抓取,API接口,视频下载,图片下载,电商数据,金融数据,数据安全,IP隐藏,web scraping,web scraper,web crawler, data scraping,scraping tool,scraper tool,web extractor,email extractor,data extraction">
+    <link rel="stylesheet" href="https://spiderbuf.cn/static/css/style.v1.min.css">
+    
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4169504979687359" crossorigin="anonymous"></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7B42BKG1QE"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-7B42BKG1QE');
+    </script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Python爬虫在线练习与项目实战","item":"https://spiderbuf.cn"},{"@type":"ListItem","position":2,"name":"爬虫挑战","item":"https://spiderbuf.cn/challenges"},{"@type":"ListItem","position":3,"name":"高分电影列表复杂页面的解析（仿豆瓣电影）-xpath高级用法","item":"https://spiderbuf.cn/challenge/scraping-douban-movies-xpath-advanced"}]}</script>
+    <script src="https://spiderbuf.cn/static/js/site.v3.min.js"></script>
+    <title>高分电影列表复杂页面的解析（仿豆瓣电影）-xpath高级用法 | SpiderBuf</title>
+</head>
+
+<body class="flex flex-col justify-between">
+    <header class="border-b border-slate-200 bg-white/80 backdrop-blur-md sticky top-0 z-50">
+        <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="flex h-16 items-center justify-between">
+                <div class="flex items-center gap-2 shrink-0">
+                    <a href="/" aria-label="logo">
+                        <span class="text-xl font-bold tracking-tight text-indigo-600">SpiderBuf<span class="text-slate-600">.cn</span></span>
+                    </a>
+                </div>
+                <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600" aria-label="网站导航">
+                    <a class="hover:text-indigo-600 transition" href="/challenges">靶场列表</a>
+                    <a class="hover:text-indigo-600 transition" href="/articles">技术文章</a>
+                    <a class="hover:text-indigo-600 transition" href="/python-exercise">Python习题</a>
+                    <a class="hover:text-indigo-600 transition" href="/tools" title="在线工具">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z"/></svg>
+                    </a>
+                    <a class="hover:text-indigo-600 transition" href="/sponsor" title="赞助支持">
+                        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M2 21h18v-2H2M20 8h-2V5h2m0-2H4v10a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4v-3h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Z"></path></svg>
+                    </a>
+                    <a class="hover:text-indigo-600 transition" href="https://github.com/hhuayuan/spiderbuf" target="_blank" title="GitHub">
+                        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12c0 5.303 3.438 9.8 8.205 11.385c.6.113.82-.258.82-.577c0-.285-.01-1.04-.015-2.04c-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729c1.205.084 1.838 1.236 1.838 1.236c1.07 1.835 2.809 1.305 3.495.998c.108-.776.417-1.305.76-1.605c-2.665-.3-5.466-1.332-5.466-5.93c0-1.31.465-2.38 1.235-3.22c-.135-.303-.54-1.523.105-3.176c0 0 1.005-.322 3.3 1.23c.96-.267 1.98-.399 3-.405c1.02.006 2.04.138 3 .405c2.28-1.552 3.285-1.23 3.285-1.23c.645 1.653.24 2.873.12 3.176c.765.84 1.23 1.91 1.23 3.22c0 4.61-2.805 5.625-5.475 5.92c.42.36.81 1.096.81 2.22c0 1.606-.015 2.896-.015 3.286c0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
+                    </a>
+                    <a class="hover:text-indigo-600 transition" href="/rss" title="RSS订阅" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+                    </a>
+                </nav>
+
+                <div class="flex md:hidden">
+                    <button id="mobile-menu-button" type="button" class="inline-flex items-center justify-center rounded-md p-2 text-slate-600 hover:bg-slate-100 outline-none">
+                        <svg id="icon-open" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                        <svg id="icon-close" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white shadow-lg transition-all duration-300">
+            <div class="space-y-1 px-4 pb-6 pt-2">
+                <a href="/challenges" class="block rounded-md px-3 py-3 text-base font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-600">靶场列表</a>
+                <a href="/articles" class="block rounded-md px-3 py-3 text-base font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-600">技术文章</a>
+                <a href="/python-exercise" class="block rounded-md px-3 py-3 text-base font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-600">Python习题</a>
+
+                <div class="my-2 border-t border-slate-100"></div>
+
+                <div class="grid grid-cols-4 gap-4 px-3 py-2">
+                    <a href="/tools" class="flex flex-col items-center gap-1.5 text-slate-500">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z"/></svg>
+                        <span class="text-xs">工具</span>
+                    </a>
+                    <a href="/sponsor" class="flex flex-col items-center gap-1.5 text-slate-500">
+                        <svg width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M2 21h18v-2H2M20 8h-2V5h2m0-2H4v10a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4v-3h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Z"></path></svg>
+                        <span class="text-xs">赞助</span>
+                    </a>
+                    <a href="https://github.com/hhuayuan/spiderbuf" class="flex flex-col items-center gap-1.5 text-slate-500">
+                        <svg width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12c0 5.303 3.438 9.8 8.205 11.385c.6.113.82-.258.82-.577c0-.285-.01-1.04-.015-2.04c-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729c1.205.084 1.838 1.236 1.838 1.236c1.07 1.835 2.809 1.305 3.495.998c.108-.776.417-1.305.76-1.605c-2.665-.3-5.466-1.332-5.466-5.93c0-1.31.465-2.38 1.235-3.22c-.135-.303-.54-1.523.105-3.176c0 0 1.005-.322 3.3 1.23c.96-.267 1.98-.399 3-.405c1.02.006 2.04.138 3 .405c2.28-1.552 3.285-1.23 3.285-1.23c.645 1.653.24 2.873.12 3.176c.765.84 1.23 1.91 1.23 3.22c0 4.61-2.805 5.625-5.475 5.92c.42.36.81 1.096.81 2.22c0 1.606-.015 2.896-.015 3.286c0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
+                        <span class="text-xs">代码</span>
+                    </a>
+                    <a href="/rss" class="flex flex-col items-center gap-1.5 text-slate-500">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+                        <span class="text-xs">订阅</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuBtn = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const iconOpen = document.getElementById('icon-open');
+            const iconClose = document.getElementById('icon-close');
+
+            menuBtn.addEventListener('click', () => {
+                
+                const isHidden = mobileMenu.classList.contains('hidden');
+
+                if (isHidden) {
+                    mobileMenu.classList.remove('hidden');
+                    iconOpen.classList.add('hidden');
+                    iconClose.classList.remove('hidden');
+                } else {
+                    mobileMenu.classList.add('hidden');
+                    iconOpen.classList.remove('hidden');
+                    iconClose.classList.add('hidden');
+                }
+            });
+
+            
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 768) { 
+                    mobileMenu.classList.add('hidden');
+                    iconOpen.classList.remove('hidden');
+                    iconClose.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+    <div class="flex-1">
+        <div class="flex gap-4">
+            
+            <aside class="hidden xl:block ml-4 shrink-0 xl:w-80 mt-8">
+                <div class="sticky top-24 border border-dashed border-slate-300 rounded-2xl text-center text-slate-400 text-sm overflow-hidden">
+                    <p class="text-[10px] text-slate-300 mb-2">AD</p>
+                    <div class="min-h-155 bg-slate-50 flex items-center justify-center w-full">
+                       
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4169504979687359"
+     data-ad-slot="9021161584"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+
+                    </div>
+                </div>
+            </aside>
+            
+            <div class="flex-1 max-w-7xl mx-auto flex flex-col gap-4">
+<style>
+    .container {
+        width: 100%;
+        text-align: center;
+    }
+
+    .row {
+        width: 100%;
+        display: flex;
+
+        justify-content: center;
+    }
+
+    .col-xs-12 {
+        display: flex;
+
+        flex-wrap: wrap;
+        flex: 1;
+    }
+
+    .col-lg-12 {
+        display: flex;
+
+        flex-wrap: wrap;
+        flex: 1;
+    }
+    .col-xs-12 h2,
+    .col-lg-12 h2{
+        margin: 1rem 0;
+    }
+
+    .col-xs-3 {
+        flex: 0 1 25%;
+    }
+
+    .col-lg-3 {
+        flex: 0 1 25%;
+    }
+
+    .col-xs-9 {
+        flex: 0 1 75%;
+    }
+
+    .col-lg-9 {
+        flex: 0 1 75%;
+    }
+
+    .img-responsive {
+        width: 260px;
+    }
+
+    .img-thumbnail {
+        width: 260px;
+    }
+
+    h2 {
+        width: 100%;
+    }
+</style>
+
+<header class="w-full max-w-4xl mx-auto my-8 font-sans border border-slate-200 rounded-2xl overflow-hidden">
+    <div class="bg-white px-6 py-4 flex items-center justify-between gap-6 shadow-sm border-b border-slate-200">
+        <div class="flex items-center gap-4 min-w-0 flex-1">
+            <span class="shrink-0 bg-indigo-500 text-white font-mono font-bold px-2 py-1 rounded-xl text-lg shadow-sm uppercase">
+                h02
+            </span>
+
+            <h1 class="text-xl font-bold text-slate-700 tracking-wide truncate flex-1"
+                title="高分电影列表复杂页面的解析（仿豆瓣电影）-xpath高级用法">
+                高分电影列表复杂页面的解析（仿豆瓣电影）-xpath高级用法
+            </h1>
+        </div>
+
+        <div class="flex items-center gap-4 text-slate-400 shrink-0">
+            <div class="flex items-center gap-1.5" title="累计访问量">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                <span class="text-xs font-medium">26.2k</span>
+            </div>
+            <div class="flex items-center gap-1.5" title="发布日期">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                <span class="text-xs font-medium">2023-10-10</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white p-6 space-y-6">
+        
+
+        <div class="flex flex-wrap gap-2">
+            
+                
+                    
+                    <span class="text-xs font-medium px-2 py-0.5 bg-gray-100 text-gray-600 rounded">进阶</span>
+                    
+                
+                    
+                    <span class="text-xs font-medium px-2 py-0.5 bg-gray-100 text-gray-600 rounded">豆瓣电影</span>
+                    
+                
+                    
+                    <span class="text-xs font-medium px-2 py-0.5 bg-gray-100 text-gray-600 rounded">海报</span>
+                    
+                
+                    
+                    <span class="text-xs font-medium px-2 py-0.5 bg-gray-100 text-gray-600 rounded">图片</span>
+                    
+                
+                    
+                    <span class="text-xs font-medium px-2 py-0.5 bg-gray-100 text-gray-600 rounded">images</span>
+                    
+                
+                    
+                    <span class="text-xs font-medium px-2 py-0.5 bg-gray-100 text-gray-600 rounded">复杂样式</span>
+                    
+                
+            
+        </div>
+    </div>
+
+    <div class="flex flex-wrap bg-slate-50 overflow-hidden divide-x divide-slate-200 border-t border-slate-200">
+        
+        <a href="/tutorial/scraping-douban-movies-xpath-advanced" class="flex-1 flex flex-col items-center justify-center p-4 hover:bg-white transition-colors group" target="_blank">
+            <svg class="w-5 h-5 text-slate-400 group-hover:text-blue-500 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+            <span class="text-sm font-semibold text-slate-700">阅读教程</span>
+        </a>
+        
+        
+        <a href="/code/scraping-douban-movies-xpath-advanced" class="flex-1 flex flex-col items-center justify-center p-4 hover:bg-white transition-colors group" target="_blank">
+            <svg class="w-5 h-5 text-slate-400 group-hover:text-purple-500 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+            <span class="text-sm font-semibold text-slate-700">参考代码</span>
+        </a>
+        
+        
+        
+    </div>
+</header>
+
+<div style="margin: 8rem 0 0;">
+    <div class="container">
+        <h1>值得一看的高分电影</h1>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>致命魔术 The Prestige</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt0482571.jpg" alt="致命魔术 The Prestige"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.9<br/>
+                <span ><span>导演</span>: <span>克里斯托弗·诺兰</span></span><br/>
+                <span ><span>编剧</span>: <span>乔纳森·诺兰 </span></span>/乔纳森·诺兰 / 克里斯托弗·诺兰 / 克里斯托弗·普瑞丝特<br/>
+                <span ><span>主演</span>: <span>休·杰克曼 </span></span>/休·杰克曼 / 克里斯蒂安·贝尔 / 迈克尔·凯恩 / 丽贝卡·豪尔 / 斯嘉丽·约翰逊 / 大卫·鲍伊 / 安迪·瑟金斯 / 派珀·佩拉博 / 萨曼塔·马霍林 / 丹尼尔·戴维斯 / 吉姆·皮多克 / 克里斯托弗·尼姆 / 马克·瑞安 / 罗杰·里斯 / 杰米·哈里斯 / 罗恩·帕金斯 / 瑞奇·杰 / 安东尼·德·马克 / 冀朝理<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 悬疑 / 惊悚<br/>
+                <span ><span>制片国家/地区:</span><span> 英国 </span></span>/英国 / 美国<br/>
+                <span ><span>语言:</span><span> 英语</span></span><br/>
+                <span ><span>上映日期:</span><span> 2006-10-17(罗马电影节) </span></span>/2006-10-17(罗马电影节) / 2006-10-20(美国)<br/>
+                <span ><span>片长:</span><span> 130分钟</span></span><br/>
+                <span ><span>又名:</span><span> 死亡魔法(港) </span></span>/死亡魔法(港) / 顶尖对决(台) / 魔高一丈 / 魔道争锋<br/>
+                <span >IMDb:</span> tt0482571<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>19世纪末，人们对科学文明还不是认识得太过清楚，于是，安吉尔（休•杰克曼Hugh Jackman饰）和伯登（克里斯蒂安•贝尔Christian Bale饰）的魔术，成为了伦敦城内的神奇人物。安吉尔出身贵族，魔术手段华丽丰富，是富人圈子里的表演常客。而伯登即使出身平平，争强好胜的心智和充满创造力的魔术技巧，却也令他有了名气。两人自小本是要好的伙伴，然而，现在魔术界二人各有领地，并且都有野心想成为音乐大厅里的顶级魔术师，一番明争暗斗如箭在弦上。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>蝴蝶效应 The Butterfly Effect</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt0289879.jpg" alt="蝴蝶效应 The Butterfly Effect"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.9<br/>
+                <span ><span>导演</span>: <span>埃里克·布雷斯 </span></span>/埃里克·布雷斯 / J·麦基·格鲁伯<br/>
+                <span ><span>编剧</span>: <span>J·麦基·格鲁伯 </span></span>/J·麦基·格鲁伯 / 埃里克·布雷斯<br/>
+                <span ><span>主演</span>: <span>阿什顿·库彻 </span></span>/阿什顿·库彻 / 梅洛拉·沃尔特斯 / 艾米·斯马特 / 埃尔登·汉森 / 威廉姆·李·斯科特 / 约翰·帕特里克·阿梅多利 / 艾琳·戈洛瓦娅 / 凯文·G·施密特 / 杰西·詹姆斯 / 罗根·勒曼 / 莎拉·威多斯 / 杰克·凯斯 / 卡梅隆·布莱特 / 埃里克·斯托尔兹 / 考乐姆·吉斯·雷尼 / 凯文·杜兰<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 科幻 / 悬疑 / 惊悚<br/>
+                <span ><span>制片国家/地区:</span><span> 美国 </span></span>/美国 / 加拿大<br/>
+                <span ><span>语言:</span><span> 英语</span></span><br/>
+                <span ><span>上映日期:</span><span> 2004-01-23(美国)</span></span><br/>
+                <span ><span>片长:</span><span> 113分钟</span></span>/113分钟/ 120分钟(导演剪辑版)<br/>
+                
+                <span >IMDb:</span> tt0289879<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>伊万（艾什顿·库奇 Ashton Kutcher 饰）曾经有一个糟糕的童年，因为他行为闯下了大祸，令他童年充满不堪回忆的往事。而事实上，他确实只是依稀记得一点可怕的情景，这些情景一直纠缠着他的正常生活。伊万接受心理学家建议，把琐碎生活记在记事本里，却偶然发现通过记事本回到过去。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>西西里的美丽传说 Malèna</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt0213847.jpg" alt="西西里的美丽传说 Malèna"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.9<br/>
+                <span ><span>导演</span>: <span>朱塞佩·托纳多雷</span></span><br/>
+                <span ><span>编剧</span>: <span>朱塞佩·托纳多雷 </span></span>/朱塞佩·托纳多雷 / 卢恰诺·温琴佐尼<br/>
+                <span ><span>主演</span>: <span>莫妮卡·贝鲁奇 </span></span>/莫妮卡·贝鲁奇 / 朱塞佩·苏尔法罗 / Luciano Federico / 玛蒂尔德·皮亚纳 / Pietro Notarianni / Gaetano Aronica / Gilberto Idonea / Angelo Pellegrino / Gabriella Di Luzio / Pippo Provvidenti / 埃丽萨·莫鲁奇 / 奥罗拉·夸特罗基 / 露琪亚·萨多 / 瓦尼·布拉马蒂 / Salvatore Martino / 安东内洛·普利西 / 诺姆·莫根施特恩<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 情色 / 战争<br/>
+                <span ><span>制片国家/地区:</span><span> 意大利 </span></span>/意大利 / 美国<br/>
+                <span ><span>语言:</span><span> 意大利语 </span></span>/意大利语 / 英语 / 拉丁语 / 古希腊语<br/>
+                <span ><span>上映日期:</span><span> 2000-10-27(意大利)</span></span><br/>
+                <span ><span>片长:</span><span> 109 分钟</span></span>/109 分钟/ USA: 92 分钟(heavily cut) / Turkey: 84 分钟(TV version)<br/>
+                <span ><span>又名:</span><span> 真爱伴我行(台) </span></span>/真爱伴我行(台) / 玛莲娜 / 玛琳娜<br/>
+                <span >IMDb:</span> tt0213847<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>当我还只是十三岁时，1941年春末的那一天，我初次见到了她那一天，墨索里尼向英法宣战，而我，得到了生命里的第一辆脚踏车。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>七宗罪 Se7en</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt0114369.jpg" alt="七宗罪 Se7en"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.8<br/>
+                <span ><span>导演</span>: <span>大卫·芬奇</span></span><br/>
+                <span ><span>编剧</span>: <span>安德鲁·凯文·沃克</span></span><br/>
+                <span ><span>主演</span>: <span>摩根·弗里曼 </span></span>/摩根·弗里曼 / 布拉德·皮特 / 凯文·史派西 / 格温妮斯·帕特洛 / 安德鲁·凯文·沃克 / 约翰·卡西尼 / 雷格·E·凯蒂 / 李·厄米<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 悬疑 / 惊悚 / 犯罪<br/>
+                <span ><span>制片国家/地区:</span><span> 美国</span></span><br/>
+                <span ><span>语言:</span><span> 英语</span></span><br/>
+                <span ><span>上映日期:</span><span> 1995-09-22(美国)</span></span><br/>
+                <span ><span>片长:</span><span> 127分钟</span></span><br/>
+                <span ><span>又名:</span><span> 火线追缉令(台) </span></span>/火线追缉令(台) / 7宗罪 / Seven<br/>
+                <span >IMDb:</span> tt0114369<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>“暴食”、“贪婪”、“懒惰”、“嫉妒”、“骄傲”、“淫欲”、“愤怒”，这是天主教教义所指的人性七宗罪。城市中发生的连坏杀人案，死者恰好都是犯有这些教义的人。凶手故弄玄虚的作案手法，令资深冷静的警员沙摩塞（摩根•弗里曼 Morgan Freeman 饰）和血气方刚的新扎警员米尔斯（布拉德•皮特 Brad Pitt 饰）都陷入了破案的谜团中。他们去图书馆研读但丁的《神曲》，企图从人间地狱的描绘中找到线索，最后从宗教文学哲学的世界中找到了凶手作案计划和手段的蛛丝马迹。凶手前来投案自首，这令众人都松了一口气，以为案件就此结束，怎料还是逃不出七宗罪的杀人逻辑，这次凶手瞄准的目标，是那个犯了“愤怒”罪的人……</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>倩女幽魂</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt0093978.jpg" alt="倩女幽魂"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.8<br/>
+                <span ><span>导演</span>: <span>程小东</span></span><br/>
+                <span ><span>编剧</span>: <span>阮继志</span></span><br/>
+                <span ><span>主演</span>: <span>张国荣 </span></span>/张国荣 / 王祖贤 / 午马 / 刘兆铭 / 林威 / 薛芷伦 / 胡大为 / 王晶<br/>
+                <span ><span>类型:</span><span> 爱情 </span></span>/爱情 / 奇幻 / 武侠 / 古装<br/>
+                <span ><span>制片国家/地区:</span><span> 中国香港</span></span><br/>
+                <span ><span>语言:</span><span> 粤语</span></span><br/>
+                <span ><span>上映日期:</span><span> 2011-04-30(中国大陆) </span></span>/2011-04-30(中国大陆) / 1987-07-18(中国香港)<br/>
+                <span ><span>片长:</span><span> 98分钟(香港)</span></span>/98分钟(香港)/ 96分钟<br/>
+                <span ><span>又名:</span><span> 倩女幽魂(87版) </span></span>/倩女幽魂(87版) / 倩女幽魂：妖魔道 / A Chinese Ghost Story<br/>
+                <span >IMDb:</span> tt0093978<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>书生宁采臣（张国荣饰）收账不成，无处可归，遂夜宿鬼寺兰若寺，遇上侠士燕赤霞（午马饰），二人成为邻居。一日偶遇艳女小倩（王祖贤饰），二人两情相悦，但小倩乃是被树妖姥姥控制的鬼魂，专门迷惑精壮男子代姥姥吸取阳气。小倩见宁采臣心地善良不忍加害，并与他感情逐渐加深。宁采臣欲救小倩脱离姥姥魔掌，但苦于姥姥功力深厚，小倩无法脱离其魔掌。二人遂向燕赤霞求救......</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>功夫</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt0373074.jpg" alt="功夫"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.8<br/>
+                <span ><span>导演</span>: <span>周星驰</span></span><br/>
+                <span ><span>编剧</span>: <span>曾瑾昌 </span></span>/曾瑾昌 / 陈文强 / 周星驰 / 霍昕<br/>
+                <span ><span>主演</span>: <span>周星驰 </span></span>/周星驰 / 元秋 / 元华 / 黄圣依 / 梁小龙 / 陈国坤 / 田启文 / 林子聪 / 林雪 / 冯克安 / 释彦能 / 冯小刚 / 袁祥仁 / 张一白 / 赵志凌 / 董志华 / 何文辉 / 陈凯师 / 贾康熙 / 林子善 / 任珈锐 / 王仕颖<br/>
+                <span ><span>类型:</span><span> 喜剧 </span></span>/喜剧 / 动作 / 犯罪 / 奇幻<br/>
+                <span ><span>制片国家/地区:</span><span> 中国大陆 </span></span>/中国大陆 / 中国香港<br/>
+                <span ><span>语言:</span><span> 粤语 </span></span>/粤语 / 汉语普通话 / 手语<br/>
+                <span ><span>上映日期:</span><span> 2004-12-23(中国大陆</span></span>/2004-12-23(中国大陆/中国香港) / 2015-01-15(中国大陆3D) / 2004-09-14(多伦多电影节)<br/>
+                <span ><span>片长:</span><span> 100分钟(3D重映)</span></span>/100分钟(3D重映)/ 95分钟(中国大陆) / 99分钟(美国)<br/>
+                <span ><span>又名:</span><span> 功夫3D </span></span>/功夫3D / Kung Fu Hustle<br/>
+                <span >IMDb:</span> tt0373074<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>1940年代的上海，自小受尽欺辱的街头混混阿星（周星驰）为了能出人头地，可谓窥见机会的缝隙就往里钻，今次他盯上行动日益猖獗的黑道势力“斧头帮”，想借之大名成就大业。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>加勒比海盗 Pirates of the Caribbean: The Curse of the Black Pearl</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt0325980.jpg" alt="加勒比海盗 Pirates of the Caribbean: The Curse of the Black Pearl"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.8<br/>
+                <span ><span>导演</span>: <span>戈尔·维宾斯基</span></span><br/>
+                <span ><span>编剧</span>: <span>泰德·艾略特 </span></span>/泰德·艾略特 / 特里·鲁西奥 / 斯图尔特·贝亚蒂耶 / 杰·沃尔伯特<br/>
+                <span ><span>主演</span>: <span>约翰尼·德普 </span></span>/约翰尼·德普 / 杰弗里·拉什 / 奥兰多·布鲁姆 / 凯拉·奈特莉 / 杰克·达文波特 / 乔纳森·普雷斯<br/>
+                <span ><span>类型:</span><span> 动作 </span></span>/动作 / 奇幻 / 冒险<br/>
+                <span ><span>制片国家/地区:</span><span> 美国</span></span><br/>
+                <span ><span>语言:</span><span> 英语</span></span><br/>
+                <span ><span>上映日期:</span><span> 2003-11-21(中国大陆) </span></span>/2003-11-21(中国大陆) / 2003-07-09(美国)<br/>
+                <span ><span>片长:</span><span> 143 分钟</span></span><br/>
+                <span ><span>又名:</span><span> 加勒比海盗1：黑珍珠号的诅咒 </span></span>/加勒比海盗1：黑珍珠号的诅咒 / 神鬼奇航：鬼盗船魔咒(台) / 魔盗王：决战鬼盗船 / 海盗船<br/>
+                <span >IMDb:</span> tt0325980<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>黑珍珠号&#34;后，更加猖狂，在加勒比海上横行霸道，一时成为整个加勒比海的霸主。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>哈利·波特与火焰杯 Harry Potter and the Goblet of Fire</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt0330373.jpg" alt="哈利·波特与火焰杯 Harry Potter and the Goblet of Fire"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.8<br/>
+                <span ><span>导演</span>: <span>迈克·内威尔</span></span><br/>
+                <span ><span>编剧</span>: <span>史蒂夫·克洛夫斯 </span></span>/史蒂夫·克洛夫斯 / J. K. 罗琳<br/>
+                <span ><span>主演</span>: <span>丹尼尔·雷德克里夫 </span></span>/丹尼尔·雷德克里夫 / 艾玛·沃森 / 鲁伯特·格林特 / 迈克尔·刚本 / 玛吉·史密斯 / 汤姆·费尔顿 / 蒂莫西·斯波 / 罗伯特·帕丁森 / 梁佩诗 / 大卫·田纳特 / 马克·威廉姆斯 / 埃里克·赛克斯 / 詹姆斯·菲尔普斯 / 奥利弗·菲尔普斯 / 邦妮·怀特 / 克蕾曼丝·波西 / 加里·奥德曼 / 杰夫·劳勒 / 詹森·艾萨克 / 斯坦尼斯拉夫·雅涅夫斯基 / 罗伯特·哈迪 / 阿什莉·阿尔图斯 / 亚历克斯·帕尔墨 / 罗格·洛伊德-派克 / 希拉·艾伦 / Su Elliot / 大卫·斯特恩 / 玛格里·梅森 / 马修·刘易斯 / 罗彼·考特拉尼 / 威廉姆·麦灵 / 大卫·布拉德利 / 戴文·穆雷 / 艾芙珊·阿扎德 / 沃维克·戴维斯 / 弗朗西斯·德·拉·图瓦 / 谢发丽·裘德胡里 / 安吉拉珂·曼蒂 / 艾伦·瑞克曼 / 普里德拉格·比耶拉克 / Tolga Safer / 布莱丹·格里森 / 阿尔弗雷德·伊诺奇 / 路易·多伊尔 / 杰米·威莱特 / 乔什·赫德曼 / 夏洛特·斯凯奇 / 米兰达·理查森 / 罗伯特·威尔福特 / Tiana Benjamin / 亨利·劳埃德-休斯 / 贾维斯·考科尔 / 强尼·格林伍德 / 菲尔·塞尔维 / 史蒂夫·麦基 / Jason Buckle / Steve Claydon / 雪莉·亨德森 / 拉尔夫·费因斯 / 阿德里安·劳林斯 / 杰拉丁·萨莫维尔 / 拉斯科·阿特金斯 / Jack Bagley / 葛蕾·贝拉玛西娜 / Paul Davies / Barry Dowden / Natalie Hallam<br/>
+                <span ><span>类型:</span><span> 悬疑 </span></span>/悬疑 / 奇幻 / 冒险<br/>
+                <span ><span>制片国家/地区:</span><span> 英国 </span></span>/英国 / 美国<br/>
+                <span ><span>语言:</span><span> 英语 </span></span>/英语 / 法语<br/>
+                <span ><span>上映日期:</span><span> 2005-11-18(中国大陆) </span></span>/2005-11-18(中国大陆) / 2005-11-06(英国)<br/>
+                <span ><span>片长:</span><span> 157 分钟</span></span><br/>
+                <span ><span>又名:</span><span> 哈利波特4：火杯的考验(港</span></span>/哈利波特4：火杯的考验(港/台) / 哈4<br/>
+                <span >IMDb:</span> tt0330373<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>这是一个不同寻常的学期，魔法学校的盛事：三强争霸赛在霍格沃茨举行。学生们争先报名，希翼获得永恒无上的荣誉。火焰杯在选出三所学校的三名勇士后，竟将未足年龄的哈利也挑选出来。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>喜剧之王 喜劇之王</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt0188766.jpg" alt="喜剧之王 喜劇之王"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.8<br/>
+                <span ><span>导演</span>: <span>周星驰 </span></span>/周星驰 / 李力持<br/>
+                <span ><span>编剧</span>: <span>曾瑾昌 </span></span>/曾瑾昌 / 周星驰 / 李敏 / 郑文辉 / 冯勉恒 / 梁嘉杰<br/>
+                <span ><span>主演</span>: <span>周星驰 </span></span>/周星驰 / 张柏芝 / 莫文蔚 / 吴孟达 / 林子善 / 田启文 / 李兆基 / 成龙 / 李思捷 / 郑文辉<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 喜剧 / 爱情<br/>
+                <span ><span>制片国家/地区:</span><span> 中国香港</span></span><br/>
+                <span ><span>语言:</span><span> 粤语</span></span><br/>
+                <span ><span>上映日期:</span><span> 1999-02-13(中国香港)</span></span><br/>
+                <span ><span>片长:</span><span> 89分钟</span></span><br/>
+                <span ><span>又名:</span><span> King of Comedy</span></span><br/>
+                <span >IMDb:</span> tt0188766<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>尹天仇（周星驰 饰）一直醉心戏剧，想成为一名演员，平时除了做跑龙套以外，还会在街坊福利会里开设演员训练班。此时舞小姐柳飘飘在妈妈桑的带领下来到这里要求学做戏，原来柳飘飘有一段非常不愉快的经历，在尹天仇对她指导的过程中，柳飘飘对尹天仇渐生情愫，同时她也成为了夜总会里当红的小姐。尹天仇受到了极多白眼之后，终于得到了大明星鹃姐（莫文蔚 饰）的赏识，提携他担演新戏中的男主角，但没想到突然把他的角色换掉了，令他失望不已。在片场当场务的卧底警员（吴孟达 饰）身份被识穿，尹天仇阴差阳错的帮忙破了案。之后尹天仇继续活跃在街坊福利会的演员训练班里。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>寄生虫 기생충</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt6751668.jpg" alt="寄生虫 기생충"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.8<br/>
+                <span ><span>导演</span>: <span>奉俊昊</span></span><br/>
+                <span ><span>编剧</span>: <span>奉俊昊 </span></span>/奉俊昊 / 韩珍元<br/>
+                <span ><span>主演</span>: <span>宋康昊 </span></span>/宋康昊 / 李善均 / 曹汝贞 / 崔宇植 / 朴素丹 / 李姃垠 / 张慧珍 / 郑知晓 / 朴明勋 / 朴叙俊 / 朴根禄 / 郑贤俊 / 朴孝新 / 安德烈亚斯·弗龙克<br/>
+                <span ><span>类型:</span><span> 剧情</span></span><br/>
+                <span ><span>制片国家/地区:</span><span> 韩国</span></span><br/>
+                <span ><span>语言:</span><span> 韩语 </span></span>/韩语 / 英语<br/>
+                <span ><span>上映日期:</span><span> 2019-05-21(戛纳电影节) </span></span>/2019-05-21(戛纳电影节) / 2019-05-30(韩国)<br/>
+                <span ><span>片长:</span><span> 132分钟</span></span><br/>
+                <span ><span>又名:</span><span> 寄生上流(台) </span></span>/寄生上流(台) / 上流寄生族(港) / 패러사이트 / Parasite / Gisaengchung<br/>
+                <span >IMDb:</span> tt6751668<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>基宇（崔宇植 饰）出生在一个贫穷的家庭之中，和妹妹基婷（朴素丹 饰）以及父母在狭窄的地下室里过着相依为命的日子。一天，基宇的同学上门拜访，他告诉基宇，自己在一个有钱人家里给他们的女儿做家教，太太是一个头脑简单出手又阔绰的女人，因为自己要出国留学，所以将家教的职位暂时转交给基宇。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>怪兽电力公司 Monsters, Inc.</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt0198781.jpg" alt="怪兽电力公司 Monsters, Inc."
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.8<br/>
+                <span ><span>导演</span>: <span>彼特·道格特 </span></span>/彼特·道格特 / 大卫·西尔弗曼 / 李·昂克里奇<br/>
+                <span ><span>编剧</span>: <span>安德鲁·斯坦顿 </span></span>/安德鲁·斯坦顿 / 丹尼尔·吉尔森 / 罗伯特·L·贝尔德 / 瑞特·里斯 / 乔纳森·罗伯特  / 彼特·道格特 / 杰夫·皮金 / 吉尔·卡尔顿 / 拉夫·埃格尔斯顿<br/>
+                <span ><span>主演</span>: <span>约翰·古德曼 </span></span>/约翰·古德曼 / 比利·克里斯托 / 玛丽·吉布斯 / 史蒂夫·布西密 / 詹姆斯·柯本 / 詹妮弗·提莉 / 鲍勃·彼德森 / 约翰·拉岑贝格 / 弗兰克·奥兹 / 丹尼尔·吉尔森 / 邦尼·亨特 / 杰克·安杰尔 / 塞缪尔·洛德·布莱克 / 史蒂夫·萨斯坎德<br/>
+                <span ><span>类型:</span><span> 喜剧 </span></span>/喜剧 / 动画 / 儿童 / 奇幻 / 冒险<br/>
+                <span ><span>制片国家/地区:</span><span> 美国</span></span><br/>
+                <span ><span>语言:</span><span> 英语</span></span><br/>
+                <span ><span>上映日期:</span><span> 2001-11-02(美国) </span></span>/2001-11-02(美国) / 2012-12-19(美国)<br/>
+                <span ><span>片长:</span><span> 92分钟</span></span><br/>
+                <span ><span>又名:</span><span> 怪兽公司(港) </span></span>/怪兽公司(港) / 怪物公司<br/>
+                <span >IMDb:</span> tt0198781<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>我们不知道，在那样的世界里住着那样一群怪物。他们长相滑稽，却必须装作狰狞。因为，在夜深的时候，他们要悄悄的出现在孩子的衣橱里，吓唬刚刚甜美睡去的宝宝。一切，只因为他们是怪物电力公司的员工，而孩子的尖叫，则是怪物王国发电的全部能量。怪物们害怕孩子，却又必须让孩子尖叫。在怪物的国度里，他们都是为全民造福的英雄。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>看不见的客人 Contratiempo</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt4857264.jpg" alt="看不见的客人 Contratiempo"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.8<br/>
+                <span ><span>导演</span>: <span>奥里奥尔·保罗</span></span><br/>
+                <span ><span>编剧</span>: <span>奥里奥尔·保罗</span></span><br/>
+                <span ><span>主演</span>: <span>马里奥·卡萨斯 </span></span>/马里奥·卡萨斯 / 阿娜·瓦格纳 / 何塞·科罗纳多 / 巴巴拉·莱涅 / 弗兰塞斯克·奥雷利亚 / 帕科·图斯 / 大卫·塞尔瓦斯 / 伊尼戈·加斯特西 / 圣·耶拉莫斯 / 马内尔·杜维索 / 布兰卡·马丁内斯 / 佩雷·布拉索 / 霍尔迪·布鲁内特 / 鲍比·冈萨雷斯 / 玛蒂娜·乌尔塔多<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 悬疑 / 惊悚 / 犯罪<br/>
+                <span ><span>制片国家/地区:</span><span> 西班牙</span></span><br/>
+                <span ><span>语言:</span><span> 西班牙语</span></span><br/>
+                <span ><span>上映日期:</span><span> 2017-09-15(中国大陆) </span></span>/2017-09-15(中国大陆) / 2016-09-23(奇幻电影节) / 2017-01-06(西班牙)<br/>
+                <span ><span>片长:</span><span> 106分钟</span></span><br/>
+                <span ><span>又名:</span><span> 死无对证(港) </span></span>/死无对证(港) / 布局(台) / The Invisible Guest<br/>
+                <span >IMDb:</span> tt4857264<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>艾德里安（马里奥·卡萨斯 Mario Casas 饰）经营着一间科技公司，事业蒸蒸日上，家中有美丽贤惠的妻子和活泼可爱的女儿，事业家庭双丰收的他是旁人羡慕的对象。然而，野心勃勃的艾德里安并未珍惜眼前来之不易的生活，一直以来，他和一位名叫劳拉（芭芭拉·蓝妮 Bárbara Lennie 饰）的女摄影师保持着肉体关系。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>蝙蝠侠：黑暗骑士崛起 The Dark Knight Rises</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt1345836.jpg" alt="蝙蝠侠：黑暗骑士崛起 The Dark Knight Rises"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.8<br/>
+                <span ><span>导演</span>: <span>克里斯托弗·诺兰</span></span><br/>
+                <span ><span>编剧</span>: <span>大卫·S·高耶 </span></span>/大卫·S·高耶 / 乔纳森·诺兰 / 克里斯托弗·诺兰<br/>
+                <span ><span>主演</span>: <span>克里斯蒂安·贝尔 </span></span>/克里斯蒂安·贝尔 / 汤姆·哈迪 / 安妮·海瑟薇 / 约瑟夫·高登-莱维特 / 玛丽昂·歌迪亚 / 加里·奥德曼 / 迈克尔·凯恩 / 摩根·弗里曼 / 朱诺·坦普尔 / 乔什·平茨 / 丹尼尔·逊亚塔 / 内斯特·卡博内尔 / 伯恩·戈曼 / 连姆·尼森 / 乔伊·金 / 艾丹·吉伦 / 基里安·墨菲 / 乔什·斯图沃特 / 马修·莫迪恩 / 本·门德尔森<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 动作 / 科幻 / 惊悚 / 犯罪<br/>
+                <span ><span>制片国家/地区:</span><span> 美国 </span></span>/美国 / 英国<br/>
+                <span ><span>语言:</span><span> 英语 </span></span>/英语 / 阿拉伯语<br/>
+                <span ><span>上映日期:</span><span> 2012-08-27(中国大陆) </span></span>/2012-08-27(中国大陆) / 2012-07-20(美国)<br/>
+                <span ><span>片长:</span><span> 165分钟</span></span><br/>
+                <span ><span>又名:</span><span> 蝙蝠侠前传3：黑暗骑士崛起 </span></span>/蝙蝠侠前传3：黑暗骑士崛起 / 黑暗骑士：黎明升起(台) / 蝙蝠侠：夜神起义(港) / 蝙蝠侠前传3：黑骑再起 / 蝙蝠侠7：黑暗骑士崛起 / 暗夜骑士崛起 / T.D.K.R. / TDKR / Batman 3: The Dark Knight Rises<br/>
+                <span >IMDb:</span> tt1345836<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>检察官哈维·登特（艾伦·艾克哈特 Aaron Eckhart 饰）死后的八年间，哥谭市在戈登警长（加里·奥德曼 Gary Oldman 饰）的努力下有效地遏制了犯罪活动。而蝙蝠侠布鲁斯·韦恩（克里斯蒂安·贝尔 Christian Bale 饰）因为背负谋杀登特的罪名，被 警方通缉，在哥谭市销声匿迹。然而，这看似平静的状态被恐怖分子贝恩（汤姆·哈迪 Tom Hardy 饰）的出现打破，他利用猫女（安妮·海瑟薇 Anne Hathaway 饰）偷取布鲁斯的指纹，致使韦恩集团面临破财，布鲁斯被赶出董事会。为了保证韦恩集团投资的能源项目不被坏人利用制造核弹，布鲁斯帮助米兰达（玛丽昂·歌迪亚 Marion Cotillard 饰）成为董事会主席。贝恩接下来一连串精密设计的计划将哥谭市陷入孤绝之境，毁灭之日指日可待。布鲁斯只能再次肩负起拯救哥谭的重任，然而至亲的...</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>重庆森林 重慶森林</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt0109424.jpg" alt="重庆森林 重慶森林"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.8<br/>
+                <span ><span>导演</span>: <span>王家卫</span></span><br/>
+                <span ><span>编剧</span>: <span>王家卫</span></span><br/>
+                <span ><span>主演</span>: <span>林青霞 </span></span>/林青霞 / 金城武 / 梁朝伟 / 王菲 / 周嘉玲<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 爱情<br/>
+                <span ><span>制片国家/地区:</span><span> 中国香港</span></span><br/>
+                <span ><span>语言:</span><span> 粤语 </span></span>/粤语 / 汉语普通话 / 英语 / 印地语 / 日语<br/>
+                <span ><span>上映日期:</span><span> 1994-07-14(中国香港)</span></span><br/>
+                <span ><span>片长:</span><span> 102分钟</span></span>/102分钟/ 111分钟(台湾版DVD)<br/>
+                <span ><span>又名:</span><span> Chungking Express</span></span><br/>
+                <span >IMDb:</span> tt0109424<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>编号为223的警察（金城武）失恋后患上失恋综合症，在与金发女杀手（林青霞）擦肩而过又离奇相遇并有了一晚温情后，原本以为包括“爱情”在内的所有东西都有保质期的他意外地迎来心灵的短暂温暖。可是，他们的爱情还是结束了。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>阿凡达 Avatar</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt0499549.jpg" alt="阿凡达 Avatar"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.8<br/>
+                <span ><span>导演</span>: <span>詹姆斯·卡梅隆</span></span><br/>
+                <span ><span>编剧</span>: <span>詹姆斯·卡梅隆</span></span><br/>
+                <span ><span>主演</span>: <span>萨姆·沃辛顿 </span></span>/萨姆·沃辛顿 / 佐伊·索尔达娜 / 西格妮·韦弗 / 史蒂芬·朗 / 米歇尔·罗德里格兹 / 吉奥瓦尼·瑞比西 / 乔·大卫·摩尔  / 希·庞德 / 韦斯·斯塔迪 / 拉兹·阿隆索 / 迪利普·劳 / 马特·杰拉德 / 肖恩·安东尼·莫兰 / 杰森·怀特 / 斯科特·劳伦斯 / 凯利·基尔戈 / 詹姆斯·皮特 / 肖恩·帕特里克·墨菲 / 彼得·狄龙 / 凯文·多曼 / 凯尔森·亨德森 / 大卫·范·霍恩 / 雅克布·托毛里 / Julene Renee / 卢克·霍克 / 伍迪·舒尔茨 / 彼得·门萨 / 伊拉姆·崔 / 黛布拉·威尔逊 / Chris Mala / 马修张伯伦 / 詹姆斯·盖林 / 拉斯科·阿特金斯 / Jørn Benzon / 罗文·贝特杰曼 / Robert Catto / 罗德尼·库克 / Nicole Dionne / 安东尼·英格鲁伯 / 蒂姆·卡诺 / 卡米尔·基南 / 迪恩·诺斯利 / Emma Law<br/>
+                <span ><span>类型:</span><span> 动作 </span></span>/动作 / 科幻 / 冒险<br/>
+                <span ><span>制片国家/地区:</span><span> 美国</span></span><br/>
+                <span ><span>语言:</span><span> 英语 </span></span>/英语 / 西班牙语<br/>
+                <span ><span>上映日期:</span><span> 2010-01-04(中国大陆) </span></span>/2010-01-04(中国大陆) / 2021-03-12(中国大陆重映) / 2022-12-12(中国大陆重映) / 2009-12-18(美国)<br/>
+                <span ><span>片长:</span><span> 162分钟</span></span>/162分钟/ 178分钟(加长版)<br/>
+                
+                <span >IMDb:</span> tt0499549<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>战斗中负伤而下身瘫痪的前海军战士杰克·萨利（萨姆·沃辛顿 Sam Worthington 饰）决定替死去的同胞哥哥来到潘多拉星操纵格蕾丝博士（西格妮·韦弗 Sigourney Weaver 饰）用人类基因与当地纳美部族基因结合创造出的 “阿凡达” 混血生物。杰克的目的是打入纳美部落，外交说服他们自愿离开世代居住的家园，从而SecFor公司可砍伐殆尽该地区的原始森林，开采地下昂贵的“不可得”矿。在探索潘多拉星的过程中，杰克遇到了纳美部落的公主娜蒂瑞（佐伊·索尔达娜 Zoe Saldana 饰），向她学习了纳美人的生存技能与对待自然的态度。与此同时，SecFor公司的经理和军方代表上校迈尔斯（史蒂芬·朗 Stephen Lang 饰）逐渐丧失耐心，决定诉诸武力驱赶纳美人……</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>驯龙高手 How to Train Your Dragon</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt0892769.jpg" alt="驯龙高手 How to Train Your Dragon"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.8<br/>
+                <span ><span>导演</span>: <span>迪恩·德布洛斯 </span></span>/迪恩·德布洛斯 / 克里斯·桑德斯<br/>
+                <span ><span>编剧</span>: <span>威廉姆·戴维斯 </span></span>/威廉姆·戴维斯 / 迪恩·德布洛斯 / 克里斯·桑德斯 / 葛蕾熙达·柯维尔<br/>
+                <span ><span>主演</span>: <span>杰伊·巴鲁切尔 </span></span>/杰伊·巴鲁切尔 / 杰拉德·巴特勒 / 克雷格·费格森 / 亚美莉卡·费雷拉 / 乔纳·希尔 / 克里斯托夫·梅兹-普莱瑟 / T·J·米勒 / 克里斯汀·韦格 / 罗宾·阿特金·唐斯 / 菲利普·麦格雷德 / 基隆·埃利奥特 / 阿什利·詹森 / 大卫·田纳特<br/>
+                <span ><span>类型:</span><span> 动画 </span></span>/动画 / 奇幻 / 冒险<br/>
+                <span ><span>制片国家/地区:</span><span> 美国</span></span><br/>
+                <span ><span>语言:</span><span> 英语</span></span><br/>
+                <span ><span>上映日期:</span><span> 2010-05-14(中国大陆) </span></span>/2010-05-14(中国大陆) / 2010-03-18(俄罗斯) / 2010-03-26(美国)<br/>
+                <span ><span>片长:</span><span> 98分钟</span></span><br/>
+                <span ><span>又名:</span><span> 驯龙记(港)</span></span><br/>
+                <span >IMDb:</span> tt0892769<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>维京岛国的少年小嗝嗝（杰伊•巴鲁切尔 Jay Baruchel 配音）是部落统领伟大的斯托里克（杰拉德·巴特勒 Gerard Butler 配音）的儿子，他非常想像自己的父亲一样亲手屠龙——这些飞龙是岛上维京人放牧羊群的主要天敌——但他每次出现在部落屠龙的战斗中都只给大家徒增烦恼。在一次对抗飞龙的战斗中，希卡普偷偷用射龙器击伤了一只最神秘的“夜之怒龙”，并背着族人放生、豢养，甚至驯服了这只龙，还给它起名“无牙”。希卡普的神秘行径引起了一同训练屠龙技巧的女孩阿斯特丽德（亚美莉卡·费雷拉 America Ferrera 配音）的怀疑。阿斯特丽德发现了希卡普的秘密，却同时被身骑“无牙”御风而飞的美妙体验所震撼。格雷决定在屠龙成人礼上向远征归来的斯托里克和族人讲明真相，说服大家放弃屠龙，却偏偏弄巧成拙，害得“无牙”被俘，一场更大的灾难就在眼前……</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>三块广告牌 Three Billboards Outside Ebbing, Missouri</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt5027774.jpg" alt="三块广告牌 Three Billboards Outside Ebbing, Missouri"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.7<br/>
+                <span ><span>导演</span>: <span>马丁·麦克唐纳</span></span><br/>
+                <span ><span>编剧</span>: <span>马丁·麦克唐纳</span></span><br/>
+                <span ><span>主演</span>: <span>弗兰西斯·麦克多蒙德 </span></span>/弗兰西斯·麦克多蒙德 / 伍迪·哈里森 / 山姆·洛克威尔 / 艾比·考尼什 / 卢卡斯·赫奇斯 / 彼特·丁拉基 / 约翰·浩克斯 / 卡赖伯·兰德里·琼斯 / 凯瑟琳·纽顿 / 凯瑞·康顿 / 泽利科·伊万内克 / 萨玛拉·维文 / 克拉克·彼得斯 / 尼克·瑟西 / 阿曼达·沃伦 / 玛拉雅·瑞沃拉·德鲁 / 布兰登·萨克斯顿 / 迈克尔·艾伦·米利甘<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 犯罪<br/>
+                <span ><span>制片国家/地区:</span><span> 英国 </span></span>/英国 / 美国<br/>
+                <span ><span>语言:</span><span> 英语</span></span><br/>
+                <span ><span>上映日期:</span><span> 2018-03-02(中国大陆) </span></span>/2018-03-02(中国大陆) / 2017-09-04(威尼斯电影节) / 2017-12-01(美国)<br/>
+                <span ><span>片长:</span><span> 115分钟</span></span><br/>
+                <span ><span>又名:</span><span> 广告牌杀人事件(港) </span></span>/广告牌杀人事件(港) / 意外(台)<br/>
+                <span >IMDb:</span> tt5027774<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>米尔德雷德（弗兰西斯·麦克多蒙德 Frances McDormand 饰）的女儿在外出时惨遭奸杀，米尔德雷德和丈夫查理（约翰·哈克斯 John Hawkes 饰）之间的婚姻因此走到了尽头，如今，她同儿子罗比（卢卡斯·赫奇斯 Lucas Hedges饰）过着相依为命的生活。一晃眼几个月过去了，案件仍然没有告破预兆，而警方似乎早已经将注意力从案子上转移了开来。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>傲慢与偏见 Pride &amp; Prejudice</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt0414387.jpg" alt="傲慢与偏见 Pride &amp; Prejudice"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.7<br/>
+                <span ><span>导演</span>: <span>乔·赖特</span></span><br/>
+                <span ><span>编剧</span>: <span>简·奥斯汀 </span></span>/简·奥斯汀 / 黛博拉·莫盖茨<br/>
+                <span ><span>主演</span>: <span>凯拉·奈特莉 </span></span>/凯拉·奈特莉 / 马修·麦克费登 / 唐纳德·萨瑟兰 / 布兰达·布莱斯 / 凯瑞·穆里根 / 裴淳华 / 吉娜·马隆 / 妲露拉·莱莉 / 朱迪·丹奇 / 西蒙·伍兹 / 克劳迪·布莱克利 / 汤姆·霍兰德尔 / 鲁伯特·弗兰德 / 凯利·蕾莉 / 皮普·托伦斯 / 西妮德·马修斯 / 佩内洛普·威尔顿 / 塔姆金·莫钦特<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 爱情<br/>
+                <span ><span>制片国家/地区:</span><span> 法国 </span></span>/法国 / 英国 / 美国<br/>
+                <span ><span>语言:</span><span> 英语</span></span><br/>
+                <span ><span>上映日期:</span><span> 2005-09-16(英国)</span></span><br/>
+                <span ><span>片长:</span><span> 129 分钟</span></span>/129 分钟/ 135 分钟(加拿大)<br/>
+                <span ><span>又名:</span><span> 傲慢与偏见2005 </span></span>/傲慢与偏见2005 / Pride And Prejudice<br/>
+                <span >IMDb:</span> tt0414387<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>根据简·奥斯汀同名小说改编。伊丽莎白·班纳特(凯拉·奈特丽 饰)出身于小地主家庭，有四个姐妹，母亲班纳特太太整天操心着为女儿物色称心如意的丈夫。新来的邻居宾格来先生和他的朋友达西（马修·麦克菲迪恩 饰）打破了她们一家人单调的乡村生活。宾格来和伊丽莎白的姐姐简·班纳特互生情愫；达西对善良聪明的伊丽莎白产生了好感，而伊丽莎白却对达西不可一世的傲慢心存偏见，不接受他的感情。然而，世事难料，宾格来和简·班纳特因为误会，关系危在旦夕；达西的种种作为，展示了性格中和伊丽莎白相同的善良一面，逐渐赢得了伊丽莎白的好感。两对有情人能否终成眷属？班纳特姐妹们能否得到自己想要的生活？</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>剪刀手爱德华 Edward Scissorhands</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt0099487.jpg" alt="剪刀手爱德华 Edward Scissorhands"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.7<br/>
+                <span ><span>导演</span>: <span>蒂姆·波顿</span></span><br/>
+                <span ><span>编剧</span>: <span>蒂姆·波顿 </span></span>/蒂姆·波顿 / 卡罗琳·汤普森<br/>
+                <span ><span>主演</span>: <span>约翰尼·德普 </span></span>/约翰尼·德普 / 薇诺娜·瑞德 / 黛安·韦斯特 / 安东尼·迈克尔·豪尔 / 凯西·贝克 / 罗伯特·奥利维里 / 康查塔·费雷尔 / 卡罗琳·阿隆 / 迪克·安东尼·威廉姆斯 / 澳澜·琼斯 / 文森特·普莱斯 / 艾伦·阿金 / 苏珊·布洛马特 / 约翰·戴维森 / 布莱恩·拉肯 / Victoria Price / Stuart Lancaster / Gina Gallagher / 阿隆·鲁斯汀 / 阿兰·弗吉 / 史蒂文·布里尔 / Peter Palmer / 马克·麦考利 / 唐娜·派洛尼 / Ken DeVaul / Kathy Dombo / Tabetha Thomas / 尼克·卡特<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 爱情 / 奇幻<br/>
+                <span ><span>制片国家/地区:</span><span> 美国</span></span><br/>
+                <span ><span>语言:</span><span> 英语</span></span><br/>
+                <span ><span>上映日期:</span><span> 1990-12-06(美国)</span></span><br/>
+                <span ><span>片长:</span><span> 105分钟</span></span><br/>
+                <span ><span>又名:</span><span> 幻海奇缘(港)</span></span><br/>
+                <span >IMDb:</span> tt0099487<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>爱德华（约翰尼•戴普 饰）是一个机器人，他拥有人的心智，却有一双剪刀手，孤独地生活在古堡里，闯入古堡的化妆品推销员佩格把他带回家，让他走进了人类的世界。单纯的爱德华爱上了佩格的女儿金（薇诺娜•瑞德 饰），金也慢慢的被爱德华的善良所吸引。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>唐伯虎点秋香 唐伯虎點秋香</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt0108289.jpg" alt="唐伯虎点秋香 唐伯虎點秋香"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.7<br/>
+                <span ><span>导演</span>: <span>李力持</span></span><br/>
+                <span ><span>编剧</span>: <span>李力持 </span></span>/李力持 / 谷德昭 / 陈文强<br/>
+                <span ><span>主演</span>: <span>周星驰 </span></span>/周星驰 / 巩俐 / 陈百祥 / 郑佩佩 / 朱咪咪 / 梁家仁 / 苑琼丹 / 梁荣忠 / 黄一山 / 黄霑 / 吴镇宇 / 刘家辉 / 蓝洁瑛 / 谷德昭 / 陈辉虹 / 李健仁 / 宣萱 / 温翠苹<br/>
+                <span ><span>类型:</span><span> 喜剧 </span></span>/喜剧 / 爱情 / 古装<br/>
+                <span ><span>制片国家/地区:</span><span> 中国香港</span></span><br/>
+                <span ><span>语言:</span><span> 粤语</span></span><br/>
+                <span ><span>上映日期:</span><span> 1993-07-01(中国香港)</span></span><br/>
+                <span ><span>片长:</span><span> 102 分钟</span></span><br/>
+                <span ><span>又名:</span><span> Flirting Scholar</span></span><br/>
+                <span >IMDb:</span> tt0108289<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>唐伯虎（周星驰 饰）身为江南四大才子之首，却有道不尽的心酸。宁王想唐伯虎帮忙图谋作反，唐伯虎只好用内功改变脉象，令众人都相信他命不久矣。母亲埋怨他不应该把功夫暴露，因为他们家族一直被当年的仇人追杀。唐伯虎在与朋友出游时，遇到了貌若天仙的秋香并对她一见钟情，决心要到华府当 家丁以追求秋香，唐伯虎被取名华安。期间华太师遇到了宁王上门刁难，幸好有唐伯虎出面相助，并暴露了自己是唐伯虎的身份。秋香才知道华安是自己欣赏的唐伯虎。华夫人跟唐家有怨，因此二人便开始斗法。怎料宁王跟夺命书生再次上门，华夫人不是对手，幸得唐伯虎出手，华夫人也答应把秋香许配给唐伯虎。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>天使爱美丽 Le fabuleux destin d&#39;Amélie Poulain</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt0211915.jpg" alt="天使爱美丽 Le fabuleux destin d&#39;Amélie Poulain"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.7<br/>
+                <span ><span>导演</span>: <span>让-皮埃尔·热内</span></span><br/>
+                <span ><span>编剧</span>: <span>纪尧姆·洛朗 </span></span>/纪尧姆·洛朗 / 让-皮埃尔·热内<br/>
+                <span ><span>主演</span>: <span>奥黛丽·塔图 </span></span>/奥黛丽·塔图 / 马修·卡索维茨 / 吕菲斯 / 洛莱拉·克拉沃塔 / 塞尔·梅林 / 贾梅尔·杜布兹 / 克洛蒂尔德·莫莱特 / 克莱尔·莫里耶 / 伊莎贝尔·南蒂 / 多米尼克·皮侬 / 阿尔蒂斯·德·彭居埃恩 / 友兰达·梦露 / 于尔班·康塞利埃 / 莫里斯·贝尼舒 / 米歇尔·罗班 / 安德烈·达芒 / 克洛德·佩隆 / 阿尔梅尔 / 迪基·奥尔加多 / 凯文·迪亚士 / 弗洛拉·吉耶 / 阿莫里·巴博尔 / 欧仁·贝蒂埃 / 让·达里 / 马克·阿米约<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 喜剧 / 爱情<br/>
+                <span ><span>制片国家/地区:</span><span> 法国 </span></span>/法国 / 德国<br/>
+                <span ><span>语言:</span><span> 法语 </span></span>/法语 / 俄语<br/>
+                <span ><span>上映日期:</span><span> 2001-04-25(法国) </span></span>/2001-04-25(法国) / 2001-08-16(德国)<br/>
+                <span ><span>片长:</span><span> 122分钟</span></span><br/>
+                <span ><span>又名:</span><span> 艾蜜莉的异想世界(台) </span></span>/艾蜜莉的异想世界(台) / 天使艾米莉 / 天使艾美丽 / 阿梅丽的奇妙命运 / 艾蜜丽 / Amelie<br/>
+                <span >IMDb:</span> tt0211915<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>艾米莉（奥黛丽·塔图 Audrey Tautou 饰）有着别人看来不幸的童年——父亲给她做健康检查时，发现她心跳过快，便断定她患上心脏病，从此艾米莉与学校绝缘。随后因为一桩意外，母亲在她眼前突然死去。这一切都毫不影响艾米莉对生活的豁达乐观。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>头号玩家 Ready Player One</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt1677720.jpg" alt="头号玩家 Ready Player One"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.7<br/>
+                <span ><span>导演</span>: <span>史蒂文·斯皮尔伯格</span></span><br/>
+                <span ><span>编剧</span>: <span>扎克·佩恩 </span></span>/扎克·佩恩 / 恩斯特·克莱恩<br/>
+                <span ><span>主演</span>: <span>泰伊·谢里丹 </span></span>/泰伊·谢里丹 / 奥利维亚·库克 / 本·门德尔森 / 马克·里朗斯 / 丽娜·维特 / 森崎温 / 赵家正 / 西蒙·佩吉 / T·J·米勒 / 汉娜·乔恩-卡门 / 拉尔夫·伊内森 / 苏珊·林奇 / 克莱尔·希金斯 / 劳伦斯·斯佩尔曼 / 佩蒂塔·维克斯 / 艾萨克·安德鲁斯<br/>
+                <span ><span>类型:</span><span> 动作 </span></span>/动作 / 科幻 / 冒险<br/>
+                <span ><span>制片国家/地区:</span><span> 美国</span></span><br/>
+                <span ><span>语言:</span><span> 英语 </span></span>/英语 / 日语 / 汉语普通话<br/>
+                <span ><span>上映日期:</span><span> 2018-03-30(中国大陆) </span></span>/2018-03-30(中国大陆) / 2018-03-11(西南偏南电影节) / 2018-03-29(美国)<br/>
+                <span ><span>片长:</span><span> 140分钟</span></span><br/>
+                <span ><span>又名:</span><span> 玩家一号 </span></span>/玩家一号 / 挑战者1号(港) / 一级玩家(台) / 一号玩家<br/>
+                <span >IMDb:</span> tt1677720<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>故事发生在2045年，虚拟现实技术已经渗透到了人类生活的每一个角落。詹姆斯哈利迪（马克·里朗斯 Mark Rylance 饰）一手建造了名为“绿洲”的虚拟现实游戏世界，临终前，他宣布自己在游戏中设置了一个彩蛋，找到这枚彩蛋的人即可成为绿洲的继承人。要找到这枚彩蛋，必须先获得三把钥匙，而寻找钥匙的线索就隐藏在詹姆斯的过往之中。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>小丑 Joker</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt7286456.jpg" alt="小丑 Joker"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.7<br/>
+                <span ><span>导演</span>: <span>托德·菲利普斯</span></span><br/>
+                <span ><span>编剧</span>: <span>托德·菲利普斯 </span></span>/托德·菲利普斯 / 斯科特·西尔弗 / 鲍勃·凯恩 / 比尔·芬格 / 杰瑞·罗宾逊<br/>
+                <span ><span>主演</span>: <span>华金·菲尼克斯 </span></span>/华金·菲尼克斯 / 罗伯特·德尼罗 / 马克·马龙 / 莎姬·贝兹 / 谢伊·惠格姆 / 弗兰西丝·康罗伊 / 布莱恩·考伦 / 布莱恩·泰里·亨利 / 布莱特·卡伦 / 道格拉斯·霍奇斯 / 格伦·弗莱舍尔 / 比尔·坎普 / 乔什·帕斯 / 但丁·佩雷拉-奥尔森 / 玛丽·凯特·马拉特 / 迈克尔·本茨 / 莎珑·华盛顿 / 桑德拉·詹姆斯 / 托尼·赫德 / 曼德拉·贝拉米 / 乔·奥克曼 / 卡尔·伦德施泰特 / 米克·奥罗克 / 大卫·吉布森 / 伊万·罗萨多 / 安妮·比萨比亚 / 布莱斯·科里根 / 乔恩·道格拉斯·雷尼 / 艾恩斯利·丹恩 / 杰森·约翰·奇卡莱塞<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 惊悚 / 犯罪<br/>
+                <span ><span>制片国家/地区:</span><span> 美国 </span></span>/美国 / 加拿大<br/>
+                <span ><span>语言:</span><span> 英语</span></span><br/>
+                <span ><span>上映日期:</span><span> 2019-08-31(威尼斯电影节) </span></span>/2019-08-31(威尼斯电影节) / 2019-10-04(美国)<br/>
+                <span ><span>片长:</span><span> 122分钟</span></span>/122分钟/ 118分钟(威尼斯电影节)<br/>
+                <span ><span>又名:</span><span> 小丑起源电影：罗密欧 </span></span>/小丑起源电影：罗密欧 / Romeo / Joker Origin Movie<br/>
+                <span >IMDb:</span> tt7286456<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>湿冷无望的哥谭市，卑微的亚瑟·弗兰克（华金·菲尼克斯 Joaquin Phoenix 饰）依靠扮演小丑赚取营生。与之相依为命的母亲患有精神疾病，而亚瑟深记母亲的教诲，无论遭受怎样的挫折都笑对人生，却因此让自己背负着莫大的压力，濒临崩溃。他梦想成为一名脱口秀演员，怎奈生活一次次将失望狠狠地砸在他的头上。不仅如此，他因意外丢掉了工作，偶然瞥见母亲的秘密，又使他心中燃起对那个与之地位悬殊却从未谋面的父亲的殷切渴望。命运习惯了事与愿违，空荡荡的地铁内，悲伤的小丑在无法自已的癫狂笑声中大开杀戒……</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>小偷家族 万引き家族</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt8075192.jpg" alt="小偷家族 万引き家族"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.7<br/>
+                <span ><span>导演</span>: <span>是枝裕和</span></span><br/>
+                <span ><span>编剧</span>: <span>是枝裕和</span></span><br/>
+                <span ><span>主演</span>: <span>中川雅也 </span></span>/中川雅也 / 安藤樱 / 松冈茉优 / 城桧吏 / 佐佐木美结 / 树木希林 / 绪形直人 / 池松壮亮 / 森口瑶子 / 山田裕贵 / 片山萌美 / 柄本明 / 高良健吾 / 池胁千鹤 / 足立智充<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 家庭 / 犯罪<br/>
+                <span ><span>制片国家/地区:</span><span> 日本</span></span><br/>
+                <span ><span>语言:</span><span> 日语</span></span><br/>
+                <span ><span>上映日期:</span><span> 2018-08-03(中国大陆) </span></span>/2018-08-03(中国大陆) / 2018-05-13(戛纳电影节) / 2018-06-08(日本)<br/>
+                <span ><span>片长:</span><span> 117分钟(中国大陆)</span></span>/117分钟(中国大陆)/ 121分钟<br/>
+                <span ><span>又名:</span><span> Shoplifters </span></span>/Shoplifters / Une Affaire de Famille / Manbiki kazoku<br/>
+                <span >IMDb:</span> tt8075192<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>东京的都市丛林中央，残存着一栋古旧寒酸的老房子，这里局促地生活着柴田一家五口人。在工地当临时工的男人阿治（Lily Franky 饰）经常带着儿子祥太（城桧吏 饰）到超市盗窃生活用品，这一天，他们回家路上遇到了独自待在户外的四岁女孩由里（佐佐木美结 饰）。妻子信代（安藤樱 饰）起初极力主张将女孩送回父母身边，但当看到女孩原生家庭的状况时又心生恻隐。原本柴田家就靠着老奶奶初枝（树木希林 饰）的养老金度日，而今多了一口人，自然更艰辛了几分。包括信代的妹妹亚纪（松冈茉优 饰）在内，虽然一家人游走在贫困和违法的边缘，但笃深的羁绊将他们紧紧联系在一起，使他们的心不会随着冰冷的都市而寒冷下去……</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>心灵奇旅 Soul</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt2948372.jpg" alt="心灵奇旅 Soul"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.7<br/>
+                <span ><span>导演</span>: <span>彼特·道格特 </span></span>/彼特·道格特 / 凯普·鲍尔斯<br/>
+                <span ><span>编剧</span>: <span>彼特·道格特 </span></span>/彼特·道格特 / 麦克·琼斯 / 凯普·鲍尔斯<br/>
+                <span ><span>主演</span>: <span>杰米·福克斯 </span></span>/杰米·福克斯 / 蒂娜·菲 / 菲利西亚·拉斯海德 / 阿米尔-卡利布·汤普森 / 戴维德·迪格斯 / 格拉汉姆·诺顿 / 瑞切尔·豪斯 / 艾莉丝·布拉加 / 理查德·艾欧阿德 / 唐尼尔·罗林斯 / 安吉拉·贝塞特 / 马戈·霍尔 / 罗德莎·琼斯 / 韦斯·斯塔迪 / 沙基纳·贾弗里 / 福琼·费姆斯特 / 卡鲁姆·格兰特 / 泽诺比娅·谢罗夫 / 朱恩·斯奎布 / 凯茜·卡瓦蒂妮 / 罗纳尔多·德尔·卡门 / 埃利萨皮·艾萨克 / 杰森·佩斯 / 科拉·尚波米耶<br/>
+                <span ><span>类型:</span><span> 动画 </span></span>/动画 / 音乐 / 奇幻<br/>
+                <span ><span>制片国家/地区:</span><span> 美国</span></span><br/>
+                <span ><span>语言:</span><span> 英语</span></span><br/>
+                <span ><span>上映日期:</span><span> 2020-12-25(中国大陆</span></span>/2020-12-25(中国大陆/美国网络) / 2020-10-11(伦敦电影节)<br/>
+                <span ><span>片长:</span><span> 101分钟</span></span><br/>
+                <span ><span>又名:</span><span> 灵魂奇遇记(港) </span></span>/灵魂奇遇记(港) / 灵魂急转弯(台) / 灵魂 / 心灵<br/>
+                <span >IMDb:</span> tt2948372<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>究竟是什么塑造了真正的你？电影将聚焦乔伊·高纳（杰米·福克斯配音）。这位中学音乐老师获得了梦寐以求的机会——在纽约最好的爵士俱乐部演奏。但一个小失误把他从纽约的街道带到了一个奇幻的地方“生之来处”（the Great Before）。在那里，灵魂们获得培训，在前往地球之前将获得他们的个性特点和兴趣。决心要回到地球生活的乔伊认识了一个早熟的灵魂“二十二”（蒂娜·菲 配音），二十二一直找不到自己对于人类生活的兴趣。随着乔伊不断试图向二十二展示生命的精彩之处，他也将领悟一些人生终极问题的答案。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>消失的爱人 Gone Girl</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt2267998.jpg" alt="消失的爱人 Gone Girl"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.7<br/>
+                <span ><span>导演</span>: <span>大卫·芬奇</span></span><br/>
+                <span ><span>编剧</span>: <span>吉莉安·弗琳</span></span><br/>
+                <span ><span>主演</span>: <span>本·阿弗莱克 </span></span>/本·阿弗莱克 / 裴淳华 / 尼尔·帕特里克·哈里斯 / 凯莉·库恩 / 泰勒·派瑞 / 金·迪肯斯 / 米西·派勒 / 波伊德·霍布鲁克 / 艾米丽·拉塔科斯基 / 雪拉·渥德 / 派屈克·福吉特 / 斯科特·麦克纳里 / 凯西·威尔逊 / 李·诺里斯<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 悬疑 / 惊悚 / 犯罪<br/>
+                <span ><span>制片国家/地区:</span><span> 美国</span></span><br/>
+                <span ><span>语言:</span><span> 英语</span></span><br/>
+                <span ><span>上映日期:</span><span> 2014-09-26(纽约电影节) </span></span>/2014-09-26(纽约电影节) / 2014-10-03(美国)<br/>
+                <span ><span>片长:</span><span> 149分钟</span></span><br/>
+                <span ><span>又名:</span><span> 失踪的女孩 </span></span>/失踪的女孩 / 失踪女孩 / 失踪罪(港) / 控制(台)<br/>
+                <span >IMDb:</span> tt2267998<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>结婚五周年纪念日的早上，尼克·邓恩（本·阿弗莱克 Ben Affleck 饰）来到妹妹玛戈（凯莉·库恩 Carrie Coon 饰）的酒吧，咒骂抱怨那个曾经彼此恩爱缠绵的妻子艾米（罗莎蒙德·派克 Rosamund Pike 饰）以及全然看不见希望的婚姻。当他返回家中时， 却发现客厅留下了暴行的痕迹，而妻子竟不见了踪影。女探员朗达·邦妮（金·迪肯斯 Kim Dickens 饰）接到报案后赶来调查，而现场留下的种种蛛丝马迹似乎昭示着这并非是一件寻常的失踪案，其背后或许隐藏着裂变于夫妻之情的谋杀罪行。艾米的失踪通过媒体大肆渲染和妄加揣测很快闻名全国，品行不端的尼克被推上风口浪尖，至今不见踪影的爱人对他进行无情审判，你侬我侬的甜言蜜语早已化作以血洗血的复仇与折磨……</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>疯狂原始人 The Croods</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt0481499.jpg" alt="疯狂原始人 The Croods"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.7<br/>
+                <span ><span>导演</span>: <span>柯克·德·米科 </span></span>/柯克·德·米科 / 克里斯·桑德斯<br/>
+                <span ><span>编剧</span>: <span>克里斯·桑德斯 </span></span>/克里斯·桑德斯 / 柯克·德·米科 / 约翰·克里斯<br/>
+                <span ><span>主演</span>: <span>尼古拉斯·凯奇 </span></span>/尼古拉斯·凯奇 / 艾玛·斯通 / 瑞安·雷诺兹 / 凯瑟琳·基纳 / 克萝丽丝·利奇曼 / 克拉克·杜克 / 克里斯·桑德斯 / 兰迪·汤姆<br/>
+                <span ><span>类型:</span><span> 喜剧 </span></span>/喜剧 / 动画 / 冒险<br/>
+                <span ><span>制片国家/地区:</span><span> 美国</span></span><br/>
+                <span ><span>语言:</span><span> 英语</span></span><br/>
+                <span ><span>上映日期:</span><span> 2013-04-20(中国大陆) </span></span>/2013-04-20(中国大陆) / 2013-02-15(柏林电影节) / 2013-03-22(美国)<br/>
+                <span ><span>片长:</span><span> 98分钟</span></span><br/>
+                <span ><span>又名:</span><span> 古鲁家族(港</span></span>/古鲁家族(港/台) / 克鲁德一家 / 疯狂家族<br/>
+                <span >IMDb:</span> tt0481499<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>原始人咕噜一家六口在老爸Grug（尼古拉斯·凯奇 Nicolas Cage 配音）的庇护下生活。每天抢夺鸵鸟蛋为食，躲避野兽的追击，每晚听老爸叙述同一个故事，在山洞里过着一成不变的生活。大女儿Eep（艾玛·斯通 Emma Stone 配音）是一个和老爸性格截然相反的充满好奇心的女孩，她不满足一辈子留在这个小山洞里，一心想要追逐山洞外面的新奇世界。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>神偷奶爸 Despicable Me</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt1323594.jpg" alt="神偷奶爸 Despicable Me"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.7<br/>
+                <span ><span>导演</span>: <span>皮埃尔·柯芬 </span></span>/皮埃尔·柯芬 / 克里斯·雷纳德<br/>
+                <span ><span>编剧</span>: <span>肯·道里欧 </span></span>/肯·道里欧 / 塞尔希奥·巴勃罗斯 / 辛科·保罗<br/>
+                <span ><span>主演</span>: <span>史蒂夫·卡瑞尔 </span></span>/史蒂夫·卡瑞尔 / 杰森·席格尔 / 拉塞尔·布兰德 / 朱莉·安德鲁斯 / 威尔·阿奈特 / 克里斯汀·韦格 / 米兰达·卡斯格拉夫 / 达纳·盖尔 / 艾尔西·费舍尔 / 皮埃尔·柯芬 / 克里斯·雷纳德 / 杰梅奈·克莱门特 / 杰克·麦克布瑞尔 / 丹尼·麦克布莱德 / 敏迪·卡灵 / 罗布·许贝尔 / 肯·道里欧 / 郑肯<br/>
+                <span ><span>类型:</span><span> 喜剧 </span></span>/喜剧 / 动画 / 冒险<br/>
+                <span ><span>制片国家/地区:</span><span> 美国 </span></span>/美国 / 法国<br/>
+                <span ><span>语言:</span><span> 英语</span></span><br/>
+                <span ><span>上映日期:</span><span> 2010-06-20(莫斯科电影节) </span></span>/2010-06-20(莫斯科电影节) / 2010-07-09(美国)<br/>
+                <span ><span>片长:</span><span> 95分钟</span></span><br/>
+                <span ><span>又名:</span><span> 卑鄙的我 </span></span>/卑鄙的我 / 坏蛋奖门人(港) / 偷天换“月”(港) / 我很贱 / Baby的我<br/>
+                <span >IMDb:</span> tt1323594<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>超级坏蛋格鲁（史蒂夫·卡瑞尔 Steve Carell 配音）在听说埃及金字塔被盗的新闻后不满市面上新贼辈出，决定在纳法利欧博士（拉塞尔·布兰德 Russell Brand 配音）的帮助下建造火箭升空盗取月亮。在向坏蛋银行贷款的过程中，格鲁盗取的收缩射线枪被新贼维克托（杰森·席格尔 Jason Segel 配音）抢走。为了夺回收缩射线枪，格鲁决定领养三位孤儿——玛戈（米兰达·卡斯格拉夫 Miranda Cosgrove 配音）、伊迪丝（达娜·盖伊 Dana Gaier 配音）和阿格蕾丝（埃尔希·费舍 Elsie Fisher 配音），利用她们进入维克托的城堡兜售饼干的机会实施偷盗，计划成功后再偷偷处理掉三个小孩。然而在平凡的日常相处中，格鲁却发现自己越来越离不开这三个小鬼，但这样的感情用事却将严重影响周密的盗月计划……</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>色，戒</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt0808357.jpg" alt="色，戒"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.7<br/>
+                <span ><span>导演</span>: <span>李安</span></span><br/>
+                <span ><span>编剧</span>: <span>王蕙玲 </span></span>/王蕙玲 / 詹姆斯·夏慕斯 / 张爱玲<br/>
+                <span ><span>主演</span>: <span>梁朝伟 </span></span>/梁朝伟 / 汤唯 / 陈冲 / 王力宏 / 庹宗华 / 朱芷莹 / 高英轩 / 柯宇纶 / 阮德锵 / 钱嘉乐 / 苏岩 / 何赛飞 / 宋茹惠 / 樊光耀 / 卢燕 / 刘洁 / 余娅 / 王琳 / 王侃 / 竹下明子 / 阿努潘·凯尔<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 爱情 / 情色<br/>
+                <span ><span>制片国家/地区:</span><span> 中国台湾 </span></span>/中国台湾 / 中国大陆 / 美国 / 中国香港<br/>
+                <span ><span>语言:</span><span> 汉语普通话 </span></span>/汉语普通话 / 上海话 / 英语 / 粤语 / 日语 / 印地语<br/>
+                <span ><span>上映日期:</span><span> 2007-11-01(中国大陆) </span></span>/2007-11-01(中国大陆) / 2007-09-24(中国台湾) / 2007-09-26(中国香港) / 2007-08-30(威尼斯电影节) / 2007-10-26(美国)<br/>
+                <span ><span>片长:</span><span> 158分钟</span></span>/158分钟/ 145分钟(中国大陆)<br/>
+                <span ><span>又名:</span><span> 色戒 </span></span>/色戒 / 色·戒 / 色戒 / Lust, Caution<br/>
+                <span >IMDb:</span> tt0808357<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>本是岭南大学学生的王佳芝（汤唯 饰）因战争辗转到了香港读书，她在香港大学加入了爱国青年邝裕民（王力宏 饰）组织的话剧组，他们主演的爱国话剧更激起了他们的爱国情操。当邝裕民得知汪伪政府的特务头子易先生（梁朝伟 饰）正在香港的时候，他们便密谋要刺杀易先生。化名“麦太太”的王佳芝很快得到了易太太（陈冲 饰）的信任与喜爱，同时美丽的“麦太太”也吸引了易先生的眼球，正当事情进行得如火如荼之际，易先生突然要回到上海去。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>血战钢锯岭 Hacksaw Ridge</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt2119532.jpg" alt="血战钢锯岭 Hacksaw Ridge"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.7<br/>
+                <span ><span>导演</span>: <span>梅尔·吉布森</span></span><br/>
+                <span ><span>编剧</span>: <span>安德鲁·奈特 </span></span>/安德鲁·奈特 / 罗伯特·申坎<br/>
+                <span ><span>主演</span>: <span>安德鲁·加菲尔德 </span></span>/安德鲁·加菲尔德 / 萨姆·沃辛顿 / 文斯·沃恩 / 雨果·维文 / 卢克·布雷西 / 泰莉莎·帕尔墨 / 瑞切尔·格里菲斯 / 内森奈尔·布佐里克 / 理查德·劳斯伯格 / 马特·纳夫莱 / 费拉斯·迪拉尼 / 瑞安·柯尔 / 卢克·佩格勒<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 传记 / 历史 / 战争<br/>
+                <span ><span>制片国家/地区:</span><span> 澳大利亚 </span></span>/澳大利亚 / 美国<br/>
+                <span ><span>语言:</span><span> 英语 </span></span>/英语 / 日语<br/>
+                <span ><span>上映日期:</span><span> 2016-12-08(中国大陆) </span></span>/2016-12-08(中国大陆) / 2016-09-04(威尼斯电影节) / 2016-11-04(美国)<br/>
+                <span ><span>片长:</span><span> 139分钟(中国大陆)</span></span>/139分钟(中国大陆)/ 140分钟(美国)<br/>
+                <span ><span>又名:</span><span> 钢锯岭 </span></span>/钢锯岭 / 钢铁英雄(台) / The Conscientious Objector<br/>
+                <span >IMDb:</span> tt2119532<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>1945年，第二次世界大战接近尾声，作为邪恶轴心重要成员的日本，其嚣张态势已成强弩之末。是年，决定战局走向的冲绳岛战役拉开序幕，成千上万斗志昂扬的美国大兵被派往冲绳，等待他们的则是敌军重兵防守、凶险异常的钢锯岭。在这群人中间，却有一个不愿拿起武器的军医。他名叫戴斯蒙德·道斯（安德鲁·加菲尔德 Andrew Garfield 饰），来自美国的弗吉尼亚。太平洋爆发之际，瘦弱的戴斯蒙德志愿成为救死扶伤的军医而应征入伍。可因童年和家庭的原因，他始终不愿拿起枪支操练，为此宁愿背上拒服兵役的罪名被送上军事法庭。几经周折，戴斯蒙德最终和战友来到了钢锯岭。枪林弹雨，转瞬之间无数人应声倒地。在信仰和信念的支持下，戴斯蒙德仅凭一己之力拯救了数十条濒死的生命……</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>超能陆战队 Big Hero 6</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt2245084.jpg" alt="超能陆战队 Big Hero 6"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.7<br/>
+                <span ><span>导演</span>: <span>唐·霍尔 </span></span>/唐·霍尔 / 克里斯·威廉姆斯<br/>
+                <span ><span>编剧</span>: <span>乔丹·罗伯茨 </span></span>/乔丹·罗伯茨 / 丹尼尔·吉尔森 / 罗伯特·L·贝尔德<br/>
+                <span ><span>主演</span>: <span>斯科特·安第斯 </span></span>/斯科特·安第斯 / 瑞恩·波特 / 丹尼尔·海尼 / T·J·米勒 / 郑智麟 / 小达蒙·韦恩斯 / 珍尼希斯·罗德里格兹 / 詹姆斯·克伦威尔 / 艾伦·图代克 / 玛娅·鲁道夫 / 亚布拉哈姆·本鲁比 / 凯蒂·洛斯 / 比利·布什 / 丹尼尔·吉尔森 / 保罗·布里格斯<br/>
+                <span ><span>类型:</span><span> 喜剧 </span></span>/喜剧 / 动作 / 科幻 / 动画 / 冒险<br/>
+                <span ><span>制片国家/地区:</span><span> 美国</span></span><br/>
+                <span ><span>语言:</span><span> 英语</span></span><br/>
+                <span ><span>上映日期:</span><span> 2015-02-28(中国大陆) </span></span>/2015-02-28(中国大陆) / 2020-07-31(中国大陆重映) / 2014-10-23(东京电影节) / 2014-11-07(美国)<br/>
+                <span ><span>片长:</span><span> 102分钟</span></span><br/>
+                <span ><span>又名:</span><span> 大英雄联盟(港) </span></span>/大英雄联盟(港) / 大英雄天团(台) / 六大英雄 / (●—●)<br/>
+                <span >IMDb:</span> tt2245084<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>未来世界的超级都市旧京山（San Fransokyo），热爱发明创造的天才少年小宏，在哥哥泰迪的鼓励下参加了罗伯特·卡拉汉教授主持的理工学院机器人专业的入学大赛。他凭借神奇的微型磁力机器人赢得观众、参赛者以及考官的一致好评，谁知突如其来的灾难却将小宏的梦想和人生毁于一旦。大火烧毁了展示会场，而哥哥为了救出受困的卡拉汉教授命丧火场。身心饱受创伤的小宏闭门不出，哥哥生前留下的治疗型机器人大白则成为安慰他的唯一伙伴。原以为微型机器人也毁于火灾，谁知小宏和大白竟意外发现有人在某座废弃工厂内大批量地生产他的发明。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>冰川时代 Ice Age</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt0268380.jpg" alt="冰川时代 Ice Age"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.6<br/>
+                <span ><span>导演</span>: <span>卡洛斯·沙尔丹哈 </span></span>/卡洛斯·沙尔丹哈 / 克里斯·韦奇<br/>
+                <span ><span>编剧</span>: <span>迈克尔·伯格  </span></span>/迈克尔·伯格  / 迈克尔·J·威尔森 / 彼得·阿克曼<br/>
+                <span ><span>主演</span>: <span>雷·罗马诺 </span></span>/雷·罗马诺 / 约翰·雷吉扎莫 / 丹尼斯·利瑞 / 杰克·布莱克<br/>
+                <span ><span>类型:</span><span> 喜剧 </span></span>/喜剧 / 动画 / 冒险<br/>
+                <span ><span>制片国家/地区:</span><span> 美国</span></span><br/>
+                <span ><span>语言:</span><span> 英语 </span></span>/英语 / 克罗地亚语<br/>
+                <span ><span>上映日期:</span><span> 2002-03-15(美国)</span></span><br/>
+                <span ><span>片长:</span><span> 81分钟</span></span><br/>
+                <span ><span>又名:</span><span> 冰河世纪 </span></span>/冰河世纪 / 冰原历险记<br/>
+                <span >IMDb:</span> tt0268380<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>冰河时期降至，动物们都急着迁徙到温暖的地方及储存食物。长毛象曼弗瑞德、树獭希德、剑齿虎迪亚戈为了帮助一个人类的婴儿回到父母身边，因而也掉了动物们迁徙的队伍。三只性格各异的动物，觉得集合力量帮助婴儿。一路上，善良的曼弗瑞德总觉得迪亚戈心怀鬼胎，想吃掉婴儿，互相猜疑。他们一起经历了无数艰难险阻，终于能够真诚相对。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>疯狂的石头</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt0843270.jpg" alt="疯狂的石头"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.6<br/>
+                <span ><span>导演</span>: <span>宁浩</span></span><br/>
+                <span ><span>编剧</span>: <span>张承 </span></span>/张承 / 宁浩 / 岳小军<br/>
+                <span ><span>主演</span>: <span>郭涛 </span></span>/郭涛 / 刘桦 / 连晋 / 黄渤 / 徐峥 / 岳小军 / 罗兰 / 王迅<br/>
+                <span ><span>类型:</span><span> 喜剧 </span></span>/喜剧 / 犯罪<br/>
+                <span ><span>制片国家/地区:</span><span> 中国大陆 </span></span>/中国大陆 / 中国香港<br/>
+                <span ><span>语言:</span><span> 汉语普通话 </span></span>/汉语普通话 / 重庆话<br/>
+                <span ><span>上映日期:</span><span> 2006-06-30(中国大陆) </span></span>/2006-06-30(中国大陆) / 2006-08-10(中国香港)<br/>
+                <span ><span>片长:</span><span> 106分钟(香港)</span></span>/106分钟(香港)/ 98分钟(中国大陆)<br/>
+                <span ><span>又名:</span><span> Crazy Stone</span></span><br/>
+                <span >IMDb:</span> tt0843270<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>重庆一间工艺品厂已经濒临倒闭，却不料在拆倒旧厂房的时候，发现了厕所里的一件宝物——一块价值连城的翡翠。厂里决定用这块翡翠举办一个展览，赚些钱发拖欠了几个月的工人工资。期间由工艺品厂保卫科长包世宏（郭涛 饰）负责看守这件宝物。但是，国际大盗麦克与本地一帮小偷却让包世宏一筹莫展，他们各施其技接近翡翠，展览馆开始了一场明争暗斗的较量。黑色幽默也开始幕幕上演。翡翠的价值几何？最后谁是胜出者？事情远没有表面那么简单……</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>蜘蛛侠：平行宇宙 Spider-Man: Into the Spider-Verse</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt4633694.jpg" alt="蜘蛛侠：平行宇宙 Spider-Man: Into the Spider-Verse"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.6<br/>
+                <span ><span>导演</span>: <span>鲍勃·佩尔西凯蒂 </span></span>/鲍勃·佩尔西凯蒂 / 彼得·拉姆齐 / 罗德尼·罗斯曼<br/>
+                <span ><span>编剧</span>: <span>菲尔·罗德 </span></span>/菲尔·罗德 / 罗德尼·罗斯曼 / 布莱恩·本迪斯 / 萨拉·皮凯利 / 史蒂夫·迪特寇 / 斯坦·李 / 戴维·海因 / 法布里斯·萨波尔斯基<br/>
+                <span ><span>主演</span>: <span>沙梅克·摩尔 </span></span>/沙梅克·摩尔 / 杰克·约翰逊 / 海莉·斯坦菲尔德 / 马赫沙拉·阿里 / 布莱恩·泰里·亨利 / 莉莉·汤姆林 / 劳伦·维勒斯 / 佐伊·克罗维兹 / 约翰·木兰尼 / 贵美子·格伦 / 尼古拉斯·凯奇 / 凯瑟琳·哈恩 / 列维·施瑞博尔 / 克里斯·派恩 / 娜塔丽·莫瑞丝 / 奥斯卡·伊萨克 / 格蕾塔·李 / 斯坦·李 / 乔玛·塔科内 / 华金·科西奥 / 蕾克·贝尔 / 梅勒妮·海恩斯 / 尼克·杰恩 / 穆尼卜·拉赫曼 / 卡洛斯·萨拉戈萨 / 黛西·罗斯·布莱内斯 / 里夫·霍顿 / 哈里森·奈特 / 莱克斯·朗 / 凯特琳·麦肯纳-威尔金森 / 斯科特·门维尔 / 克里斯托弗·米勒 / 德维卡·帕利赫 / 柯特妮·佩尔顿 / 克里斯蒂·法瑞斯 / 杰奎琳·皮诺尔 / 贾斯汀·沉卡罗 / 梅利莎·斯特姆<br/>
+                <span ><span>类型:</span><span> 动作 </span></span>/动作 / 科幻 / 动画 / 冒险<br/>
+                <span ><span>制片国家/地区:</span><span> 美国</span></span><br/>
+                <span ><span>语言:</span><span> 英语 </span></span>/英语 / 西班牙语<br/>
+                <span ><span>上映日期:</span><span> 2018-12-21(中国大陆) </span></span>/2018-12-21(中国大陆) / 2018-12-14(美国)<br/>
+                <span ><span>片长:</span><span> 116分钟(中国大陆)</span></span>/116分钟(中国大陆)/ 117分钟(美国) / 143分钟(加长版)<br/>
+                <span ><span>又名:</span><span> 蜘蛛侠：新纪元 </span></span>/蜘蛛侠：新纪元 / 蜘蛛人：新宇宙(台) / 蜘蛛侠：跳入蜘蛛宇宙(港) / 蜘蛛侠：平行世界 / Spider-Man: a New Universe<br/>
+                <span >IMDb:</span> tt4633694<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>正就读中学的少年迈尔斯（沙梅克·摩尔 Shameik Moore 配音）意外被一只遭受放射性污染的蜘蛛咬伤，随后身体发生奇特的变化。偶然机缘，他目睹了蜘蛛侠（克里斯·派恩 Chris Pine 配音）和犯罪头目金并（列维·施瑞博尔 Liev Schreiber 配音）的战斗。为了阻止金并利用时空对撞机扰乱宇宙，蜘蛛侠最终壮烈牺牲。可未过多久，来自平行宇宙的颓废的彼德·帕克（杰克·约翰逊 Jake M. Johnson 配音）出现在迈尔斯面前。为了阻止金并的阴谋，并帮助这个帕克返回自己的宇宙，他们闯入金并的老巢。在这一过程中，二人遭到章鱼博士和徘徊者的狙击。与此同时，来自其他宇宙的女蜘蛛侠、暗影蜘蛛侠、蜘猪侠、二次元蜘蛛妹相继出现。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>贫民窟的百万富翁 Slumdog Millionaire</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt1010048.jpg" alt="贫民窟的百万富翁 Slumdog Millionaire"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.6<br/>
+                <span ><span>导演</span>: <span>丹尼·博伊尔 </span></span>/丹尼·博伊尔 / 洛芙琳·坦丹<br/>
+                <span ><span>编剧</span>: <span>西蒙·博福伊 </span></span>/西蒙·博福伊 / 维卡斯·史瓦卢普<br/>
+                <span ><span>主演</span>: <span>戴夫·帕特尔 </span></span>/戴夫·帕特尔 / 沙鲁巴·舒克拉 / 亚尼·卡普 / 拉詹德拉纳斯·祖特施 / 吉尼瓦·塔瓦尔 / 芙蕾达·平托 / 伊尔凡·可汗 / 爱资哈尔丁·穆罕默德·伊斯梅尔 / 阿什·马赫什·舍德卡 / 马赫什·曼杰瑞卡 / 麦活·米泰尔<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 爱情<br/>
+                <span ><span>制片国家/地区:</span><span> 英国</span></span><br/>
+                <span ><span>语言:</span><span> 英语 </span></span>/英语 / 印地语 / 法语 / 德语<br/>
+                <span ><span>上映日期:</span><span> 2009-03-26(中国大陆) </span></span>/2009-03-26(中国大陆) / 2008-08-30(特柳赖德电影节) / 2009-01-09(英国)<br/>
+                <span ><span>片长:</span><span> 120分钟</span></span><br/>
+                <span ><span>又名:</span><span> 一百万零一夜(港) </span></span>/一百万零一夜(港) / 贫民百万富翁(台) / 贫民富翁 / 山寨富翁 / 阳光小阿三(豆友译名)<br/>
+                <span >IMDb:</span> tt1010048<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>2006年，印度孟买。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>釜山行 부산행</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt5700672.jpg" alt="釜山行 부산행"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.6<br/>
+                <span ><span>导演</span>: <span>延尚昊</span></span><br/>
+                <span ><span>编剧</span>: <span>延尚昊</span></span><br/>
+                <span ><span>主演</span>: <span>孔刘 </span></span>/孔刘 / 郑有美 / 马东锡 / 金秀安 / 金义城 / 崔宇植 / 安昭熙 / 崔奎华 / 郑锡勇 / 芮秀贞 / 朴明申 / 张赫镇 / 禹都临 / 沈恩敬<br/>
+                <span ><span>类型:</span><span> 动作 </span></span>/动作 / 惊悚 / 灾难<br/>
+                <span ><span>制片国家/地区:</span><span> 韩国</span></span><br/>
+                <span ><span>语言:</span><span> 韩语</span></span><br/>
+                <span ><span>上映日期:</span><span> 2016-05-13(戛纳电影节) </span></span>/2016-05-13(戛纳电影节) / 2016-07-20(韩国)<br/>
+                <span ><span>片长:</span><span> 118分钟</span></span><br/>
+                <span ><span>又名:</span><span> 尸杀列车(港) </span></span>/尸杀列车(港) / 尸速列车(台) / Train to Busan / Busanhaeng<br/>
+                <span >IMDb:</span> tt5700672<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>证券公司基金管理人石宇（孔侑 饰）光鲜精干，却也是个重利轻义之徒。妻子为此与之决裂，女儿秀安（金秀安 饰）则对如此自私的父亲越来越失望，决定前往釜山和母亲生活。在秀安生日这天，石宇抽出时间陪伴女儿登上开往釜山的特快列车。而与此同时，城市四处出现了极为可疑的暴动事件。政府极力洗白无法掩盖丧尸肆虐的事实，即便懵然无知的列车乘客也因为不速之客的到来而堕入恐慌绝望的地狱中。开车的刹那，一名感染者冲入车厢，而她很快尸变并对目光所及之处的健康人展开血腥屠杀。未过多久，丧尸便呈几何数爆发性地增长。石宇被迫和幸存者的乘客们在逼仄的空间中奋力求生。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>黑天鹅 Black Swan</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt0947798.jpg" alt="黑天鹅 Black Swan"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.6<br/>
+                <span ><span>导演</span>: <span>达伦·阿伦诺夫斯基</span></span><br/>
+                <span ><span>编剧</span>: <span>安德雷斯·海因斯 </span></span>/安德雷斯·海因斯 / 马克·海曼 / 约翰·J·麦克劳克林<br/>
+                <span ><span>主演</span>: <span>娜塔莉·波特曼 </span></span>/娜塔莉·波特曼 / 米拉·库尼斯 / 文森特·卡塞尔 / 芭芭拉·赫希 / 薇诺娜·瑞德 / 本杰明·米派德 / 克塞尼亚·索罗 / 克里斯汀娜·安娜波 / 詹妮特·蒙哥马利 / 塞巴斯蒂安·斯坦 / 托比·海明威 / 塞尔吉奥·托拉多 / 马克·马戈利斯 / 蒂娜·斯隆 / 亚伯拉罕·阿罗诺夫斯基 / 夏洛特·阿罗诺夫斯基 / 玛西娅·让·库尔茨 / 肖恩·奥哈根 / 克里斯托弗·加廷 / 黛博拉·奥夫纳 / 斯坦利·B·赫尔曼 / 库尔特·弗勒曼 / 帕特里克·赫辛格 / 莎拉·海伊<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 惊悚<br/>
+                <span ><span>制片国家/地区:</span><span> 美国</span></span><br/>
+                <span ><span>语言:</span><span> 英语 </span></span>/英语 / 法语 / 意大利语<br/>
+                <span ><span>上映日期:</span><span> 2010-09-01(威尼斯电影节) </span></span>/2010-09-01(威尼斯电影节) / 2010-12-17(美国)<br/>
+                <span ><span>片长:</span><span> 108分钟</span></span>/108分钟/ 103分钟(威尼斯电影节)<br/>
+                <span ><span>又名:</span><span> 夺命黑天鹅 </span></span>/夺命黑天鹅 / 霸王别鹅(豆友译名)<br/>
+                <span >IMDb:</span> tt0947798<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>纽约剧团要重排《天鹅湖》，因前领舞Beth（薇诺娜•赖德 Winona Ryder 饰）离去，总监Thomas（文森特•卡索尔 Vincent Cassel. 饰）决定海选新领舞，且要求领舞要分饰黑天鹅与白天鹅。Nina（娜塔莉•波特曼Natalie Portman 饰）自幼练习芭蕾舞，在母亲的细心关照下，技艺出众。这次，她希望可以脱颖而出。然而，在竞争中，她发现心机颇重的Lily（米拉•库妮丝 Mila Kunis 饰）是自己的强劲对手。在选拔中，她的白天鹅表演的无可挑剔，但是黑天鹅不及Lily。她感到身心俱疲，回家还发现了背部的红斑与脚伤。她一个人找到总监，希望争取一下。总监趁机亲吻她，却被她强硬拒绝。结果，总监居然选了她。队友怀疑她靠色相上位。在酒会上，Beth甚至当众发泄。这种压力外加伤病，一直影响着她的发挥。总监启发她要释放激情，表现出黑天...</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>你的名字。 君の名は。</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt5311514.jpg" alt="你的名字。 君の名は。"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.5<br/>
+                <span ><span>导演</span>: <span>新海诚</span></span><br/>
+                <span ><span>编剧</span>: <span>新海诚</span></span><br/>
+                <span ><span>主演</span>: <span>神木隆之介 </span></span>/神木隆之介 / 上白石萌音 / 长泽雅美 / 市原悦子 / 成田凌 / 悠木碧 / 岛崎信长 / 石川界人 / 谷花音 / 寺杣昌纪 / 大原沙耶香 / 井上和彦 / 茶风林 / 加藤有花 / 花泽香菜 / 寺崎裕香<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 爱情 / 动画<br/>
+                <span ><span>制片国家/地区:</span><span> 日本</span></span><br/>
+                <span ><span>语言:</span><span> 日语</span></span><br/>
+                <span ><span>上映日期:</span><span> 2016-12-02(中国大陆) </span></span>/2016-12-02(中国大陆) / 2016-08-26(日本)<br/>
+                <span ><span>片长:</span><span> 106分钟</span></span><br/>
+                <span ><span>又名:</span><span> 你的名字 </span></span>/你的名字 / 君之名 / Your Name / Kimi no na wa.<br/>
+                <span >IMDb:</span> tt5311514<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>在远离大都会的小山村，住着巫女世家出身的高中女孩宫水三叶（上白石萌音 配音）。校园和家庭的原因本就让她充满烦恼，而近一段时间发生的奇怪事件，又让三叶摸不清头脑。不知从何时起，三叶在梦中就会变成一个住在东京的高中男孩。那里有陌生的同学和朋友，有亲切的前辈和繁华的街道，一切都是如此诱人而真实。另一方面，住在东京的高中男孩立花泷（神木隆之介 配音）则总在梦里来到陌生的小山村，以女孩子的身份过着全新的生活。许是受那颗神秘彗星的影响，立花和三叶在梦中交换了身份。他们以他者的角度体验着对方的人生，这期间有愤怒、有欢笑也有暖心。只是两人并不知道，身份交换的背后隐藏着重大而锥心的秘密……</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>初恋这件小事 สิ่งเล็กเล็กที่เรียกว่า...รัก</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt1859438.jpg" alt="初恋这件小事 สิ่งเล็กเล็กที่เรียกว่า...รัก"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.5<br/>
+                <span ><span>导演</span>: <span>普特鹏·普罗萨卡·那·萨克那卡林 </span></span>/普特鹏·普罗萨卡·那·萨克那卡林 / 华森·波克彭<br/>
+                <span ><span>编剧</span>: <span>普特鹏·普罗萨卡·那·萨克那卡林</span></span><br/>
+                <span ><span>主演</span>: <span>平采娜·乐维瑟派布恩 </span></span>/平采娜·乐维瑟派布恩 / 马里奥·毛瑞尔 / 苏达拉·布查蓬 / 雅尼卡·桑普蕾舞 / 诺特·阿查拉那·阿瑞亚卫考 / 皮拉瓦特·赫拉巴特 / 普特鹏·普罗萨卡·那·萨克那卡林 / 华森·波克彭<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 喜剧 / 爱情<br/>
+                <span ><span>制片国家/地区:</span><span> 泰国</span></span><br/>
+                <span ><span>语言:</span><span> 泰语 </span></span>/泰语 / 印度尼西亚语 / 英语<br/>
+                <span ><span>上映日期:</span><span> 2012-06-05(中国大陆) </span></span>/2012-06-05(中国大陆) / 2010-08-12(泰国)<br/>
+                <span ><span>片长:</span><span> 118分钟(泰国)</span></span>/118分钟(泰国)/ 100分钟(中国大陆)<br/>
+                <span ><span>又名:</span><span> 初恋那件小事(港) </span></span>/初恋那件小事(港) / 暗恋那点小事 / 叫做爱的小事 / Sing lek lek tee reak wa rak / A Little Thing Called Love / First Love<br/>
+                <span >IMDb:</span> tt1859438<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>初中生小水相貌平平，家境一般，所以在学校里并不受重视。但是她心地善良，又有一群死党，日子过得倒也开心。某天，她遇见了帅气的学长阿亮（马里奥·毛瑞尔 Mario Maurer 饰），春心萌动，无 法遏制。她喜欢看他踢足球，看他拍照，如痴如狂。上英语课时，她不停地给死党传纸条 表达对阿亮的爱慕。然而，英语老师则指出她除了英语一无是处。回到家，叔叔从美国捎来了父亲的消息，说如果她能考全校第一，就可以去美国。于是，她按下决心要努力加油。某天，小水等人在买饮料时，碰到篮球队员蛮横插队。阿亮挺身而出，为她们教训了对方，并挨了校长的责骂。小水也第一次听说，阿亮的父亲因为射失点球而退役的事情，理解了他心中的隐痛。由于舞蹈队是给美女准备的，所以小水等一干姐妹准备在话剧社大展身手，没想到学长也来到这个社团。两人还扮演王子公主，他们的恋情会由此展开么？……</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>哈利·波特与凤凰社 Harry Potter and the Order of the Phoenix</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt0373889.jpg" alt="哈利·波特与凤凰社 Harry Potter and the Order of the Phoenix"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.5<br/>
+                <span ><span>导演</span>: <span>大卫·叶茨</span></span><br/>
+                <span ><span>编剧</span>: <span>迈克尔·戈登伯格 </span></span>/迈克尔·戈登伯格 / J. K. 罗琳<br/>
+                <span ><span>主演</span>: <span>丹尼尔·雷德克里夫 </span></span>/丹尼尔·雷德克里夫 / 艾玛·沃森 / 鲁伯特·格林特 / 加里·奥德曼 / 拉尔夫·费因斯 / 玛吉·史密斯 / 迈克尔·刚本 / 艾伦·瑞克曼 / 艾玛·汤普森 / 艾美达·斯丹顿 / 詹森·艾萨克 / 汤姆·费尔顿 / 海伦娜·伯翰·卡特 / 邦妮·怀特 / 朱丽·沃特斯 / 梁佩诗 / 布莱丹·格里森 / 罗彼·考特拉尼 / 伊文娜·林奇<br/>
+                <span ><span>类型:</span><span> 奇幻 </span></span>/奇幻 / 冒险<br/>
+                <span ><span>制片国家/地区:</span><span> 英国 </span></span>/英国 / 美国<br/>
+                <span ><span>语言:</span><span> 英语</span></span><br/>
+                <span ><span>上映日期:</span><span> 2007-08-10(中国大陆) </span></span>/2007-08-10(中国大陆) / 2007-07-11(美国)<br/>
+                <span ><span>片长:</span><span> 138分钟</span></span><br/>
+                <span ><span>又名:</span><span> 哈利波特5：凤凰会的密令(港</span></span>/哈利波特5：凤凰会的密令(港/台) / 哈5<br/>
+                <span >IMDb:</span> tt0373889<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>逃过摄魂怪的追杀，通过魔法部的审查，哈利（丹尼尔·雷德克里夫）终于回到美丽的霍格沃兹。然而这个学期并不轻松，他不仅要完成魔法等级考试，还要应对夜晚的噩梦和黑魔法防御课老师乌姆里奇的打压。在好友的支持下，哈利秘密组建了邓不利多军团，与大家一起练习黑魔法防御术。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>哈利·波特与死亡圣器(上) Harry Potter and the Deathly Hallows: Part 1</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt0926084.jpg" alt="哈利·波特与死亡圣器(上) Harry Potter and the Deathly Hallows: Part 1"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.5<br/>
+                <span ><span>导演</span>: <span>大卫·叶茨</span></span><br/>
+                <span ><span>编剧</span>: <span>史蒂夫·克洛夫斯 </span></span>/史蒂夫·克洛夫斯 / J. K. 罗琳<br/>
+                <span ><span>主演</span>: <span>丹尼尔·雷德克里夫 </span></span>/丹尼尔·雷德克里夫 / 艾玛·沃森 / 鲁伯特·格林特 / 海伦娜·伯翰·卡特 / 拉尔夫·费因斯 / 比尔·奈伊 / 约翰·赫特 / 艾伦·瑞克曼 / 艾美达·斯丹顿 / 费奥纳·肖 / 邦妮·怀特 / 朱丽·沃特斯 / 米歇尔·费尔利 / 杰米·坎贝尔·鲍尔<br/>
+                <span ><span>类型:</span><span> 奇幻 </span></span>/奇幻 / 冒险<br/>
+                <span ><span>制片国家/地区:</span><span> 英国 </span></span>/英国 / 美国<br/>
+                <span ><span>语言:</span><span> 英语</span></span><br/>
+                <span ><span>上映日期:</span><span> 2010-11-19(中国大陆</span></span>/2010-11-19(中国大陆/英国)<br/>
+                <span ><span>片长:</span><span> 146分钟</span></span><br/>
+                <span ><span>又名:</span><span> 哈利波特7：死神的圣物1(港</span></span>/哈利波特7：死神的圣物1(港/台) / 哈利·波特与死圣(上) / 哈7(上)<br/>
+                <span >IMDb:</span> tt0926084<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>《哈利·波特与死亡圣器》小站</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>复仇者联盟4：终局之战 Avengers: Endgame</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt4154796.jpg" alt="复仇者联盟4：终局之战 Avengers: Endgame"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.5<br/>
+                <span ><span>导演</span>: <span>安东尼·罗素 </span></span>/安东尼·罗素 / 乔·罗素<br/>
+                <span ><span>编剧</span>: <span>克里斯托弗·马库斯 </span></span>/克里斯托弗·马库斯 / 斯蒂芬·麦克菲利 / 斯坦·李 / 杰克·科比 / 吉姆·斯特林<br/>
+                <span ><span>主演</span>: <span>小罗伯特·唐尼 </span></span>/小罗伯特·唐尼 / 克里斯·埃文斯 / 马克·鲁弗洛 / 克里斯·海姆斯沃斯 / 乔什·布洛林 / 保罗·路德 / 凯伦·吉兰 / 杰瑞米·雷纳 / 斯嘉丽·约翰逊 / 唐·钱德尔 / 布丽·拉尔森 / 布莱德利·库珀 / 泰莎·汤普森 / 汤姆·赫兰德 / 伊丽莎白·奥尔森 / 本尼迪克特·康伯巴奇 / 蒂尔达·斯文顿 / 格温妮斯·帕特洛 / 蕾妮·罗素 / 约翰·斯拉特里 / 查德维克·博斯曼 / 安东尼·麦凯 / 塞巴斯蒂安·斯坦 / 克里斯·帕拉特 / 汤姆·希德勒斯顿 / 佐伊·索尔达娜 / 丹娜·奎里拉 / 本尼迪克特·黄 / 庞·克莱门捷夫 / 戴夫·巴蒂斯塔 / 利蒂希娅·赖特 / 伊万杰琳·莉莉 / 乔恩·费儒 / 海莉·阿特维尔 / 娜塔莉·波特曼 / 玛丽莎·托梅 / 塔伊加·维迪提 / 安吉拉·贝塞特 / 迈克尔·道格拉斯 / 米歇尔·菲佛 / 威廉·赫特 / 寇碧·史莫德斯 / 肖恩·古恩 / 温斯顿·杜克 / 琳达·卡德里尼 / 马克斯米利亚诺·赫尔南德斯 / 弗兰克·格里罗 / 真田广之 / 汤姆-沃恩-劳勒 / 詹姆斯·达西 / 雅各布·巴特朗 / 范·迪塞尔 / 罗伯特·雷德福 / 塞缪尔·杰克逊 / 伊薇特·尼科尔·布朗 / 卡梅伦·布鲁姆布罗 / 蒂莫西·卡尔 / 凯瑞·康顿 / 迈克尔·A·库克 / 凯莉·库恩 / 艾玛·福尔曼 / 雷纳·加拉赫 / 丹妮拉·加斯基 / 郑肯 / 小弗洛伊德·安东尼·约翰 / 斯坦·李 / 罗斯·马昆德 / 布伦特·麦吉 / 迈克尔·皮耶里诺·米勒 / 卡兰·马尔韦 / 泰瑞·诺塔里 / 吉米·雷·皮肯斯 / 迈克尔·詹姆斯·肖 / 泰·辛普金斯 / 格雷格·蒂芬<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 动作 / 科幻 / 奇幻 / 冒险<br/>
+                <span ><span>制片国家/地区:</span><span> 美国</span></span><br/>
+                <span ><span>语言:</span><span> 英语 </span></span>/英语 / 日语 / 科萨语<br/>
+                <span ><span>上映日期:</span><span> 2019-04-24(中国大陆) </span></span>/2019-04-24(中国大陆) / 2019-04-26(美国)<br/>
+                <span ><span>片长:</span><span> 181分钟</span></span><br/>
+                <span ><span>又名:</span><span> 复仇者联盟3：无尽之战(下) </span></span>/复仇者联盟3：无尽之战(下) / 复联4 / Avengers: Infinity War - Part II / The Avengers 3: Part 2 / The Avengers 4: Endgame / AVG4<br/>
+                <span >IMDb:</span> tt4154796<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>一声响指，宇宙间半数生命灰飞烟灭。几近绝望的复仇者们在惊奇队长（布丽·拉尔森 Brie Larson 饰）的帮助下找到灭霸（乔什·布洛林 Josh Brolin 饰）归隐之处，却得知六颗无限宝石均被销毁，希望彻底破灭。如是过了五年，迷失在量子领域的蚁人（保罗·路德 Paul Rudd 饰）意外回到现实世界，他的出现为幸存的复仇者们点燃了希望。与美国队长（克里斯·埃文斯 Chris Evans 饰）冰释前嫌的托尼（小罗伯特·唐尼 Robert Downey Jr. 饰）找到了穿越时空的方法，星散各地的超级英雄再度集结，他们分别穿越不同的时代去搜集无限宝石。而在这一过程中，平行宇宙的灭霸察觉了他们的计划。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>恐怖游轮 Triangle</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt1187064.jpg" alt="恐怖游轮 Triangle"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.5<br/>
+                <span ><span>导演</span>: <span>克里斯托弗·史密斯</span></span><br/>
+                <span ><span>编剧</span>: <span>克里斯托弗·史密斯</span></span><br/>
+                <span ><span>主演</span>: <span>梅利莎·乔治 </span></span>/梅利莎·乔治 / 利亚姆·海姆斯沃斯 / 迈克尔·多曼 / 瑞秋·卡帕尼 / 艾玛·朗 / 亨利·尼克松 / 约书亚·麦基弗<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 悬疑 / 惊悚<br/>
+                <span ><span>制片国家/地区:</span><span> 英国 </span></span>/英国 / 澳大利亚<br/>
+                <span ><span>语言:</span><span> 英语</span></span><br/>
+                <span ><span>上映日期:</span><span> 2009-10-16(英国)</span></span><br/>
+                <span ><span>片长:</span><span> 99 分钟</span></span><br/>
+                <span ><span>又名:</span><span> 汪洋血迷宮(台) </span></span>/汪洋血迷宮(台) / 轮回三角 / 三角形 / 迷失三角洲<br/>
+                <span >IMDb:</span> tt1187064<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>单亲母亲杰西（梅利莎·乔治 饰）和一帮朋友乘游艇出海游玩，但她总有一种有不好的事情发生的感觉。不久，他们便在海上遭遇一场强烈的风暴。游艇翻船，众人落海，几经挣扎他们好不容易爬到游艇残骸上来。正当他们无计可施之时，一艘巨大的游轮向众人缓缓驶来。众人欣喜过望，未加思索便登上这艘名为“艾俄洛斯”的游轮，结果发现这竟是一艘1930年便告失踪的神秘之船，而船上更是空无一人。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>源代码 Source Code</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt0945513.jpg" alt="源代码 Source Code"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.5<br/>
+                <span ><span>导演</span>: <span>邓肯·琼斯</span></span><br/>
+                <span ><span>编剧</span>: <span>本·雷普利</span></span><br/>
+                <span ><span>主演</span>: <span>杰克·吉伦哈尔 </span></span>/杰克·吉伦哈尔 / 维拉·法米加 / 米歇尔·莫纳汉 / 杰弗里·怀特 / 拉塞尔·皮特斯 / 詹姆斯·A·伍兹 / 迈克尔·阿登 / 乔·柯布登  / 卡斯·安瓦尔<br/>
+                <span ><span>类型:</span><span> 科幻 </span></span>/科幻 / 悬疑 / 惊悚<br/>
+                <span ><span>制片国家/地区:</span><span> 美国 </span></span>/美国 / 加拿大<br/>
+                <span ><span>语言:</span><span> 英语</span></span><br/>
+                <span ><span>上映日期:</span><span> 2011-08-30(中国大陆) </span></span>/2011-08-30(中国大陆) / 2011-03-11(西南偏南电影节) / 2011-04-01(美国)<br/>
+                <span ><span>片长:</span><span> 93分钟</span></span><br/>
+                <span ><span>又名:</span><span> 启动原始码(台) </span></span>/启动原始码(台) / 危机解密(港)<br/>
+                <span >IMDb:</span> tt0945513<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>在阿富汗执行任务的美国空军飞行员科特史蒂文斯上尉（杰克·吉伦哈尔 Jake Gyllenhaal 饰）突然惊醒，发现自己在一辆高速行驶的列车上，而他的身边坐着一个素不相识的女子克里斯蒂安（米歇尔·莫娜汉 Michelle Monaghan 饰）正在与自己讲话。科尔不知自己为什么会在这辆车上，而且他发现自己居然是以另一个人的身份存在，正当他迷惑不解的时候，列车上忽然发生爆炸……</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>火星救援 The Martian</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt3659388.jpg" alt="火星救援 The Martian"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.5<br/>
+                <span ><span>导演</span>: <span>雷德利·斯科特</span></span><br/>
+                <span ><span>编剧</span>: <span>德鲁·戈达德 </span></span>/德鲁·戈达德 / 安迪·威尔<br/>
+                <span ><span>主演</span>: <span>马特·达蒙 </span></span>/马特·达蒙 / 杰西卡·查斯坦 / 克里斯汀·韦格 / 杰夫·丹尼尔斯 / 迈克尔·佩纳 / 凯特·玛拉 / 肖恩·宾 / 塞巴斯蒂安·斯坦 / 唐纳德·格洛弗 / 切瓦特·埃加福 / 阿卡塞尔·亨涅 / 陈数 / 高雄 / 本尼迪克特·黄 / 麦肯兹·戴维斯 / 娜奥米·斯科特 / 丽丽·博尔丹 / 布莱恩·卡斯佩<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 科幻 / 冒险<br/>
+                <span ><span>制片国家/地区:</span><span> 英国 </span></span>/英国 / 美国 / 匈牙利 / 约旦<br/>
+                <span ><span>语言:</span><span> 英语 </span></span>/英语 / 汉语普通话<br/>
+                <span ><span>上映日期:</span><span> 2015-11-25(中国大陆) </span></span>/2015-11-25(中国大陆) / 2015-10-02(美国)<br/>
+                <span ><span>片长:</span><span> 142分钟</span></span>/142分钟/ 151分钟(加长版)<br/>
+                <span ><span>又名:</span><span> 火星任务(港) </span></span>/火星任务(港) / 绝地救援(台) / 火星人<br/>
+                <span >IMDb:</span> tt3659388<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>载人航天宇宙飞船阿瑞斯3号成功抵达火星，谁知一场破坏力极其巨大的风暴向宇航员们袭来，阿瑞斯3号被迫中断任务，紧急返航。撤离途中，宇航员马克·沃特尼（马特·达蒙 Matt Damon 饰）被飞船上吹落的零件击中，由于生还希望渺茫，队友们只得匆匆返航，并向世人宣告他已牺牲的事实。出乎意料的是，马克以极低的概率活了下来。他躲进驻火星的航天基地疗伤。下一次火星任务要等到四年后，而基地内的补给仅够他维持31天。短暂的绝望后，马克决定利用有限的食物，在这颗空无一人的星球上种植作物，寻找一线生机。与此同时，地球方面也很快发现马克生还的事实，他们想尽办法部署营救计划。孤军奋战的马克，能否等到救援队伍的到来？</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>冰雪奇缘 Frozen</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt2294629.jpg" alt="冰雪奇缘 Frozen"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.4<br/>
+                <span ><span>导演</span>: <span>克里斯·巴克 </span></span>/克里斯·巴克 / 珍妮弗·李<br/>
+                <span ><span>编剧</span>: <span>珍妮弗·李 </span></span>/珍妮弗·李 / 克里斯·巴克 / 夏恩·莫里斯<br/>
+                <span ><span>主演</span>: <span>克里斯汀·贝尔 </span></span>/克里斯汀·贝尔 / 伊迪娜·门泽尔 / 乔纳森·格罗夫 / 乔什·加德 / 圣蒂诺·方塔纳 / 艾伦·图代克 / 塞伦·希德 / 克里斯·威廉姆斯 / 斯蒂芬·安德森 / 玛雅·威尔逊 / 伊迪·麦克勒格 / 罗伯特·派恩 / 莫里斯·拉马奇 / 珍妮弗·李 / 莉薇·施图本劳赫 / 伊娃·贝拉 / 斯宾塞·莱西·加纳斯 / 泰里·布朗 / 杰西·科尔蒂 / 杰夫·马库斯 / 塔克·吉莫尔 / 保罗·布里格斯<br/>
+                <span ><span>类型:</span><span> 喜剧 </span></span>/喜剧 / 动画 / 歌舞 / 奇幻<br/>
+                <span ><span>制片国家/地区:</span><span> 美国</span></span><br/>
+                <span ><span>语言:</span><span> 英语 </span></span>/英语 / 冰岛语<br/>
+                <span ><span>上映日期:</span><span> 2014-02-05(中国大陆) </span></span>/2014-02-05(中国大陆) / 2013-11-27(美国)<br/>
+                <span ><span>片长:</span><span> 102分钟</span></span><br/>
+                <span ><span>又名:</span><span> 魔雪奇缘(港) </span></span>/魔雪奇缘(港) / 冰雪大冒险 / 冰雪皇后 / 白雪皇后 / 冰雪女王 / 冰冻公主<br/>
+                <span >IMDb:</span> tt2294629<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>在四面环海、风景如画的阿伦黛尔王国，生活着两位可爱美丽的小公主，艾莎和安娜。艾莎天生具有制造冰雪的能力，随着年龄的增长，她的能力越来越强，甚至险些夺走妹妹的生命。为此国王紧闭宫门，也中断了两姐妹的联系。悲哀的海难过后，艾莎（伊迪娜·门泽尔 Idina Menzel 配音 ）终于到了加冕的年龄，各国王公齐来祝贺。艾莎战战兢兢，唯恐被人识破隐藏了多年的秘密。然而当听说安娜（克里斯汀·贝尔 Kristen Bell 配音）将要和初次见面的南埃尔斯王子汉斯（圣蒂诺·方塔纳 Santino Fontana 配音）结婚时，依然情绪失控露出了马脚。在此之后她逃到山中，构建了属于自己的冰雪王国，而阿伦黛尔也陷入可怕的寒冷之中。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>哪吒之魔童降世</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt10627720.jpg" alt="哪吒之魔童降世"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.4<br/>
+                <span ><span>导演</span>: <span>饺子</span></span><br/>
+                <span ><span>编剧</span>: <span>饺子 </span></span>/饺子 / 易巧 / 魏芸芸<br/>
+                <span ><span>主演</span>: <span>吕艳婷 </span></span>/吕艳婷 / 囧森瑟夫 / 瀚墨 / 陈浩 / 绿绮 / 张珈铭 / 杨卫<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 喜剧 / 动画 / 奇幻<br/>
+                <span ><span>制片国家/地区:</span><span> 中国大陆</span></span><br/>
+                <span ><span>语言:</span><span> 汉语普通话</span></span><br/>
+                <span ><span>上映日期:</span><span> 2019-07-26(中国大陆) </span></span>/2019-07-26(中国大陆) / 2019-07-13(大规模点映)<br/>
+                <span ><span>片长:</span><span> 110分钟</span></span><br/>
+                <span ><span>又名:</span><span> 哪吒降世 </span></span>/哪吒降世 / Ne Zha / Nezha: Birth of the Demon Child<br/>
+                <span >IMDb:</span> tt10627720<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>天地灵气孕育出一颗能量巨大的混元珠，元始天尊将混元珠提炼成灵珠和魔丸，灵珠投胎为人，助周伐纣时可堪大用；而魔丸则会诞出魔王，为祸人间。元始天尊启动了天劫咒语，3年后天雷将会降临，摧毁魔丸。太乙受命将灵珠托生于陈塘关李靖家的儿子哪吒身上。然而阴差阳错，灵珠和魔丸竟然被掉包。本应是灵珠英雄的哪吒却成了混世大魔王。调皮捣蛋顽劣不堪的哪吒却徒有一颗做英雄的心。然而面对众人对魔丸的误解和即将来临的天雷的降临，哪吒是否命中注定会立地成魔？他将何去何从？</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>敦刻尔克 Dunkirk</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt5013056.jpg" alt="敦刻尔克 Dunkirk"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.4<br/>
+                <span ><span>导演</span>: <span>克里斯托弗·诺兰</span></span><br/>
+                <span ><span>编剧</span>: <span>克里斯托弗·诺兰</span></span><br/>
+                <span ><span>主演</span>: <span>菲恩·怀特海德 </span></span>/菲恩·怀特海德 / 汤姆·格林-卡尼 / 杰克·劳登 / 哈里·斯泰尔斯 / 阿奈林·巴纳德 / 汤姆·哈迪 / 马克·里朗斯 / 巴里·基奥恩 / 基里安·墨菲 / 詹姆斯·达西 / 肯尼思·布拉纳 / 李·阿姆斯特朗 / 詹姆斯·布鲁尔 / 达米安·勃纳尔 / 布莱恩·威纳尔 / 哈利·理查森 / 艾略特·提特恩索 / 凯文·格思里 / 巴比·洛克伍德 / 米歇尔·贝尔 / 比利·豪尔 / 迈克尔·凯恩 / 约翰·诺兰 / 米兰达·诺兰<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 历史 / 战争<br/>
+                <span ><span>制片国家/地区:</span><span> 英国 </span></span>/英国 / 法国 / 美国 / 荷兰<br/>
+                <span ><span>语言:</span><span> 英语 </span></span>/英语 / 法语 / 德语<br/>
+                <span ><span>上映日期:</span><span> 2017-09-01(中国大陆) </span></span>/2017-09-01(中国大陆) / 2017-07-13(伦敦首映) / 2017-07-21(美国)<br/>
+                <span ><span>片长:</span><span> 107分钟</span></span><br/>
+                <span ><span>又名:</span><span> 邓寇克大行动(港) </span></span>/邓寇克大行动(港) / 敦克尔克大行动(台) / 敦刻尔克大撤退<br/>
+                <span >IMDb:</span> tt5013056<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>故事改编自著名的二战军事事件“敦刻尔克大撤退”。二战初期，40万英法盟军被敌军围困于敦刻尔克的海滩之上，面对敌军步步逼近的绝境，形势万分危急。英国政府和海军发动大批船员，动员人民起来营救军队。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>爱乐之城 La La Land</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt3783958.jpg" alt="爱乐之城 La La Land"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.4<br/>
+                <span ><span>导演</span>: <span>达米恩·查泽雷</span></span><br/>
+                <span ><span>编剧</span>: <span>达米恩·查泽雷</span></span><br/>
+                <span ><span>主演</span>: <span>瑞恩·高斯林 </span></span>/瑞恩·高斯林 / 艾玛·斯通 / 约翰·传奇 / 罗丝玛丽·德薇特 / 芬·维特洛克 / 杰西卡·罗德 / 水野索诺娅 / 考莉·埃尔南德斯 / J·K·西蒙斯 / 汤姆·艾弗瑞特·斯科特 / 米根·费伊 / 达蒙·冈普顿 / 贾森·福克斯 / 乔什·平茨 / 艾米·科恩 / 特里·沃尔特斯 / 汤姆·谢尔顿 / 信达·亚当斯 / 克劳丁·克劳迪奥 / D·A·瓦拉赫 / 特雷弗·里斯奥尔 / 奥莉维亚·汉密尔顿 / 安娜·查泽雷 / 马里乌斯·代·弗里斯 / 妮科尔·库隆 / 迈尔斯·安德森 / 约翰·辛德曼 / 瓦拉里·雷·米勒 / 基夫·范登·霍伊维尔 / 佐伊·霍尔 / 登普西·帕皮恩 / 辛德拉·车<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 爱情 / 歌舞<br/>
+                <span ><span>制片国家/地区:</span><span> 美国</span></span><br/>
+                <span ><span>语言:</span><span> 英语</span></span><br/>
+                <span ><span>上映日期:</span><span> 2017-02-14(中国大陆) </span></span>/2017-02-14(中国大陆) / 2016-08-31(威尼斯电影节) / 2016-12-25(美国)<br/>
+                <span ><span>片长:</span><span> 128分钟</span></span><br/>
+                <span ><span>又名:</span><span> 星声梦里人(港) </span></span>/星声梦里人(港) / 乐来越爱你(台) / 爵士情缘 / 啦啦之地<br/>
+                <span >IMDb:</span> tt3783958<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>米娅（艾玛·斯通 Emma Stone 饰）渴望成为一名演员，但至今她仍旧只是片场咖啡厅里的一名平凡的咖啡师，尽管不停的参加着大大小小的试镜，但米娅收获的只有失败。某日，在一场派对之中，米娅邂逅了名为塞巴斯汀（瑞恩·高斯林 Ryan Gosling 饰）的男子，起初两人之间产生了小小的矛盾，但很快，米娅便被塞巴斯汀身上闪耀的才华以及他对爵士乐的纯粹追求所吸引，最终两人走到了一起。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>钢铁侠 Iron Man</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt0371746.jpg" alt="钢铁侠 Iron Man"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.4<br/>
+                <span ><span>导演</span>: <span>乔恩·费儒</span></span><br/>
+                <span ><span>编剧</span>: <span>阿特·马库姆 </span></span>/阿特·马库姆 / 马特·霍洛维 / 马克·弗格斯 / 霍克·奥斯比<br/>
+                <span ><span>主演</span>: <span>小罗伯特·唐尼 </span></span>/小罗伯特·唐尼 / 泰伦斯·霍华德 / 格温妮斯·帕特洛 / 杰夫·布里吉斯 / 莱丝莉·比伯 / 肖恩·托布 / 保罗·贝坦尼 / 乔恩·费儒 / 克拉克·格雷格<br/>
+                <span ><span>类型:</span><span> 动作 </span></span>/动作 / 科幻 / 惊悚 / 冒险<br/>
+                <span ><span>制片国家/地区:</span><span> 美国</span></span><br/>
+                <span ><span>语言:</span><span> 英语 </span></span>/英语 / 波斯语 / 乌尔都语 / 阿拉伯语<br/>
+                <span ><span>上映日期:</span><span> 2008-04-30(中国大陆) </span></span>/2008-04-30(中国大陆) / 2008-04-14(悉尼首映) / 2008-05-02(美国)<br/>
+                <span ><span>片长:</span><span> 126分钟</span></span><br/>
+                <span ><span>又名:</span><span> 铁甲奇侠(港) </span></span>/铁甲奇侠(港) / 钢铁人(台) / 铁人<br/>
+                <span >IMDb:</span> tt0371746<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>斯塔克军火公司是美军在全球范围内第一大军火供应商，其新任掌门人托尼•斯塔克（小罗伯特·唐尼 Robert Downey Jr. 饰）风流倜傥，天资聪颖。他与公司元老俄巴迪亚•斯坦（杰夫·布里吉斯 Jeff Bridges 饰）合作无间，共同将斯塔克公司的业务推向顶峰。现 实生活中的托尼热衷收集名贵跑车，搞点儿发明创造，当然露水姻缘更不可少。所幸他身边有维吉尼亚•波茨（格温妮斯·帕特洛 Gwyneth Paltrow 饰）这样的好助手细心打理一切，才让他能自由自在过着贵公子的生活。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>哈利·波特与混血王子 Harry Potter and the Half-Blood Prince</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt0417741.jpg" alt="哈利·波特与混血王子 Harry Potter and the Half-Blood Prince"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.3<br/>
+                <span ><span>导演</span>: <span>大卫·叶茨</span></span><br/>
+                <span ><span>编剧</span>: <span>史蒂夫·克洛夫斯 </span></span>/史蒂夫·克洛夫斯 / J. K. 罗琳<br/>
+                <span ><span>主演</span>: <span>丹尼尔·雷德克里夫 </span></span>/丹尼尔·雷德克里夫 / 艾玛·沃森 / 鲁伯特·格林特 / 迈克尔·刚本 / 大卫·勒格诺 / 埃拉丽卡·加拉切 / 吉姆·布劳德本特 / 杰拉丁·萨莫维尔 / 邦妮·怀特 / 朱丽·沃特斯 / 海伦娜·伯翰·卡特 / 海伦·麦克洛瑞 / 蒂莫西·斯波 / 艾伦·瑞克曼 / 奥利弗·菲尔普斯 / 詹姆斯·菲尔普斯 / 弗雷迪·史卓玛 / 杰西·卡芙 / 汤姆·费尔顿 / 阿尔弗雷德·伊诺奇 / 伊文娜·林奇 / 罗伯特·克诺斯 / Louis Cordice / 斯嘉丽·伯恩 / 杰米·威莱特 / 乔什·赫德曼 / 罗彼·考特拉尼 / 沃维克·戴维斯 / 大卫·布拉德利 / 马修·刘易斯 / 威廉姆·麦灵 / 安娜·谢弗 / 戴文·穆雷 / 乔治娜·雷尼达斯 / 玛吉·史密斯 / 伊莎贝拉·拉夫兰德 / 艾芙珊·阿扎德 / 谢发丽·裘德胡里 / 赫洛·费因斯-提芬 / 保罗·里特 / 大卫·休里斯 / 娜塔丽·特纳 / 马克·威廉姆斯 / 弗兰克·迪兰 / 杰玛·琼斯 / 拉尔夫·伊内森 / 梁佩诗 / 亚瑟·博文 / Paul Davies / 艾略特·弗朗西斯 / 鲁斯迪·戈夫 / 詹森·艾萨克 / 奥利维亚·杰森 / 特蕾莎·马奥尼 / 弗莱迪·罗斯 / 本·谢博德 / 卡伦姆·西维耶 / 艾美达·斯丹顿<br/>
+                <span ><span>类型:</span><span> 奇幻 </span></span>/奇幻 / 冒险<br/>
+                <span ><span>制片国家/地区:</span><span> 英国 </span></span>/英国 / 美国<br/>
+                <span ><span>语言:</span><span> 英语</span></span><br/>
+                <span ><span>上映日期:</span><span> 2009-07-15(中国大陆) </span></span>/2009-07-15(中国大陆) / 2009-07-06(英国)<br/>
+                <span ><span>片长:</span><span> 153分钟</span></span><br/>
+                <span ><span>又名:</span><span> 哈利波特6：混血王子的背叛(港</span></span>/哈利波特6：混血王子的背叛(港/台) / 哈6 / HP and the HBP<br/>
+                <span >IMDb:</span> tt0417741<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>这一集中，食死徒开始肆无忌惮横行于麻瓜和魔法两个世界中，霍格沃茨内忧外患，危机重重。邓不利多（迈克尔·甘本 Michael Gambon 饰）带着哈利（丹尼尔·雷德克里夫 Daniel Radcliffe 饰）辗转找到隐居多年的霍拉斯·斯拉格霍恩，请他出山接替斯内普（艾伦 ·里克曼 Alan Rickman 饰）担任魔药学的老师。霍拉斯曾经教授过无数优秀的学生，而汤姆·里德尔——伏地魔——正是他最出色的一名弟子。邓不利多深信霍拉斯保有伏地魔不死身的秘密，他希望哈利能够说服霍拉斯。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>复仇者联盟 The Avengers</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt0848228.jpg" alt="复仇者联盟 The Avengers"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.3<br/>
+                <span ><span>导演</span>: <span>乔斯·韦登</span></span><br/>
+                <span ><span>编剧</span>: <span>乔斯·韦登 </span></span>/乔斯·韦登 / 扎克·佩恩<br/>
+                <span ><span>主演</span>: <span>小罗伯特·唐尼 </span></span>/小罗伯特·唐尼 / 克里斯·埃文斯 / 斯嘉丽·约翰逊 / 克里斯·海姆斯沃斯 / 杰瑞米·雷纳 / 马克·鲁弗洛 / 塞缪尔·杰克逊 / 汤姆·希德勒斯顿 / 斯特兰·斯卡斯加德 / 寇碧·史莫德斯 / 克拉克·格雷格 / 保罗·贝坦尼 / 格温妮斯·帕特洛<br/>
+                <span ><span>类型:</span><span> 动作 </span></span>/动作 / 科幻 / 奇幻 / 冒险<br/>
+                <span ><span>制片国家/地区:</span><span> 美国</span></span><br/>
+                <span ><span>语言:</span><span> 英语 </span></span>/英语 / 俄语<br/>
+                <span ><span>上映日期:</span><span> 2012-05-05(中国大陆) </span></span>/2012-05-05(中国大陆) / 2012-05-04(美国)<br/>
+                <span ><span>片长:</span><span> 142分钟</span></span><br/>
+                <span ><span>又名:</span><span> 复仇者 </span></span>/复仇者 / 复联 / 妇联(豆友译名)<br/>
+                <span >IMDb:</span> tt0848228<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>一股突如其来的强大邪恶势力对地球造成致命威胁，没有任何一个超级英雄能够单独抵挡。长期致力于保护全球安危的神盾局（SHIELD）感到措手不及，其指挥官“独眼侠”尼克·弗瑞（塞缪尔·杰克逊 Samuel L. Jackson 饰）意识到他必须创建一个“史上最强”的联盟组织， 云集各方超级英雄一起发威，才能拯救世界于水深火热，抵御黑暗势力的侵袭。于是由六大超级英雄——“钢铁侠”（小罗伯特·唐尼 Robert Downey Jr. 饰）、“雷神” （克里斯·海姆斯沃斯 Chris Hemsworth 饰）、“美国队长”（克里斯·埃文斯 Chris Evans 饰）、“绿巨人” （马克·鲁弗洛 Mark Ruffalo 饰）、“黑寡妇”（斯嘉丽·约翰逊 Scarlett Johansson 饰）和“鹰眼”（杰瑞米·雷纳 Jeremy Renner 饰）组成的 ...</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>流浪地球2</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt13539646.jpg" alt="流浪地球2"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.3<br/>
+                <span ><span>导演</span>: <span>郭帆</span></span><br/>
+                <span ><span>编剧</span>: <span>杨治学 </span></span>/杨治学 / 龚格尔 / 郭帆 / 叶濡畅<br/>
+                <span ><span>主演</span>: <span>吴京 </span></span>/吴京 / 刘德华 / 李雪健 / 沙溢 / 宁理 / 王智 / 朱颜曼滋 / 安地 / 王若熹  / 佟丽娅 / 伟大力 / 张衣 / 天使 / 克拉拉 / 叶展飞 / 倪腾 / 胡先煦 / 霍青 / 刘寅 / 国义骞 / 吴恩璇 / 王红卫 / 孔大山 / 徐建 / 刘佳沄 / 丁燕来 / 郜昂 / 严华 / 李仁 / 洪真 / 王磊 / 王一通 / 杨洪涛 / 赵叶索 / 李路琦 / 黄纪渊 / 郑楚一 / 吴静一 / 付嘉灏 / 瓦伦廷·沃罗布耶夫 / 李一冉 / 周强 / 朱超艺 / 何金和龙 / 何金和金 / 张涛 / 向进 / 李沛东 <br/>
+                <span ><span>类型:</span><span> 科幻 </span></span>/科幻 / 冒险 / 灾难<br/>
+                <span ><span>制片国家/地区:</span><span> 中国大陆</span></span><br/>
+                <span ><span>语言:</span><span> 汉语普通话 </span></span>/汉语普通话 / 俄语 / 英语 / 印地语 / 法语 / 葡萄牙语 / 日语 / 韩语 / 泰语 / 南非荷兰语<br/>
+                <span ><span>上映日期:</span><span> 2023-01-22(中国大陆)</span></span><br/>
+                <span ><span>片长:</span><span> 173分钟</span></span><br/>
+                <span ><span>又名:</span><span> The Wandering Earth Ⅱ </span></span>/The Wandering Earth Ⅱ / The Wandering Earth 2 / 《流浪地球》前传<br/>
+                <span >IMDb:</span> tt13539646<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>在并不遥远的未来，太阳急速衰老与膨胀，再过几百年整个太阳系将被它吞噬毁灭。为了应对这场史无前例的危机，地球各国放下芥蒂，成立联合政府，试图寻找人类存续的出路。通过摸索与考量，最终推着地球逃出太阳系的“移山计划”获得压倒性胜利。人们着手建造上万台巨大的行星发动机，带着地球踏上漫漫征程。满腔赤诚的刘培强（吴京 饰）和韩朵朵（王智 饰）历经层层考验成为航天员大队的一员，并由此相知相恋。但是漫漫征途的前方，仿佛有一股神秘的力量不断破坏者人类的自救计划。看似渺小的刘培强、量子科学家图恒宇（刘德华 饰）、联合政府中国代表周喆直（李雪健 饰）以及无数平凡的地球人，构成了这项伟大计划的重要一环……</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>西游记之大圣归来</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt4644382.jpg" alt="西游记之大圣归来"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.3<br/>
+                <span ><span>导演</span>: <span>田晓鹏</span></span><br/>
+                <span ><span>编剧</span>: <span>田晓鹏 </span></span>/田晓鹏 / 刘虎 / 米粒 / 金冉 / 金成<br/>
+                <span ><span>主演</span>: <span>张磊 </span></span>/张磊 / 林子杰 / 吴文伦 / 童自荣 / 刘九容 / 吴迪 / 刘北辰 / 赵乾景 / 周帅<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 动画 / 奇幻<br/>
+                <span ><span>制片国家/地区:</span><span> 中国大陆</span></span><br/>
+                <span ><span>语言:</span><span> 汉语普通话 </span></span>/汉语普通话 / 粤语<br/>
+                <span ><span>上映日期:</span><span> 2015-07-10(中国大陆)</span></span><br/>
+                <span ><span>片长:</span><span> 89分钟</span></span><br/>
+                <span ><span>又名:</span><span> 大圣归来 </span></span>/大圣归来 / 猴王 / 西游记3D / Monkey King: Hero is Back / CUG: King of Heroes<br/>
+                <span >IMDb:</span> tt4644382<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>五百年前，由石猴变化而成的齐天大圣孙悟空（张磊 配音）大闹天宫，最终被如来佛祖镇在了五行山下。此去经年，长安城内突然遭到山妖洗劫，童男童女哭声连连，命悬一线。危机时刻，自幼被行脚僧法明（吴文伦 配音）抚养长大的江流儿（林子杰 配音）救下了一个小女孩，结果反遭山妖追杀。经过一番追逐，江流儿无意中解除了孙悟空的封印，齐天大圣自然好好地将山妖教训了一番。因为封印未解开，悟空不得不护送江流儿和小女孩回长安，一路上又遭遇了猪八戒（刘九容 配音）和白龙马。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>驴得水</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt6167014.jpg" alt="驴得水"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.3<br/>
+                <span ><span>导演</span>: <span>周申 </span></span>/周申 / 刘露<br/>
+                <span ><span>编剧</span>: <span>周申 </span></span>/周申 / 刘露<br/>
+                <span ><span>主演</span>: <span>任素汐 </span></span>/任素汐 / 大力 / 刘帅良 / 裴魁山 / 阿如那 / 韩彦博 / 卜冠今 / 王堃 / 高阳 / 苏千越 / 麦亚瑟 / 王峰<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 喜剧<br/>
+                <span ><span>制片国家/地区:</span><span> 中国大陆</span></span><br/>
+                <span ><span>语言:</span><span> 汉语普通话</span></span><br/>
+                <span ><span>上映日期:</span><span> 2016-10-28(中国大陆)</span></span><br/>
+                <span ><span>片长:</span><span> 111分钟</span></span><br/>
+                <span ><span>又名:</span><span> Mr. Donkey</span></span><br/>
+                <span >IMDb:</span> tt6167014<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>民国时期，在一个远离喧嚣和战乱的偏远山区，伫立着一所简陋平凡的学校。校长孙恒海（大力 饰）带着女儿孙佳（卜冠今 饰）以及裴魁山（裴魁山 饰）、张一曼（任素汐 饰）、周铁男（刘帅良 饰）这几个有着各种污点的教师栖身于此。他们豁达乐观，而又为艰苦生活所恼，于是把院子里的一头驴起了名字当作教员报了上去，以吃空饷。可就在某天，校长得知教育部要派专员来检查，慌乱之际，偶然来到学校的铜匠（阿如那 饰）如同救命稻草出现在众人面前。他们央求铜匠伪装成教员，可是一切真能顺利蒙混过关吗？</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>天才枪手 ฉลาดเกมส์โกง</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt6788942.jpg" alt="天才枪手 ฉลาดเกมส์โกง"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.2<br/>
+                <span ><span>导演</span>: <span>纳塔吾·彭皮里亚</span></span><br/>
+                <span ><span>编剧</span>: <span>塔妮达·汉塔维瓦塔娜 </span></span>/塔妮达·汉塔维瓦塔娜 / 瓦苏红·皮娅罗姆娜 / 纳塔吾·彭皮里亚<br/>
+                <span ><span>主演</span>: <span>茱蒂蒙·琼查容苏因 </span></span>/茱蒂蒙·琼查容苏因 / 查侬·散顶腾古 / 依莎亚·贺苏汪 / 披纳若·苏潘平佑 / 塔内·瓦拉库努娄 / 莎琳雷特·托马斯 / 伊戈·米基塔斯 / 帕辛·宽萨塔彭 / 萨哈贾克·波斯安吉特 / 坎嘉娜·维耐潘尼 / 育塔彭·瓦拉努科洛楚 / 诺帕瓦特·里基特王<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 悬疑 / 犯罪<br/>
+                <span ><span>制片国家/地区:</span><span> 泰国</span></span><br/>
+                <span ><span>语言:</span><span> 泰语 </span></span>/泰语 / 英语<br/>
+                <span ><span>上映日期:</span><span> 2017-10-13(中国大陆) </span></span>/2017-10-13(中国大陆) / 2017-05-03(泰国)<br/>
+                <span ><span>片长:</span><span> 130分钟</span></span><br/>
+                <span ><span>又名:</span><span> 出猫特攻队(港) </span></span>/出猫特攻队(港) / 模犯生(台) / 完美作弊 / 高智商的作弊游戏 / 坏天才 / Bad Genius / Chalard games goeng<br/>
+                <span >IMDb:</span> tt6788942<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>影片根据2014年轰动一时的亚洲考场作弊案改编，讲述了天才学霸利用高智商考场作弊牟取暴利的故事。出生平凡的天才少女Lynn（茱蒂蒙·琼查容苏因 饰）在进入贵族学校后，结识了富二代同学Grace（依莎亚·贺苏汪饰）与Pat（披纳若·苏潘平佑饰），从此开始了考场作弊生涯，与此同时，另一名记忆力极佳的天才学霸Bank（查侬·散顶腾古 饰）发现了Lynn不为人知的“交易”。经过多场险象环生的“作弊战争”后，Lynn接下最后一单在国际考场上为富家子弟作弊的天价委托。一场横跨两大洲的完美作弊方案横空出世，然而一切并不像他们想的那么简单……</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>少年的你</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt9586294.jpg" alt="少年的你"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.2<br/>
+                <span ><span>导演</span>: <span>曾国祥</span></span><br/>
+                <span ><span>编剧</span>: <span>林咏琛 </span></span>/林咏琛 / 李媛 / 许伊萌<br/>
+                <span ><span>主演</span>: <span>周冬雨 </span></span>/周冬雨 / 易烊千玺 / 尹昉 / 周也 / 吴越 / 黄觉 / 张艺凡 / 张耀 / 张歆怡 / 赵润南 / 郜玄铭<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 爱情 / 犯罪<br/>
+                <span ><span>制片国家/地区:</span><span> 中国大陆 </span></span>/中国大陆 / 中国香港<br/>
+                <span ><span>语言:</span><span> 汉语普通话</span></span><br/>
+                <span ><span>上映日期:</span><span> 2019-10-25(中国大陆)</span></span><br/>
+                <span ><span>片长:</span><span> 135分钟</span></span><br/>
+                <span ><span>又名:</span><span> 少年的你，如此美丽 </span></span>/少年的你，如此美丽 / Better Days<br/>
+                <span >IMDb:</span> tt9586294<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>陈念（周冬雨 饰）是一名即将参加高考的高三学生，同校女生胡晓蝶（张艺凡 饰）的跳楼自杀让她的生活陷入了困顿之中。胡晓蝶死后，陈念遭到了以魏莱（周也 饰）为首的三人组的霸凌，魏莱虽然表面上看来是乖巧的优等生，实际上却心思毒辣，胡晓蝶的死和她有着千丝万缕的联系。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>穿普拉达的女王 The Devil Wears Prada</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt0458352.jpg" alt="穿普拉达的女王 The Devil Wears Prada"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.2<br/>
+                <span ><span>导演</span>: <span>大卫·弗兰科尔</span></span><br/>
+                <span ><span>编剧</span>: <span>艾莲·布洛什·麦肯纳 </span></span>/艾莲·布洛什·麦肯纳 / 劳伦·魏丝伯格<br/>
+                <span ><span>主演</span>: <span>梅丽尔·斯特里普 </span></span>/梅丽尔·斯特里普 / 安妮·海瑟薇 / 艾米莉·布朗特 / 斯坦利·图齐 / 西蒙·贝克 / 艾德里安·格尼尔 / 翠茜·索姆斯 / 里奇·索莫 / 丹尼尔·逊亚塔 / 大卫·马歇尔·格兰特 / 詹姆斯·诺顿 / 蒂波·费德曼 / 丽贝卡·麦德 / Jimena Hoyos / 吉赛尔·邦辰 / 乔治·乌尔夫 / 约翰·罗斯曼 / 斯特芬妮·斯佐斯塔克 / Colleen Dengel / Suzanne Dengel / 海蒂·克鲁姆 / 瓦伦蒂诺·加拉瓦尼 / 布里姬特·豪尔 / 伊内丝·里韦罗 / 阿丽莎·萨瑟兰 / Robert Verdi / Paul Keany / David Callegati / 弗兰克·安妮罗 / 亚历山大·布莱斯 / Molyneau DuBelle / 阿丽克谢·吉尔莫 / Scott Hatfield / Hector Lincoln / 尼娜·利安德雷罗 / Carrie Navarro / Justin Restivo / 艾米丽·山德伯格 / Andrea Bertola / 泰勒·崔德威尔 / 莱恩·瓦莱丽 / 多纳泰拉·范思哲 / 劳伦·魏丝伯格<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 喜剧<br/>
+                <span ><span>制片国家/地区:</span><span> 美国 </span></span>/美国 / 法国<br/>
+                <span ><span>语言:</span><span> 英语 </span></span>/英语 / 法语<br/>
+                <span ><span>上映日期:</span><span> 2007-02-27(中国大陆) </span></span>/2007-02-27(中国大陆) / 2006-06-30(美国)<br/>
+                <span ><span>片长:</span><span> 109 分钟</span></span><br/>
+                <span ><span>又名:</span><span> 时尚女魔头 </span></span>/时尚女魔头 / 穿Prada的恶魔(港) / 穿着Prada的恶魔(台) / 穿普拉达的女魔头<br/>
+                <span >IMDb:</span> tt0458352<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>初涉社会的安德丽娅•桑切丝（安妮•海瑟薇饰）来到了著名时尚杂志《RUNWAY》面试，以聪明得到了主编米兰达•普雷斯丽（梅利尔•斯特里普）的特许，让她担任自己的第二助理。开始的时候安德丽娅感到十分委屈，就算自己多努力工作也无法得到赞赏，经一位老前辈的指点便重新改造自己。工作越来越顺，甚至取代了第一助理在米兰达心中的地位，决定带着这个聪明的女孩前往法国。可安德丽的改变让她失去了男友及朋友的爱，令她非常矛盾。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>红海行动</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt6878882.jpg" alt="红海行动"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.2<br/>
+                <span ><span>导演</span>: <span>林超贤</span></span><br/>
+                <span ><span>编剧</span>: <span>冯骥 </span></span>/冯骥 / 陈珠珠 / 林明杰<br/>
+                <span ><span>主演</span>: <span>张译 </span></span>/张译 / 黄景瑜 / 海清 / 杜江 / 蒋璐霞 / 尹昉 / 王强 / 郭家豪 / 王雨甜 / 麦亨利 / 张涵予 / 王彦霖<br/>
+                <span ><span>类型:</span><span> 动作 </span></span>/动作 / 战争<br/>
+                <span ><span>制片国家/地区:</span><span> 中国大陆 </span></span>/中国大陆 / 中国香港<br/>
+                <span ><span>语言:</span><span> 汉语普通话 </span></span>/汉语普通话 / 阿拉伯语 / 英语 / 索马里语 / 粤语<br/>
+                <span ><span>上映日期:</span><span> 2018-02-16(中国大陆) </span></span>/2018-02-16(中国大陆) / 2020-07-24(中国大陆重映)<br/>
+                <span ><span>片长:</span><span> 138分钟</span></span><br/>
+                <span ><span>又名:</span><span> 刀锋·红海行动 </span></span>/刀锋·红海行动 / 红海风暴 / Operation Red Sea<br/>
+                <span >IMDb:</span> tt6878882<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>中东国家伊维亚共和国发生政变，武装冲突不断升级。刚刚在索马里执行完解救人质任务的海军护卫舰临沂号，受命前往伊维亚执行撤侨任务。舰长高云（张涵予 饰）派出杨锐（张译 饰）率领的蛟龙突击队登陆战区，护送华侨安全撤离。谁知恐怖组织扎卡却将撤侨部队逼入交火区，一场激烈的战斗在所难免。与此同时，法籍华人记者夏楠（海清 饰）正在伊维亚追查威廉·柏森博士贩卖核原料的事实，而扎卡则突袭柏森博士所在的公司，意图抢走核原料。混战中，一名隶属柏森博士公司的中国员工成为人质。为了解救该人质，八名蛟龙队员必须潜入有150名恐怖分子的聚集点，他们用自己的信念和鲜血铸成中国军人顽强不屈的丰碑！</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>调音师 Andhadhun</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt8108198.jpg" alt="调音师 Andhadhun"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.2<br/>
+                <span ><span>导演</span>: <span>斯里兰姆·拉格万</span></span><br/>
+                <span ><span>编剧</span>: <span>阿里吉特·比沙什 </span></span>/阿里吉特·比沙什 / 约戈什·查德卡尔 / 斯里兰姆·拉格万 / 赫曼斯·饶 / 普哈·拉达·瑟蒂 / 奥利维耶·特雷内<br/>
+                <span ><span>主演</span>: <span>阿尤斯曼·库拉纳 </span></span>/阿尤斯曼·库拉纳 / 塔布 / 拉迪卡·艾普特 / 安尔·德霍万 / 马纳夫·维吉 / 阿什维尼·卡尔塞卡 / 查亚·卡达姆 / 萨基尔·侯赛因 / 拉什米·阿格德卡 / 莫希尼·凯瓦拉曼<br/>
+                <span ><span>类型:</span><span> 喜剧 </span></span>/喜剧 / 悬疑 / 惊悚 / 犯罪<br/>
+                <span ><span>制片国家/地区:</span><span> 印度</span></span><br/>
+                <span ><span>语言:</span><span> 印地语 </span></span>/印地语 / 英语<br/>
+                <span ><span>上映日期:</span><span> 2019-04-03(中国大陆) </span></span>/2019-04-03(中国大陆) / 2018-10-05(印度)<br/>
+                <span ><span>片长:</span><span> 139分钟</span></span><br/>
+                <span ><span>又名:</span><span> 看不见的旋律 </span></span>/看不见的旋律 / 调琴师 / 盲调 / The Blind Melody<br/>
+                <span >IMDb:</span> tt8108198<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>双目失明的钢琴家阿卡什（阿尤斯曼·库拉纳 Ayushmann Khurrana 饰）为了参加国际大赛，平日里通过私人授课赚取经费。事实上他的眼睛完全正常，只不过希望通过这种方式感受不同的生活。因为一场意外，阿卡什结识了美丽的姑娘苏菲（拉迪卡·艾普特 Radhika Apte 饰）。凭借出色的演奏技巧，阿卡什在苏菲父亲经营的西餐馆谋得兼职。他的演奏不仅令食客们倾倒，更虏获了苏菲的心。某天，阿卡什接受过气的影星普拉默（安尔·德霍万 Anil Dhawan 饰）的邀请，登门为对方的妻子西米（塔布 Tabu 饰）演奏庆生，谁知却亲眼目睹了倒在血泊中的普拉默的尸体。惊慌失措的阿卡什假装镇定，虽然暂时骗过了西米及其情夫，但是他的秘密还是慢慢被人戳穿……</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>复仇者联盟3：无限战争 Avengers: Infinity War</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt4154756.jpg" alt="复仇者联盟3：无限战争 Avengers: Infinity War"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.1<br/>
+                <span ><span>导演</span>: <span>安东尼·罗素 </span></span>/安东尼·罗素 / 乔·罗素<br/>
+                <span ><span>编剧</span>: <span>杰克·科比 </span></span>/杰克·科比 / 克里斯托弗·马库斯 / 斯蒂芬·麦克菲利 / 吉姆·斯特林<br/>
+                <span ><span>主演</span>: <span>小罗伯特·唐尼 </span></span>/小罗伯特·唐尼 / 克里斯·海姆斯沃斯 / 克里斯·埃文斯 / 马克·鲁弗洛 / 乔什·布洛林 / 佐伊·索尔达娜 / 本尼迪克特·康伯巴奇 / 克里斯·帕拉特 / 汤姆·赫兰德 / 伊丽莎白·奥尔森 / 保罗·贝坦尼 / 斯嘉丽·约翰逊 / 查德维克·博斯曼 / 塞巴斯蒂安·斯坦 / 唐·钱德尔 / 汤姆·希德勒斯顿 / 安东尼·麦凯 / 本尼迪克特·黄 / 戴夫·巴蒂斯塔 / 布莱德利·库珀 / 范·迪塞尔 / 凯伦·吉兰 / 利蒂希娅·赖特 / 庞·克莱门捷夫 / 凯莉·库恩 / 汤姆-沃恩-劳勒 / 海登·瓦尔希 / 迈克尔·詹姆斯·肖 / 泰瑞·诺塔里 / 本尼西奥·德尔·托罗 / 彼特·丁拉基 / 罗斯·马昆德 / 丹娜·奎里拉 / 温斯顿·杜克 / 弗洛伦丝·卡松巴 / 塞缪尔·杰克逊 / 雅各布·巴特朗 / 斯坦·李<br/>
+                <span ><span>类型:</span><span> 动作 </span></span>/动作 / 科幻 / 奇幻 / 冒险<br/>
+                <span ><span>制片国家/地区:</span><span> 美国</span></span><br/>
+                <span ><span>语言:</span><span> 英语</span></span><br/>
+                <span ><span>上映日期:</span><span> 2018-05-11(中国大陆) </span></span>/2018-05-11(中国大陆) / 2018-04-23(加州首映) / 2018-04-27(美国)<br/>
+                <span ><span>片长:</span><span> 149分钟</span></span><br/>
+                <span ><span>又名:</span><span> 复仇者联盟3：无限之战(港) </span></span>/复仇者联盟3：无限之战(港) / 复仇者联盟：无限之战(台) / 复仇者联盟3：无尽之战 / 复联3 / 妇联3(豆友译名) / 复仇者联盟3：灭霸传(豆友译名) / Avengers: Infinity War - Part I / The Avengers 3: Part 1<br/>
+                <span >IMDb:</span> tt4154756<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>最先与灭霸军团遭遇的雷神索尔一行遭遇惨烈打击，洛基遇害，空间宝石落入灭霸之手。未几，灭霸的先锋部队杀至地球，一番缠斗后掳走奇异博士。为阻止时间宝石落入敌手，斯塔克和蜘蛛侠闯入了敌人的飞船。与此同时，拥有心灵宝石的幻视也遭到外星侵略者的袭击，为此美国队长、黑寡妇等人将其带到瓦坎达王国，向黑豹求助。幸免于难的索尔与星爵一行相逢，随后他们兵分两路。索尔与火箭、格鲁特踏上再铸雷神之锤的旅程，星爵则与卡魔拉等人试图阻止灭霸的恶行。而知晓灵魂宝石下落的卡魔拉，同样是其义父灭霸追踪的对象。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>碟中谍6：全面瓦解 Mission: Impossible - Fallout</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt4912910.jpg" alt="碟中谍6：全面瓦解 Mission: Impossible - Fallout"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.1<br/>
+                <span ><span>导演</span>: <span>克里斯托弗·麦奎里</span></span><br/>
+                <span ><span>编剧</span>: <span>克里斯托弗·麦奎里 </span></span>/克里斯托弗·麦奎里 / 布鲁斯·盖勒<br/>
+                <span ><span>主演</span>: <span>汤姆·克鲁斯 </span></span>/汤姆·克鲁斯 / 亨利·卡维尔 / 文·瑞姆斯 / 西蒙·佩吉 / 丽贝卡·弗格森 / 西恩·哈里斯 / 安吉拉·贝塞特 / 凡妮莎·柯比 / 米歇尔·莫纳汉 / 韦斯·本特利 / 费雷德里克·施密特 / 亚历克·鲍德温 / 杨亮 / 克里斯托弗·约纳尔 / 沃尔夫·布利策 / 拉斐尔·琼勒 / 安德鲁·卡扎纳夫·平 / 克里斯多夫·德·舒瓦西 / 拉裴尔·德普雷 / 让·巴普蒂斯特·菲永 / 马克斯·盖勒 / 奥利维尔·体班德 / 亚历山大·普尔 / 阿利克斯·贝纳泽什 / 乔伊·安沙 / 维利贝·托皮奇 / 格雷厄姆·福克斯 / 卡斯珀·菲利普森 / 菲恩·乔利 / 鲁斯·贝恩 / 奈杰尔·艾伦<br/>
+                <span ><span>类型:</span><span> 动作 </span></span>/动作 / 惊悚 / 冒险<br/>
+                <span ><span>制片国家/地区:</span><span> 美国 </span></span>/美国 / 中国大陆 / 法国 / 挪威 / 英国<br/>
+                <span ><span>语言:</span><span> 英语 </span></span>/英语 / 法语<br/>
+                <span ><span>上映日期:</span><span> 2018-08-31(中国大陆) </span></span>/2018-08-31(中国大陆) / 2018-07-27(美国)<br/>
+                <span ><span>片长:</span><span> 147分钟</span></span>/147分钟/ 148分钟(中国大陆)<br/>
+                <span ><span>又名:</span><span> 碟中谍6 </span></span>/碟中谍6 / 职业特工队：叛逆之谜(港) / 不可能的任务：全面瓦解(台) / Mission: Impossible 6 / MI6<br/>
+                <span >IMDb:</span> tt4912910<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>伊森·亨特（汤姆·克鲁斯饰）和队友们接到了追回三个大杀伤性核武器的任务。眼见任务马上就能完成，但为了挽救其中一位队友卢瑟（文·瑞姆斯饰）的生命，三个核武器被人趁机带走。中情局负责人斯隆女士（安吉拉·贝塞特饰）调来她手下的得意猛将沃克（亨利·卡维尔饰），让他盯着伊森·亨特完成追回核武器的任务。期间，女特工伊尔莎（丽贝卡·弗格森饰）突然出现，伊森·亨特发现，他要面对的并不只是恐怖分子，还有潜藏在政府部门的内鬼。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>那些年，我们一起追的女孩 那些年，我們一起追的女孩</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt2036416.jpg" alt="那些年，我们一起追的女孩 那些年，我們一起追的女孩"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.1<br/>
+                <span ><span>导演</span>: <span>九把刀</span></span><br/>
+                <span ><span>编剧</span>: <span>九把刀</span></span><br/>
+                <span ><span>主演</span>: <span>柯震东 </span></span>/柯震东 / 陈妍希 / 敖犬 / 郝劭文 / 蔡昌宪 / 侯彦西 / 弯弯 / 邱彦翔 / 王彩桦 / 柯义浤 / 黄逸祥 / 李凤新 / 黄柏钧 / 赖雅妍 / 高丽红 / 李维维 / 严艺文 / 蔡武雄<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 喜剧 / 爱情<br/>
+                <span ><span>制片国家/地区:</span><span> 中国台湾</span></span><br/>
+                <span ><span>语言:</span><span> 汉语普通话</span></span><br/>
+                <span ><span>上映日期:</span><span> 2012-01-06(中国大陆) </span></span>/2012-01-06(中国大陆) / 2011-08-19(中国台湾)<br/>
+                <span ><span>片长:</span><span> 110分钟</span></span>/110分钟/ 100分钟(中国大陆)<br/>
+                <span ><span>又名:</span><span> You Are the Apple of My Eye</span></span><br/>
+                <span >IMDb:</span> tt2036416<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>青春是一场大雨。即使感冒了，还盼望回头再淋它一次。人生就是不停的战斗，在还没有获得女神青睐时，左手永远都只是辅助！！！</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>银河护卫队 Guardians of the Galaxy</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt2015381.jpg" alt="银河护卫队 Guardians of the Galaxy"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8.1<br/>
+                <span ><span>导演</span>: <span>詹姆斯·古恩</span></span><br/>
+                <span ><span>编剧</span>: <span>詹姆斯·古恩 </span></span>/詹姆斯·古恩 / 尼科尔·帕尔曼 / 丹·阿布内特 / 安迪·兰宁 / 比尔·曼特罗 / 基思·吉芬 / 吉姆·斯特林 / 史蒂夫·恩格尔哈特 / Steve Gan / 史蒂夫·格伯 / Val Mayerik<br/>
+                <span ><span>主演</span>: <span>克里斯·帕拉特 </span></span>/克里斯·帕拉特 / 佐伊·索尔达娜 / 戴夫·巴蒂斯塔 / 范·迪塞尔 / 布莱德利·库珀 / 李·佩斯 / 迈克尔·鲁克 / 凯伦·吉兰 / 杰曼·翰苏 / 约翰·C·赖利 / 格伦·克洛斯 / 本尼西奥·德尔·托罗 / 劳拉·哈德克 / 肖恩·古恩 / 斯坦·李 / 乔什·布洛林 / 瓦耶特·奥莱夫 / 克里斯托弗·法里班克 / 格雷格·亨利 / 彼得·塞拉菲诺威茨 / Janis Ahern / 梅利亚·科尔林 / 汤姆·普罗克特 / 尼克·霍姆斯 / 马克斯·沃罗特斯利 / 妮可·亚历山德拉·希普利 / 沙利夫·阿特金斯 / 布兰登·费尔 / 托马斯·阿拉纳 / 米凯拉·霍沃 / 埃米特·斯坎伦 / 斯宾塞·怀尔丁 / 内森·菲利安 / 凯莉·芙塞丝 / 弗兰克·吉尔霍利 / 埃里克斯·德尼索夫 / 恩佐·科伦蒂 / 罗南·萨莫尔斯 / 奥菲利亚·拉维邦德 / 劳拉·奥尔蒂斯 / 玛拉马·科利特 / 叶卡捷琳娜·扎利特科 / 史蒂芬·布莱克哈特 / 布鲁斯·麦克金伦 / 拉尔夫·伊内森 / 罗布·赞比 / 娜奥米·瑞恩 / 约翰·布罗特顿 / 格拉汉姆·谢尔斯 / 詹姆斯·古恩 / 大卫·雅洛维斯基 / 泰勒·贝茨 / Joanna Chamberlain / 贝恩·科拉科<br/>
+                <span ><span>类型:</span><span> 动作 </span></span>/动作 / 科幻 / 冒险<br/>
+                <span ><span>制片国家/地区:</span><span> 美国</span></span><br/>
+                <span ><span>语言:</span><span> 英语</span></span><br/>
+                <span ><span>上映日期:</span><span> 2014-10-10(中国大陆) </span></span>/2014-10-10(中国大陆) / 2014-07-21(洛杉矶首映) / 2014-08-01(美国)<br/>
+                <span ><span>片长:</span><span> 121分钟</span></span><br/>
+                <span ><span>又名:</span><span> 银河守护队(港) </span></span>/银河守护队(港) / 星际异攻队(台) / 银河守卫者 / 银河守护者 / Full Tilt / G.O.T.G.<br/>
+                <span >IMDb:</span> tt2015381<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>彼得·奎尔（克里斯·帕拉特 Chris Pratt 饰）是一名从小被劫持到外太空的地球人，在义父勇度（迈克尔·鲁克 Michael Rooker 饰）的培养下成了一个终极混混，自称“星爵”。一次行动中他偷了一块神秘球体，便成为了赏金猎人火箭浣熊（布莱德利·库珀  Bradley Cooper 配音）、树人格鲁特（范·迪塞尔 Vin Diesel 配音）的绑架目标，而神秘的卡魔拉（佐伊·索尔达娜 Zoe Saldana 饰）也对神秘球体势在必得。经过笑料百出的坎坷遭遇，星爵被迫和这三人，以及复仇心切的“毁灭者”德拉克斯（戴夫·巴蒂斯塔 Dave Bautista 饰）组成小分队逃避“指控者”罗南（李·佩斯 Lee Pace 饰）的追杀。然而这个神秘球体拥有无穷的力量，小分队必须团结一致对付罗南，才有可能解救整个银河系，银河护卫队由此诞生。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>无双 無雙</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt7183578.jpg" alt="无双 無雙"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8<br/>
+                <span ><span>导演</span>: <span>庄文强</span></span><br/>
+                <span ><span>编剧</span>: <span>庄文强</span></span><br/>
+                <span ><span>主演</span>: <span>周润发 </span></span>/周润发 / 郭富城 / 张静初 / 冯文娟 / 廖启智 / 周家怡 / 王耀庆 / 方中信 / 高捷 / 邢佳栋 / 张松枝 / 张建声 / 吴嘉龙 / 孙佳君<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 动作 / 悬疑 / 犯罪<br/>
+                <span ><span>制片国家/地区:</span><span> 中国大陆 </span></span>/中国大陆 / 中国香港<br/>
+                <span ><span>语言:</span><span> 汉语普通话 </span></span>/汉语普通话 / 粤语 / 英语 / 泰语 / 波兰语<br/>
+                <span ><span>上映日期:</span><span> 2018-09-30(中国大陆) </span></span>/2018-09-30(中国大陆) / 2018-10-04(中国香港)<br/>
+                <span ><span>片长:</span><span> 130分钟</span></span><br/>
+                <span ><span>又名:</span><span> Project Gutenberg </span></span>/Project Gutenberg / Mo seung<br/>
+                <span >IMDb:</span> tt7183578<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>身陷囹圄的李问（郭富城 饰）被引渡回港，他原本隶属于一个的跨国假钞制贩组织。该组织曾犯下过多宗恶性案件，而首脑“画家”不仅始终逍遥法外，连真面目都没人知道。为了逼迫李问吐露“画家”真实身份，警方不惜用足以判死刑的假罪证使其就范。就在此时，富有的遗孀阮文（张静初 饰）申请保释李问，而警方提出的条件依然是“画家”的真面目。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>无名之辈</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt9282616.jpg" alt="无名之辈"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8<br/>
+                <span ><span>导演</span>: <span>饶晓志</span></span><br/>
+                <span ><span>编剧</span>: <span>饶晓志 </span></span>/饶晓志 / 雷志龙<br/>
+                <span ><span>主演</span>: <span>陈建斌 </span></span>/陈建斌 / 任素汐 / 潘斌龙 / 章宇 / 王砚辉 / 九孔 / 马吟吟 / 程怡 / 宁桓宇 / 邓恩熙 / 谢波 / 范翔 / 赵梓冲 / 史策 / 马睿瀚 / 林海 / 邓钢<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 喜剧<br/>
+                <span ><span>制片国家/地区:</span><span> 中国大陆</span></span><br/>
+                <span ><span>语言:</span><span> 汉语普通话 </span></span>/汉语普通话 / 贵州方言<br/>
+                <span ><span>上映日期:</span><span> 2018-11-16(中国大陆)</span></span><br/>
+                <span ><span>片长:</span><span> 108分钟</span></span><br/>
+                <span ><span>又名:</span><span> 慌枪走板 </span></span>/慌枪走板 / A Cool Fish<br/>
+                <span >IMDb:</span> tt9282616<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>来自乡村的笨贼眼镜（章宇 饰）和大头（潘斌龙 饰）抢了一家手机店，慌乱之中逃进坐着轮椅的单身女子嘉旗（任素汐 饰）的家中。嘉旗早已失去活着的欲望，她强横地要求俩笨贼杀死自己。另一边，某楼盘老板资金链断裂跑路，留下保安马先勇（陈建斌 饰）与讨债者周旋。马曾经是立功无数的协警，可就在转正的关头因为一场车祸毁了原本看似美好的一切。不久前他挖到一把喷子，原本打算交给当初的警察好友立功，却发现喷子被换成了水枪。而成为了新闻的手机抢劫案，让马先勇意识到喷子正在劫匪的手上。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>湄公河行动</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt6044910.jpg" alt="湄公河行动"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8<br/>
+                <span ><span>导演</span>: <span>林超贤</span></span><br/>
+                <span ><span>编剧</span>: <span>林超贤 </span></span>/林超贤 / 朱镜祺 / 刘小群 / 谭惠贞 / 林明杰<br/>
+                <span ><span>主演</span>: <span>张涵予 </span></span>/张涵予 / 彭于晏 / 孙淳 / 陈宝国 / 冯文娟 / 刘显达 / 赵健 / 吴旭东 / 吴嘉龙 / 卢惠光 / 柏华力·莫高彼斯彻 / 维他亚·潘斯林加姆 / 战立国 / 石占杰 / 伍麟凯 / 魏蔓 / 李佳璇 / 郝文婷 / 王笑龙 / 任蕊<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 动作 / 犯罪<br/>
+                <span ><span>制片国家/地区:</span><span> 中国大陆 </span></span>/中国大陆 / 中国香港<br/>
+                <span ><span>语言:</span><span> 汉语普通话 </span></span>/汉语普通话 / 粤语 / 泰语 / 缅甸语 / 英语<br/>
+                <span ><span>上映日期:</span><span> 2016-09-30(中国大陆) </span></span>/2016-09-30(中国大陆) / 2020-07-24(中国大陆重映)<br/>
+                <span ><span>片长:</span><span> 124分钟</span></span><br/>
+                <span ><span>又名:</span><span> 湄公河大案 </span></span>/湄公河大案 / 湄公河 / Operation Mekong<br/>
+                <span >IMDb:</span> tt6044910<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>金三角湄公河上，一处被称为“鬼门关”的河段，两艘来自中国的商船遭到不明身份之人的枪击袭击。未过多久，泰国军方召开新闻发布会，指责中国商船贩卖毒品。虽然发布会宣称船员全部逃亡，但是十三具遭受残忍杀害的中国船员尸体很快被人发现。这起胆大妄为的案件令中国警方大为震惊，云南省缉毒总队队长高刚（张涵予 饰）受命带特别行动小组前往泰国，并与情报员方新武（彭于晏 饰）合作接洽。根据现有资料显示，这件案子由盘踞在金三角的大毒枭糯卡所为。糯卡贪婪残忍，胆大包天，是湄公河流域上一颗惊扰运输安全的毒瘤。为了将这个恶棍绳之于法，中国、老挝、缅甸开展了三国联合巡逻，集中对糯卡的制毒窝点进行扫荡。而高刚等人也深入最危险境地，与丧失人性的贩毒分子进行惨烈对决……</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>美国队长2 Captain America: The Winter Soldier</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt1843866.jpg" alt="美国队长2 Captain America: The Winter Soldier"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8<br/>
+                <span ><span>导演</span>: <span>安东尼·罗素 </span></span>/安东尼·罗素 / 乔·罗素<br/>
+                <span ><span>编剧</span>: <span>克里斯托弗·马库斯 </span></span>/克里斯托弗·马库斯 / 斯蒂芬·麦克菲利 / 乔·西蒙 / 杰克·科比 / 史蒂夫·艾普廷 / 爱德·布鲁贝克 / 迈克尔·拉尔克<br/>
+                <span ><span>主演</span>: <span>克里斯·埃文斯 </span></span>/克里斯·埃文斯 / 斯嘉丽·约翰逊 / 塞巴斯蒂安·斯坦 / 安东尼·麦凯 / 塞缪尔·杰克逊 / 罗伯特·雷德福 / 寇碧·史莫德斯 / 弗兰克·格里罗 / 马克斯米利亚诺·赫尔南德斯 / 艾米丽·万凯普 / 海莉·阿特维尔 / 托比·琼斯 / 斯坦·李 / 卡兰·马尔韦 / 珍妮·艾加特 / 伯纳德·怀特 / 阿兰·戴尔 / 黄经汉 / 盖瑞·山德林 / 乔治·圣皮埃尔 / 萨尔瓦托雷·哈雷布 / 扎克·杜哈梅 / 阿德托库姆布斯·麦克马克 / 亚伦·希梅尔斯坦 / 乔·罗素 / 克里斯托弗·马库斯 / 斯蒂芬·麦克菲利 / 帕特·希利 / 爱德·布鲁贝克 / D·C·皮尔森 / 丹尼·朴迪 / 伯纳德·兹林斯卡斯 / 布兰卡·卡蒂奇 / 乔恩·斯克拉夫 / 查德·托德亨特 / 阿比盖尔·马洛 / 杰里米·马克斯韦尔 / 艾默生·布鲁克斯 / 伊万·帕克 / 里卡多·查康 / 埃迪·J.费尔南德斯 / 乔迪·哈特 / 斯蒂文·卡普 / 温迪胡普斯 / 伊桑·瑞恩斯 / 多米尼克·瑞恩斯 / 小安迪·迈克尔斯 / 罗伯特·克洛特沃西 / 加里·西尼斯 / 迪恩·巴拉奇 / 库伦·G·钱伯斯<br/>
+                <span ><span>类型:</span><span> 动作 </span></span>/动作 / 科幻 / 惊悚 / 冒险<br/>
+                <span ><span>制片国家/地区:</span><span> 美国</span></span><br/>
+                <span ><span>语言:</span><span> 英语 </span></span>/英语 / 法语<br/>
+                <span ><span>上映日期:</span><span> 2014-04-04(美国</span></span>/2014-04-04(美国/中国大陆) / 2014-03-13(加州首映)<br/>
+                <span ><span>片长:</span><span> 136分钟</span></span><br/>
+                <span ><span>又名:</span><span> 美队2 </span></span>/美队2 / 美国队长2：冬日战士 / 美国队长2：酷寒战士(台) / 美国队长2：寒冬战士 / 美国队长：冬兵 / Captain America 2<br/>
+                <span >IMDb:</span> tt1843866<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>渐渐习惯了现代生活的美国队长史蒂夫·罗杰斯（克里斯·埃文斯 Chris Evans 饰），在一次行动后隐隐嗅到神盾局内部所弥漫出来的凶险气味。而当得知神盾局正秘密进行的“洞察计划”后，他更为此感到愤怒。某天，神盾局指挥官尼克-法瑞（塞缪尔·杰克逊 Samuel L. Jackson 饰）遭到一群武装分子袭击，他拼尽全力将一支U盘交到美国队长手中，这里面藏着该局二战以来最重要且最可怕的秘密。在此之后，美国队长因涉嫌杀害尼克而遭到前局长亚历山大·皮尔斯（罗伯特·雷德福/Robert Redford 饰）的通缉和追杀，逃亡中他得到黑寡妇（斯嘉丽·约翰逊 Scarlett Johansson 饰）和退伍老兵“猎鹰”（安东尼·麦凯 Anthony Mackie 饰）的帮助。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>银河护卫队2 Guardians of the Galaxy Vol. 2</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt3896198.jpg" alt="银河护卫队2 Guardians of the Galaxy Vol. 2"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 8<br/>
+                <span ><span>导演</span>: <span>詹姆斯·古恩</span></span><br/>
+                <span ><span>编剧</span>: <span>詹姆斯·古恩 </span></span>/詹姆斯·古恩 / 丹·阿布内特 / 安迪·兰宁<br/>
+                <span ><span>主演</span>: <span>克里斯·帕拉特 </span></span>/克里斯·帕拉特 / 佐伊·索尔达娜 / 戴夫·巴蒂斯塔 / 范·迪塞尔 / 布莱德利·库珀 / 迈克尔·鲁克 / 凯伦·吉兰 / 庞·克莱门捷夫 / 西尔维斯特·史泰龙 / 库尔特·拉塞尔 / 伊丽莎白·德比茨基 / 克里斯·沙利文 / 肖恩·古恩 / 杨紫琼 / 斯坦·李 / 杰夫·高布伦 / 赛斯·格林 / 文·瑞姆斯 / 麦莉·赛勒斯 / 莫莉·C·奎恩 / 劳拉·哈德克 / 瓦耶特·奥莱夫 / 艾伦·施瓦茨 / 汤米·弗拉纳根 / 希尔蒂·鲍温 / 本·布劳德 / 亚历克斯·克莱因 / 卢克·库克 / 伊万·琼斯 / 乔·弗里亚 / 特伦斯·罗斯摩尔 / James Euringer / 史蒂芬·布莱克哈特 / 史蒂夫·阿吉 / Richard Christy / 罗布·赞比 / Kendra Carelli / 迈克尔·罗森巴姆 / 罗达·格里菲丝 / 大卫·哈塞尔霍夫 / 马克·威尔斯 / 伊丽莎白·菲斯·卢德洛 / 格雷格·亨利 / 尼雅迪恩 / 伊兰盖尔 / 阿方索·A·杰克逊 / Rodney L. James / 吉列尔莫·罗德里格斯 / 塞巴斯蒂安·塞格尔<br/>
+                <span ><span>类型:</span><span> 动作 </span></span>/动作 / 科幻 / 冒险<br/>
+                <span ><span>制片国家/地区:</span><span> 美国</span></span><br/>
+                <span ><span>语言:</span><span> 英语</span></span><br/>
+                <span ><span>上映日期:</span><span> 2017-05-05(中国大陆</span></span>/2017-05-05(中国大陆/美国) / 2017-04-19(洛杉矶首映)<br/>
+                <span ><span>片长:</span><span> 136分钟</span></span><br/>
+                <span ><span>又名:</span><span> 星际异攻队2(台) </span></span>/星际异攻队2(台) / 银河守护队2(港) / 银护2 / Guardians of the Galaxy 2<br/>
+                <span >IMDb:</span> tt3896198<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>火箭浣熊（布莱德利·库珀 Bradley Cooper 配音）偷走了大祭司阿耶莎（伊丽莎白·德比齐 Elizabeth Debicki 饰）的能量电池，包括星爵（克里斯·帕拉特 Chris Pratt 饰）、卡魔拉（佐伊·索尔达娜 Zoe Saldana 饰）、德拉克斯（戴夫·巴蒂斯塔 Dave Bautista 饰）在内的一行人遭到了后者派出的舰队的袭击。一个神秘人物乘坐着飞船救下了银河护卫队的众人，而驾驶着飞船的不是别人，竟然正是星爵的亲生父亲伊戈（库尔特·拉塞尔 Kurt Russell 饰）。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>流浪地球</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt7605074.jpg" alt="流浪地球"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 7.9<br/>
+                <span ><span>导演</span>: <span>郭帆</span></span><br/>
+                <span ><span>编剧</span>: <span>龚格尔 </span></span>/龚格尔 / 严东旭 / 郭帆 / 叶俊策 / 杨治学 / 吴荑 / 叶濡畅 / 沈晶晶 / 刘慈欣<br/>
+                <span ><span>主演</span>: <span>吴京 </span></span>/吴京 / 屈楚萧 / 李光洁 / 吴孟达 / 赵今麦 / 隋凯 / 屈菁菁 / 张亦驰 / 杨皓宇 / 阿尔卡基·沙罗格拉茨基 / 李虹辰 / 杨轶 / 姜志刚 / 张欢 / 雷佳音 / 宁浩 / 刘慈欣 / 郭京飞 / 王智 / 张子贤 / 路阳 / 张宁 / 张小北 / 饶晓志 / 陶珞依 / 吴晓亮 / 龚格尔 / 郭帆<br/>
+                <span ><span>类型:</span><span> 科幻 </span></span>/科幻 / 冒险 / 灾难<br/>
+                <span ><span>制片国家/地区:</span><span> 中国大陆</span></span><br/>
+                <span ><span>语言:</span><span> 汉语普通话 </span></span>/汉语普通话 / 英语 / 俄语 / 法语 / 日语 / 韩语 / 印尼语<br/>
+                <span ><span>上映日期:</span><span> 2019-02-05(中国大陆) </span></span>/2019-02-05(中国大陆) / 2020-11-26(中国大陆重映)<br/>
+                <span ><span>片长:</span><span> 125分钟</span></span>/125分钟/ 137分钟(重映版)<br/>
+                <span ><span>又名:</span><span> 流浪地球：飞跃2020特别版 </span></span>/流浪地球：飞跃2020特别版 / The Wandering Earth / The Wandering Earth: Beyond 2020 Special Edition<br/>
+                <span >IMDb:</span> tt7605074<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>近未来，科学家们发现太阳急速衰老膨胀，短时间内包括地球在内的整个太阳系都将被太阳所吞没。为了自救，人类提出一个名为“流浪地球”的大胆计划，即倾全球之力在地球表面建造上万座发动机和转向发动机，推动地球离开太阳系，用2500年的时间奔往另外一个栖息之地。中国航天员刘培强（吴京 饰）在儿子刘启四岁那年前往国际空间站，和国际同侪肩负起领航者的重任。转眼刘启（屈楚萧 饰）长大，他带着妹妹朵朵（赵今麦 饰）偷偷跑到地表，偷开外公韩子昂（吴孟达 饰）的运输车，结果不仅遭到逮捕，还遭遇了全球发动机停摆的事件。为了修好发动机，阻止地球坠入木星，全球开始展开饱和式营救，连刘启他们的车也被强征加入。在与时间赛跑的过程中，无数的人前仆后继，奋不顾身，只为延续百代子孙生存的希望……</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>美国队长3 Captain America: Civil War</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt3498820.jpg" alt="美国队长3 Captain America: Civil War"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 7.9<br/>
+                <span ><span>导演</span>: <span>安东尼·罗素 </span></span>/安东尼·罗素 / 乔·罗素<br/>
+                <span ><span>编剧</span>: <span>克里斯托弗·马库斯 </span></span>/克里斯托弗·马库斯 / 斯蒂芬·麦克菲利 / 乔·西蒙 / 杰克·科比 / 马克·米勒 / 史提夫·麦尼文<br/>
+                <span ><span>主演</span>: <span>克里斯·埃文斯 </span></span>/克里斯·埃文斯 / 小罗伯特·唐尼 / 斯嘉丽·约翰逊 / 塞巴斯蒂安·斯坦 / 安东尼·麦凯 / 唐·钱德尔 / 杰瑞米·雷纳 / 查德维克·博斯曼 / 保罗·贝坦尼 / 伊丽莎白·奥尔森 / 保罗·路德 / 艾米丽·万凯普 / 汤姆·赫兰德 / 丹尼尔·布鲁赫 / 弗兰克·格里罗 / 威廉·赫特 / 马丁·弗瑞曼 / 玛丽莎·托梅 / 约翰·卡尼 / 约翰·斯拉特里 / 霍普·戴维斯 / 阿尔法·伍达德 / 迈克尔·A·库克 / 杰克逊·斯皮德尔 / 海蒂·莫尼梅克 / 艾伦·托尼 / 吉恩·法贝尔 / 弗洛伦丝·卡松巴 / 科内尔·约翰 / 布伦特·麦吉 / 布莱尔·杰辛 / 奥利·比加尔克 / 大卫·德弗里斯 / 凯蒂阿弥斯 / 布伦特·吉恩蒂尔 / 金世佳 / 西尔维纳·布克包尔 / 迈克尔·安东尼·罗杰斯 / 达米恩·波蒂埃 / 盖伊·费尔南德斯 / 吉姆·拉什 / 乔·罗素 / 斯坦·李 / 凯瑞·康顿 / 朱丽安娜·古尔<br/>
+                <span ><span>类型:</span><span> 动作 </span></span>/动作 / 科幻<br/>
+                <span ><span>制片国家/地区:</span><span> 美国</span></span><br/>
+                <span ><span>语言:</span><span> 英语 </span></span>/英语 / 德语 / 科萨语 / 俄语 / 罗马尼亚语<br/>
+                <span ><span>上映日期:</span><span> 2016-05-06(中国大陆</span></span>/2016-05-06(中国大陆/美国) / 2016-04-12(加州首映)<br/>
+                <span ><span>片长:</span><span> 148分钟(中国大陆)</span></span>/148分钟(中国大陆)/ 147分钟<br/>
+                <span ><span>又名:</span><span> 美国队长3：内战 </span></span>/美国队长3：内战 / 美国队长3：英雄内战(港/台) / 美队3 / Captain America 3<br/>
+                <span >IMDb:</span> tt3498820<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>美国队长史蒂夫·罗杰斯（克里斯·埃文斯 Chris Evans 饰）带领着全新组建的复仇者联盟，继续维护世界和平。然而，一次执行任务时联盟成员不小心造成大量平民伤亡，从而激发政治压力，政府决定通过一套监管系统来管理和领导复仇者联盟。联盟内部因此分裂为两派：一方由史蒂夫· 罗杰斯领导，他主张维护成员自由，在免受政府干扰的情况下保护世界；另一方则追随托尼·斯塔克（小罗伯特·唐尼 Robert Downey Jr. 饰），他令人意外地决定支持政府的监管和责任制体系。神秘莫测的巴基（塞巴斯蒂安·斯坦 Sebastian Stan 饰）似乎成为内战的关键人物……</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>钢铁侠3 Iron Man 3</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt1300854.jpg" alt="钢铁侠3 Iron Man 3"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 7.9<br/>
+                <span ><span>导演</span>: <span>沙恩·布莱克</span></span><br/>
+                <span ><span>编剧</span>: <span>沙恩·布莱克 </span></span>/沙恩·布莱克 / 德鲁·皮尔斯 / 斯坦·李 / 唐·赫克 / 拉里·利伯 / 杰克·科比<br/>
+                <span ><span>主演</span>: <span>小罗伯特·唐尼 </span></span>/小罗伯特·唐尼 / 盖·皮尔斯 / 格温妮斯·帕特洛 / 本·金斯利 / 唐·钱德尔 / 保罗·贝坦尼 / 丽贝卡·豪尔 / 乔恩·费儒 / 泰·辛普金斯 / 威廉姆·赛德勒 / 詹姆斯·戴尔 / 伊芳·齐玛 / 阿什利·汉弥尔顿 / 王学圻 / 范冰冰<br/>
+                <span ><span>类型:</span><span> 动作 </span></span>/动作 / 科幻<br/>
+                <span ><span>制片国家/地区:</span><span> 美国 </span></span>/美国 / 中国大陆<br/>
+                <span ><span>语言:</span><span> 英语 </span></span>/英语 / 汉语普通话<br/>
+                <span ><span>上映日期:</span><span> 2013-05-01(中国大陆) </span></span>/2013-05-01(中国大陆) / 2013-04-18(伦敦首映) / 2013-05-03(美国)<br/>
+                <span ><span>片长:</span><span> 134分钟(中国大陆)</span></span>/134分钟(中国大陆)/ 130分钟(美国)<br/>
+                <span ><span>又名:</span><span> 铁甲奇侠3(港) </span></span>/铁甲奇侠3(港) / 钢铁人3(台) / 铁人3<br/>
+                <span >IMDb:</span> tt1300854<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>自纽约事件以来，托尼·斯塔克（小罗伯特·唐尼 Robert Downey Jr. 饰）为前所未有的焦虑症所困扰。他疯狂投入钢铁侠升级版的研发，为此废寝忘食，甚至忽略了女友佩珀·波茨（格温妮斯·帕特洛 Gwyneth Paltrow 饰）的感受。与此同时，臭名昭著的恐怖头目曼达林（本·金斯利 Ben Kingsley 饰）制造了一连串的爆炸袭击事件，托尼当年最忠诚的保镖即在最近的一次袭击中身负重伤。未过多久，托尼、佩珀以及曾与他有过一面之缘的女植物学家玛雅（丽贝卡·豪尔 Rebecca Hall 饰）在家中遭到猛烈的炮火袭击，几乎丧命，而这一切似乎都与22年前那名偶然邂逅的科学家阿尔德里奇·基连（盖·皮尔斯 Guy Pearce 饰）及其终极生物的研究有关。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>人在囧途</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt1737237.jpg" alt="人在囧途"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 7.8<br/>
+                <span ><span>导演</span>: <span>叶伟民</span></span><br/>
+                <span ><span>编剧</span>: <span>田羽生 </span></span>/田羽生 / 史晨赟 / 徐元丰<br/>
+                <span ><span>主演</span>: <span>徐峥 </span></span>/徐峥 / 王宝强 / 李曼 / 李小璐 / 左小青 / 张歆艺 / 黄小蕾 / 马健 / 邱林<br/>
+                <span ><span>类型:</span><span> 喜剧</span></span><br/>
+                <span ><span>制片国家/地区:</span><span> 中国大陆</span></span><br/>
+                <span ><span>语言:</span><span> 汉语普通话 </span></span>/汉语普通话 / 武汉话<br/>
+                <span ><span>上映日期:</span><span> 2010-06-04(中国大陆)</span></span><br/>
+                <span ><span>片长:</span><span> 91分钟</span></span><br/>
+                <span ><span>又名:</span><span> Lost on Journey</span></span><br/>
+                <span >IMDb:</span> tt1737237<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>大老板李成功（徐峥 饰）遇上挤奶工牛耿（王宝强 饰）之后，旅途便频出状况。被情人逼迫回长沙老家跟老婆摊牌的李成功，机场遭遇到前往长沙讨债的乌鸦嘴牛耿。牛耿人如其名，不但耿直憨厚，而且透出一股傻气。先是登机前安检一口气喝完一大罐牛奶，后来又飞机上让乘务员开窗，好不容易折腾到飞机到达长沙上空，结果让他咒得因长沙大雪飞机被迫返航。无奈挤上火车硬座车厢的李成功刚松了一口气，却又一次在人群中看到牛耿。牛耿就像李成功生命中的瘟神一样，只要他“金口一开”，便会出现如他所言的意外。由于途中的频频意外，两人从火车换乘巴士，又从巴士爬上拖拉机。尽管牛耿的乌鸦嘴让李成功吃尽苦头，但这个混身透着傻气的青年却用自己真诚与乐观感染着李成功。一路的颠簸之后，两人最终到达长沙又回到各自的生活轨迹中去，然而旅途中所遭遇的种种却影响着两人之后的生活……</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>夏洛特烦恼</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt5061814.jpg" alt="夏洛特烦恼"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 7.8<br/>
+                <span ><span>导演</span>: <span>闫非 </span></span>/闫非 / 彭大魔<br/>
+                <span ><span>编剧</span>: <span>闫非 </span></span>/闫非 / 彭大魔<br/>
+                <span ><span>主演</span>: <span>沈腾 </span></span>/沈腾 / 马丽 / 尹正 / 艾伦 / 王智 / 田雨 / 宋阳 / 常远 / 李萍 / 李立群 / 张一鸣 / 马小茜 / 赵震 / 董良瑜 / 刘坤 / 黄才伦 / 陈昊明 / 陆林洁 / 王成思 / 刘金 / 刘立东 / 杨欢 / 宁幻秋 / 温森 / 陶柏 / 许猛 / 嫣红 / 刘叶舟 / 王硕 / 马驰 / 周展翅 / 周华安 / 顾佳欣 / 易波 / 一戈 / 姜田丰 / 郭恩强 / 常世奎 / 于健 / 王琦 / 赵雪 / 陶亮 / 黄杨 / 陆羊 / 王军 / 刘子凡 / 刘笑竹 / 卢莹 / 张广洁 / 方菲菲 / 许登雨 / 朱波 / 肖扬 / 魏翔 / 江夏 / 吴江 / 张辰 / 王野 / 贾悦明 / 王翡 / 简姗姗 / 申琴子 / 尹星人 / 桂百惠 / 管亚鑫 / 彭泽言 / 王思浩 / 关鹏 / 桂琛 / 朱磊 / 徐贤任 / 田川 / 李哲 / 冯满<br/>
+                <span ><span>类型:</span><span> 喜剧 </span></span>/喜剧 / 爱情<br/>
+                <span ><span>制片国家/地区:</span><span> 中国大陆</span></span><br/>
+                <span ><span>语言:</span><span> 汉语普通话</span></span><br/>
+                <span ><span>上映日期:</span><span> 2015-09-30(中国大陆)</span></span><br/>
+                <span ><span>片长:</span><span> 104分钟</span></span><br/>
+                <span ><span>又名:</span><span> Goodbye Mr. Loser</span></span><br/>
+                <span >IMDb:</span> tt5061814<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>在学生时代的初恋秋雅（王智 饰）的婚礼上，毕业后吃软饭靠老婆养的夏洛（沈腾 饰）假充大款，出尽其丑，中间还被老婆马冬梅（马丽 饰）戳穿暴捶。混乱之中，夏洛意外穿越时空，回到了1997年的学生时代的课堂里。他懵懵懂懂，以为是场真实感极强的梦，于是痛揍王老师，强吻秋雅，还尝试跳楼让自己醒来。当受伤的他从病床上苏醒时，他意识到自己真的穿越了时空。既然有机会重新来过，那不如好好折腾一回。他勇敢追求秋雅、奚落优等生袁华（尹正 饰）、拒绝马冬梅的死缠烂打。后来夏洛凭借“创作”朴树、窦唯等人的成名曲而进入娱乐圈。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>我的少女时代 我的少女時代</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt4967094.jpg" alt="我的少女时代 我的少女時代"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 7.8<br/>
+                <span ><span>导演</span>: <span>陈玉珊</span></span><br/>
+                <span ><span>编剧</span>: <span>曾咏婷</span></span><br/>
+                <span ><span>主演</span>: <span>宋芸桦 </span></span>/宋芸桦 / 王大陆 / 李玉玺 / 简廷芮 / 刘德华 / 陈乔恩 / 言承旭 / 曲家瑞 / 屈中恒 / 钟欣凌 / 许杰辉 / 蔡颐榛 / 郭文颐 / 石知田 / 那维勋 / 林鹤轩 / 陈彦允 / 张立东 / 郑茵声 / 李绍祥<br/>
+                <span ><span>类型:</span><span> 喜剧 </span></span>/喜剧 / 爱情<br/>
+                <span ><span>制片国家/地区:</span><span> 中国台湾</span></span><br/>
+                <span ><span>语言:</span><span> 汉语普通话</span></span><br/>
+                <span ><span>上映日期:</span><span> 2015-11-19(中国大陆) </span></span>/2015-11-19(中国大陆) / 2015-08-15(中国台湾)<br/>
+                <span ><span>片长:</span><span> 134分钟</span></span><br/>
+                <span ><span>又名:</span><span> Our Times</span></span><br/>
+                <span >IMDb:</span> tt4967094<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>成功白领林真心（陈乔恩 饰）因被上司压迫、下属吐槽，陷入了少女时代的深深回忆。原来曾是平凡少女（宋芸桦 饰）的真心有着一段爆笑却有充满甜蜜的初恋回忆。少女真心曾经暗恋校草欧阳非凡（李玉玺 饰），却总是不敌校花陶敏敏（简延芮 饰）的魅力，令她苦恼不已，一次意外却让她与校霸徐太宇（王大陆 饰）组成了“失恋阵线联盟”，他们势要夺爱，上演了一幕幕生猛、搞笑的青春趣事，而在相处中两人的情感也发生了微妙的变化……若干年后，来到成人世界的林真心又能否重拾初心呢？</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>白蛇：缘起</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt9288776.jpg" alt="白蛇：缘起"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 7.8<br/>
+                <span ><span>导演</span>: <span>黄家康 </span></span>/黄家康 / 赵霁<br/>
+                <span ><span>编剧</span>: <span>王微</span></span><br/>
+                <span ><span>主演</span>: <span>张喆 </span></span>/张喆 / 杨天翔 / 唐小喜 / 刘薇 / 张遥函 / 郑小璞 / 张博恒 / 张赫 / 马程 / 程寅 / 陈霖生 / 惠龙 / 林强 / 章斌<br/>
+                <span ><span>类型:</span><span> 爱情 </span></span>/爱情 / 动画 / 奇幻<br/>
+                <span ><span>制片国家/地区:</span><span> 中国大陆 </span></span>/中国大陆 / 美国<br/>
+                <span ><span>语言:</span><span> 汉语普通话</span></span><br/>
+                <span ><span>上映日期:</span><span> 2019-01-11(中国大陆) </span></span>/2019-01-11(中国大陆) / 2020-07-20(中国大陆重映)<br/>
+                <span ><span>片长:</span><span> 99分钟</span></span><br/>
+                <span ><span>又名:</span><span> White Snake</span></span><br/>
+                <span >IMDb:</span> tt9288776<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>幽暗洞中，白蛇（张喆 配音）苦苦修炼却不得其法，小青见此情景，将发髻上的碧玉簪子取下，令白蛇攥在手中。那一刻，五百年前的记忆瞬间苏醒。五百年前，晚唐君主昏聩庸碌，掌握邪术的国师只手遮天，命令天下百姓捕蛇修法。为了拯救族群，白蛇冒险行刺，结果却遭遇挫败，还失去了记忆。当她再度醒来，发现自己被一个专门捕蛇的村落所救下，而那个胆小却善良的青年许宣（杨天翔 配音）则吸引了白蛇的注意。与此同时，国师派出爪牙四处追寻白蛇的下落，而蛇族更误解白蛇叛逃人类，接二连三派出杀手。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>你好，李焕英</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt13364790.jpg" alt="你好，李焕英"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 7.7<br/>
+                <span ><span>导演</span>: <span>贾玲</span></span><br/>
+                <span ><span>编剧</span>: <span>贾玲 </span></span>/贾玲 / 孙集斌 / 王宇 / 刘宏禄 / 卜钰 / 郭宇鹏<br/>
+                <span ><span>主演</span>: <span>贾玲 </span></span>/贾玲 / 张小斐 / 沈腾 / 陈赫 / 刘佳 / 丁嘉丽 / 王琳 / 杜源 / 何翯 / 何欢 / 韩云云 / 包文婧 / 葛珊珊 / 史策 / 黄小猫 / 许君聪 / 卜钰 / 刘宏禄 / 魏翔 / 孙集斌 / 张泰维 / 郭宇鹏 / 朱天福 / 王宇 / 冯巩 / 乔杉 / 王小利 / 宋晓峰 / 董若溪 / 曹贺军 / 赵婷婷 / 姬晴 / 郭祥鹏 / 李一峰 / 潘斌龙<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 喜剧 / 奇幻<br/>
+                <span ><span>制片国家/地区:</span><span> 中国大陆</span></span><br/>
+                <span ><span>语言:</span><span> 汉语普通话</span></span><br/>
+                <span ><span>上映日期:</span><span> 2021-02-12(中国大陆)</span></span><br/>
+                <span ><span>片长:</span><span> 128分钟</span></span><br/>
+                <span ><span>又名:</span><span> Hi, Mom </span></span>/Hi, Mom / こんにちは、私のお母さん<br/>
+                <span >IMDb:</span> tt13364790<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>一场意外，改变了一对母女的命运。病床上的母亲李焕英（刘佳 饰）昏迷不醒，女儿贾晓玲（贾玲 饰）涕泗横流，唯恐与母亲阴阳两隔。恍惚之中，晓玲突然穿越到久远以前的陌生时代，并在那里意外邂逅尚待字闺中的青年李焕英（张小斐 饰）。在此之后，晓玲以远亲相称，成为妈妈形影不离的好姐妹。许是见证了妈妈数十年来的劳苦辛酸，晓玲希望通过努力改变妈妈的命运，让她变成一个幸福快乐、富足无忧的女人。而一系列搞笑、感人的小故事，就围绕这对姐妹花母女展开……</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>唐人街探案</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt5290882.jpg" alt="唐人街探案"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 7.7<br/>
+                <span ><span>导演</span>: <span>陈思诚</span></span><br/>
+                <span ><span>编剧</span>: <span>陈思诚 </span></span>/陈思诚 / 程佳客 / 刘凯 / 白鹤<br/>
+                <span ><span>主演</span>: <span>王宝强 </span></span>/王宝强 / 刘昊然 / 佟丽娅 / 陈赫 / 肖央 / 小沈阳 / 潘粤明 / 马浴柯 / 张子枫 / 赵英俊 / 桑平 / 金士杰 / 大鹏 / 张国强 / 李叶青 / 陈祉希 / 戴墨<br/>
+                <span ><span>类型:</span><span> 喜剧 </span></span>/喜剧 / 动作 / 悬疑<br/>
+                <span ><span>制片国家/地区:</span><span> 中国大陆</span></span><br/>
+                <span ><span>语言:</span><span> 汉语普通话 </span></span>/汉语普通话 / 泰语 / 英语<br/>
+                <span ><span>上映日期:</span><span> 2015-12-31(中国大陆)</span></span><br/>
+                <span ><span>片长:</span><span> 135分钟</span></span><br/>
+                <span ><span>又名:</span><span> 唐人街·探案 </span></span>/唐人街·探案 / 唐探 / Detective Chinatown<br/>
+                <span >IMDb:</span> tt5290882<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>天赋异禀的结巴少年秦风（刘昊然 饰）警校落榜，被姥姥遣送泰国找远房表舅——号称“唐人街第一神探”，实则猥琐的大叔唐仁（王宝强 饰）散心。不想一夜花天酒地后，唐仁沦为离奇凶案嫌疑人，不得不和秦风亡命天涯……穷追不舍的警探黄兰登（陈赫 饰）、无敌幸运的警察坤泰（肖央 饰）、穷凶极恶的匪帮三人组、高深莫测的唐人街教父、美艳风骚的老板娘阿香（佟丽娅 饰）等悉数登场！七天！唐仁、秦风必须取长补短、同仇敌忾！他们能否躲避警察追捕、匪帮追杀、黑帮围剿，在短短七天内，完成找到失落的黄金并查明真凶，为自己洗清罪名这些逆天的任务？</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>芳华</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt6654316.jpg" alt="芳华"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 7.7<br/>
+                <span ><span>导演</span>: <span>冯小刚</span></span><br/>
+                <span ><span>编剧</span>: <span>严歌苓</span></span><br/>
+                <span ><span>主演</span>: <span>黄轩 </span></span>/黄轩 / 苗苗 / 钟楚曦 / 杨采钰 / 李晓峰 / 王天辰 / 王可如 / 隋源 / 张仁博 / 苏岩 / 张国立 / 赵立新<br/>
+                <span ><span>类型:</span><span> 剧情 </span></span>/剧情 / 历史 / 战争<br/>
+                <span ><span>制片国家/地区:</span><span> 中国大陆</span></span><br/>
+                <span ><span>语言:</span><span> 汉语普通话</span></span><br/>
+                <span ><span>上映日期:</span><span> 2017-12-15(中国大陆) </span></span>/2017-12-15(中国大陆) / 2017-09-07(多伦多电影节)<br/>
+                <span ><span>片长:</span><span> 136分钟</span></span>/136分钟/ 146分钟(多伦多电影节)<br/>
+                <span ><span>又名:</span><span> 歌声离我远去 </span></span>/歌声离我远去 / Youth<br/>
+                <span >IMDb:</span> tt6654316<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>故事发生在上世纪七十年代，寄人篱下的少女何小萍（苗苗 饰）经过重重试炼终于加入了梦寐以求的文工团，哪知道这里和她曾经待过的那些地方并无不同，她依然得忍受遭人唾弃和欺侮的生活。唯一给过她温暖的，是刘峰（黄轩 饰），不仅仅是对何小萍，被称为“活雷锋”的刘峰把自己的爱情和温暖无私的奉献给每一个人。</div>
+    </div>
+    
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">
+            <h2>蚁人 Ant-Man</h2></br>
+            <div class="col-xs-3 col-lg-3">
+                <img src="/static/images/douban_movie/posters/tt0478970.jpg" alt="蚁人 Ant-Man"
+                    class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-xs-9 col-lg-9">
+                <span >豆瓣电影评分:</span> 7.7<br/>
+                <span ><span>导演</span>: <span>佩顿·里德</span></span><br/>
+                <span ><span>编剧</span>: <span>斯坦·李 </span></span>/斯坦·李 / 杰克·科比 / 拉里·利伯 / 埃德加·赖特 / 乔·考尼什 / 亚当·麦凯 / 保罗·路德<br/>
+                <span ><span>主演</span>: <span>保罗·路德 </span></span>/保罗·路德 / 迈克尔·道格拉斯 / 伊万杰琳·莉莉 / 寇瑞·斯托尔 / 迈克尔·佩纳 / 大卫·达斯马齐连 / 朱迪·格雷尔 / 鲍比·坎纳瓦尔 / 约翰·斯拉特里 / 伍德·哈里斯 / T.I. / 海莉·阿特维尔 / 瓦内萨·罗斯 / 马丁·唐文 / 乔·克里斯特 / 艾比·莱德·弗特森 / 安东尼·麦凯 / 加勒特·莫里斯 / 尼尔·汉博格 / 鲁德·哈利特 / 斯坦·李 / 克里斯·埃文斯 / 塞巴斯蒂安·斯坦<br/>
+                <span ><span>类型:</span><span> 动作 </span></span>/动作 / 科幻 / 冒险<br/>
+                <span ><span>制片国家/地区:</span><span> 美国</span></span><br/>
+                <span ><span>语言:</span><span> 英语</span></span><br/>
+                <span ><span>上映日期:</span><span> 2015-10-16(中国大陆) </span></span>/2015-10-16(中国大陆) / 2015-07-17(美国)<br/>
+                <span ><span>片长:</span><span> 117分钟</span></span><br/>
+                <span ><span>又名:</span><span> 蚁侠(港) </span></span>/蚁侠(港) / Antman<br/>
+                <span >IMDb:</span> tt0478970<br/>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-lg-12">简介：</br>前工程师斯科特（保罗·路德 Paul Rudd 饰）由于劫富济贫进了监狱，出狱后的他为了争取看望女儿的权利又走上了盗窃之路。没想到一次意外的偷盗事件让他成为了新一代“蚁人”，老蚁人汉克.皮姆博士（迈克尔·道格拉斯 Michael Douglas 饰）成为了他的导师，可皮姆博士的女儿霍普（伊万杰琳·莉莉 Evangeline Lilly 饰）却并不看好他。但是危机迫在眉睫，为了对付强大的敌人拯救世界，斯科特不得不叫来自己的一帮狐朋狗友帮助自己完成一个不可能完成的任务。而取得任务的成功也是斯科特挽回女儿的关键，屌丝能否逆袭就看最后一击。</div>
+    </div>
+    
+</div>
+</div>
+            
+            <aside class="hidden xl:block mr-4 shrink-0 xl:w-80 mt-8">
+                <div class="sticky top-24 border border-dashed border-slate-300 rounded-2xl text-center text-slate-400 text-sm overflow-hidden">
+                    <p class="text-[10px] text-slate-300 mb-2">AD</p>
+                    <div class="min-h-155 bg-slate-50 flex items-center justify-center w-full">
+                        
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4169504979687359"
+     data-ad-slot="9021161584"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+
+                    </div>
+                </div>
+            </aside>
+            
+        </div>
+        
+            <div class="mx-auto max-w-full md:max-w-7xl my-6 w-full h-full min-h-80 rounded-2xl border border-dashed border-slate-300 overflow-hidden">
+                <p class="text-[10px] text-slate-300 px-1">AD</p>
+                
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4169504979687359"
+     data-ad-slot="6722548729"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+
+            </div>
+        
+    </div>
+    <footer class="flex justify-center items-center gap-6 text-sm text-gray-600 p-4 border-t border-gray-200">
+        <a href="/about" title="关于Spiderbuf" aria-label="关于Spiderbuf">关于我们</a>
+        <a href="/privacy" title="Spiderbuf网站隐私政策" aria-label="Spiderbuf 网站隐私政策">隐私政策</a>
+        <a href="/" title="Spiderbuf" aria-label="All rights reserved">All rights reserved.</a>
+        友情链接：<a href="https://gethtmx.com" target="_blank" title="HTMX中文网" aria-label="HTMX 中文网">HTMX中文网</a>
+    </footer>
+</body>
+</html>
+
+
