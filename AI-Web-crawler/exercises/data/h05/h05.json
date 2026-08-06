@@ -1,0 +1,142 @@
+[
+  {
+    "ranking": 1,
+    "passwd": "password",
+    "time_to_crack_it": "< 1 Second",
+    "used_count": 4929113,
+    "year": 2022
+  },
+  {
+    "ranking": 2,
+    "passwd": "123456",
+    "time_to_crack_it": "< 1 Second",
+    "used_count": 1523537,
+    "year": 2022
+  },
+  {
+    "ranking": 3,
+    "passwd": "123456789",
+    "time_to_crack_it": "< 1 Second",
+    "used_count": 413056,
+    "year": 2022
+  },
+  {
+    "ranking": 4,
+    "passwd": "guest",
+    "time_to_crack_it": "10 Seconds",
+    "used_count": 376417,
+    "year": 2022
+  },
+  {
+    "ranking": 5,
+    "passwd": "qwerty",
+    "time_to_crack_it": "< 1 Second",
+    "used_count": 309679,
+    "year": 2022
+  },
+  {
+    "ranking": 6,
+    "passwd": "12345678",
+    "time_to_crack_it": "< 1 Second",
+    "used_count": 284946,
+    "year": 2022
+  },
+  {
+    "ranking": 7,
+    "passwd": "111111",
+    "time_to_crack_it": "< 1 Second",
+    "used_count": 229047,
+    "year": 2022
+  },
+  {
+    "ranking": 8,
+    "passwd": "12345",
+    "time_to_crack_it": "< 1 Second",
+    "used_count": 188602,
+    "year": 2022
+  },
+  {
+    "ranking": 9,
+    "passwd": "col123456",
+    "time_to_crack_it": "11 Seconds",
+    "used_count": 140505,
+    "year": 2022
+  },
+  {
+    "ranking": 10,
+    "passwd": "123123",
+    "time_to_crack_it": "< 1 Second",
+    "used_count": 127762,
+    "year": 2022
+  },
+  {
+    "ranking": 11,
+    "passwd": "1234567",
+    "time_to_crack_it": "< 1 Second",
+    "used_count": 110279,
+    "year": 2022
+  },
+  {
+    "ranking": 12,
+    "passwd": "1234",
+    "time_to_crack_it": "< 1 Second",
+    "used_count": 106929,
+    "year": 2022
+  },
+  {
+    "ranking": 13,
+    "passwd": "1234567890",
+    "time_to_crack_it": "< 1 Second",
+    "used_count": 105189,
+    "year": 2022
+  },
+  {
+    "ranking": 14,
+    "passwd": "000000",
+    "time_to_crack_it": "< 1 Second",
+    "used_count": 102636,
+    "year": 2022
+  },
+  {
+    "ranking": 15,
+    "passwd": "555555",
+    "time_to_crack_it": "< 1 Second",
+    "used_count": 98353,
+    "year": 2022
+  },
+  {
+    "ranking": 16,
+    "passwd": "666666",
+    "time_to_crack_it": "< 1 Second",
+    "used_count": 91274,
+    "year": 2022
+  },
+  {
+    "ranking": 17,
+    "passwd": "123321",
+    "time_to_crack_it": "< 1 Second",
+    "used_count": 83241,
+    "year": 2022
+  },
+  {
+    "ranking": 18,
+    "passwd": "654321",
+    "time_to_crack_it": "< 1 Second",
+    "used_count": 81231,
+    "year": 2022
+  },
+  {
+    "ranking": 19,
+    "passwd": "7777777",
+    "time_to_crack_it": "< 1 Second",
+    "used_count": 74233,
+    "year": 2022
+  },
+  {
+    "ranking": 20,
+    "passwd": "123",
+    "time_to_crack_it": "< 1 Second",
+    "used_count": 60795,
+    "year": 2022
+  }
+]

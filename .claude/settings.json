@@ -4,7 +4,10 @@
       "Bash(python -c ' *)",
       "Bash(py -0p)",
       "Bash(D:/miniconda/python.exe -c ' *)",
-      "Bash(D:/miniconda/python.exe spiderBuf_N07.py)"
+      "Bash(D:/miniconda/python.exe spiderBuf_N07.py)",
+      "Bash(D:/miniconda/python.exe -c \"import lxml,requests;print\\('miniconda ok'\\)\")",
+      "Bash(D:/python/python.exe -c \"import lxml,requests;print\\('py314 ok'\\)\")",
+      "Bash(PYTHONIOENCODING=utf-8 D:/miniconda/python.exe spiderBuf_H03.py)"
     ]
   }
 }
