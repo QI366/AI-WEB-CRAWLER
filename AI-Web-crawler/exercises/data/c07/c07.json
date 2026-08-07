@@ -1,0 +1,72 @@
+[
+  {
+    "keyword": "car insurance quotes",
+    "cpc_usd": 52.75,
+    "monthly_search_volume": 135000,
+    "competition": "high",
+    "industry": "Insurance"
+  },
+  {
+    "keyword": "personal injury lawyer",
+    "cpc_usd": 48.2,
+    "monthly_search_volume": 74000,
+    "competition": "high",
+    "industry": "Legal Services"
+  },
+  {
+    "keyword": "mortgage refinance rates",
+    "cpc_usd": 39.1,
+    "monthly_search_volume": 60500,
+    "competition": "medium",
+    "industry": "Finance"
+  },
+  {
+    "keyword": "online mba programs",
+    "cpc_usd": 35.9,
+    "monthly_search_volume": 22000,
+    "competition": "high",
+    "industry": "Education"
+  },
+  {
+    "keyword": "cloud computing services",
+    "cpc_usd": 31.45,
+    "monthly_search_volume": 18000,
+    "competition": "medium",
+    "industry": "Technology"
+  },
+  {
+    "keyword": "credit card processing",
+    "cpc_usd": 29.8,
+    "monthly_search_volume": 27100,
+    "competition": "high",
+    "industry": "Finance"
+  },
+  {
+    "keyword": "cybersecurity solutions",
+    "cpc_usd": 27.65,
+    "monthly_search_volume": 14800,
+    "competition": "medium",
+    "industry": "Technology"
+  },
+  {
+    "keyword": "luxury real estate",
+    "cpc_usd": 25.3,
+    "monthly_search_volume": 9900,
+    "competition": "high",
+    "industry": "Real Estate"
+  },
+  {
+    "keyword": "business voip services",
+    "cpc_usd": 22.95,
+    "monthly_search_volume": 12100,
+    "competition": "medium",
+    "industry": "Telecommunications"
+  },
+  {
+    "keyword": "dental implants cost",
+    "cpc_usd": 20.5,
+    "monthly_search_volume": 33100,
+    "competition": "high",
+    "industry": "Healthcare"
+  }
+]

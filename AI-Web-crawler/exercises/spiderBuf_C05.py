@@ -338,6 +338,7 @@ def decryptInBrowser(url, payload, passphrase):
 
     time.sleep(3)
 
+    # 获取浏览器 console.log 里 CryptoJS 的报错信息，方便调试
     result = client.execute_script(
 
         'return CryptoJS.AES.decrypt(arguments[0], arguments[1])'
